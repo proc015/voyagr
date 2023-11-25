@@ -14,18 +14,18 @@ model User {
   user_id         Int         @id @default(autoincrement())
   first_name      String
   last_name       String
-  display_name    String
-  display_pic_src String
+  display_name    String?
+  display_pic_src String?
   email           String      @unique
   trips           Trip[]      @relation("owner")
   following       String[]
   followers       String[]
   comments        Comment[]
   // For being participants //
-  trip            Trip        @relation(fields: [tripId], references: [trip_id])
-  tripId          Int         @unique
-  activity        Activity    @relation(fields: [activityId], references: [activity_id])
-  activityId      Int         @unique
+  trip            Trip?       @relation(fields: [tripId], references: [trip_id])
+  tripId          Int?        @unique
+  activity        Activity?   @relation(fields: [activityId], references: [activity_id])
+  activityId      Int?        @unique
 }
 
 model Trip {
@@ -39,8 +39,8 @@ model Trip {
   destination     String
   dest_lat_lon    Int[]
   start_date      DateTime
-  end_date        DateTime
-  picture_src     String
+  end_date        DateTime?
+  picture_src     String?
   activities      Activity[]
   comments        Comment[]
 }
@@ -54,9 +54,9 @@ model Activity {
   location        String
   type            String
   tags            Tag[]
-  description     String
+  description     String?
   date            DateTime
-  picture_src     String
+  picture_src     String?
   comments        Comment[]
 }
 
@@ -67,10 +67,10 @@ model Comment {
   body            String
   timestamp       DateTime
   // Attaching to correct type of post //
-  trip            Trip        @relation(fields: [tripId], references: [trip_id])
-  tripId          Int         @unique
-  activity        Activity    @relation(fields: [activityId], references: [activity_id])
-  activityId      Int         @unique
+  trip            Trip?       @relation(fields: [tripId], references: [trip_id])
+  tripId          Int?        @unique
+  activity        Activity?   @relation(fields: [activityId], references: [activity_id])
+  activityId      Int?        @unique
 }
 
 
