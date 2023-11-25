@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id         Int         @id @default(autoincrement())
+  first_name      String
+  last_name       String
+  display_name    String
+  email           String      @unique
+  trips           Trip[]      @relation("owner")
+  following       String[]
+  followers       String[]
+  comments        Comment[]
+
+  trip            Trip        @relation(fields: [tripId], references: [trip_id])
+  tripId          Int         @unique
+  activity        Activity    @relation(fields: [activityId], references: [activity_id])
+  activityId      Int         @unique
+}
+
+model Trip {
+  trip_id         Int         @id @default(autoincrement())
+  user            User        @relation("owner", fields: [userId], references: [user_id])
+  userId          Int         @unique
+  participants    User[] 
+  title           String
+  destination     String
+  date            DateTime
+  start_loc       String
+  picture_src     String
+  activities      Activity[]
+  comments        Comment[]
+}
+
+model Activity {
+  activity_id     Int         @id @default(autoincrement())
+  trip            Trip        @relation(fields: [tripId], references: [trip_id])
+  tripId          Int         @unique
+  participants    User[]
+  title           String
+  location        String
+  type            String
+  tags            Tag[]
+  description     String
+  date            DateTime
+  picture_src     String
+  comments        Comment[]
+}
+
+model Comment {
+  comment_id      Int         @id @default(autoincrement())
+  author          User        @relation(fields: [authorId], references: [user_id])
+  authorId        Int         @unique
+  body            String
+  timestamp       DateTime
+
+  trip            Trip        @relation(fields: [tripId], references: [trip_id])
+  tripId          Int         @unique
+  activity        Activity    @relation(fields: [activityId], references: [activity_id])
+  activityId      Int         @unique
+}
+
+
+model Tag {
+  tag_id          Int         @id @default(autoincrement())
+  
+  activity        Activity    @relation(fields: [activityId], references: [activity_id])
+  activityId      Int         @unique
+}
