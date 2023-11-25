@@ -15,12 +15,13 @@ model User {
   first_name      String
   last_name       String
   display_name    String
+  display_pic_src String
   email           String      @unique
   trips           Trip[]      @relation("owner")
   following       String[]
   followers       String[]
   comments        Comment[]
-
+  // For being participants //
   trip            Trip        @relation(fields: [tripId], references: [trip_id])
   tripId          Int         @unique
   activity        Activity    @relation(fields: [activityId], references: [activity_id])
@@ -32,10 +33,13 @@ model Trip {
   user            User        @relation("owner", fields: [userId], references: [user_id])
   userId          Int         @unique
   participants    User[] 
-  title           String
-  destination     String
-  date            DateTime
+  trip_name       String
   start_loc       String
+  start_lat_lon   Int[]
+  destination     String
+  dest_lat_lon    Int[]
+  start_date      DateTime
+  end_date        DateTime
   picture_src     String
   activities      Activity[]
   comments        Comment[]
@@ -46,7 +50,7 @@ model Activity {
   trip            Trip        @relation(fields: [tripId], references: [trip_id])
   tripId          Int         @unique
   participants    User[]
-  title           String
+  activity_name   String
   location        String
   type            String
   tags            Tag[]
@@ -62,7 +66,7 @@ model Comment {
   authorId        Int         @unique
   body            String
   timestamp       DateTime
-
+  // Attaching to correct type of post //
   trip            Trip        @relation(fields: [tripId], references: [trip_id])
   tripId          Int         @unique
   activity        Activity    @relation(fields: [activityId], references: [activity_id])
@@ -72,7 +76,7 @@ model Comment {
 
 model Tag {
   tag_id          Int         @id @default(autoincrement())
-  
+
   activity        Activity    @relation(fields: [activityId], references: [activity_id])
   activityId      Int         @unique
 }
