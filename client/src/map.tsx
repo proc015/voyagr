@@ -5,13 +5,17 @@ import {
   Polyline,
 } from "@react-google-maps/api";
 
+import { Places } from "./places";
+
 import { useState, useRef, useMemo, useCallback, useEffect } from "react";
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 type MapOptions = google.maps.MapOptions;
 type PolyOptions = google.maps.PolylineOptions;
 
+// TODO create map config file for options objects & initialisation
 export function Map() {
+  // FIXME: add -coordinates to statename below
   const [location, setLocation] = useState<LatLngLiteral>({
     lat: 63.45,
     lng: -80.49,
@@ -20,13 +24,19 @@ export function Map() {
     lat: 65.45,
     lng: -60.49,
   });
+
+  //   TODO add address states
+
   const mapRef = useRef<GoogleMap>();
 
   //DEV styling to have during dev phase
   const devStyling = {
     mapDiv: {
       display: "flex",
+      flexDirection: "column",
       justifyContent: "center",
+      alignItems: "center",
+      gap: "20px",
     },
     mapContainerStyle: {
       width: "600px",
@@ -34,7 +44,7 @@ export function Map() {
     },
   };
 
-  //   DEV testing flightpath
+  //   DEV testing flightpath for polyline
   // const flightPath = new google.maps.Polyline({
   //     path: [location, destination],
   //     geodesic: true,
@@ -52,7 +62,8 @@ export function Map() {
   // load the map
   const { isLoaded } = useLoadScript({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyA-Hi2FgH2KdyCeKTUNCy4BcExpre_suew",
+    googleMapsApiKey: process.env.REACT_APP_MAPS_API_KEY!,
+    libraries: ["places"],
   });
 
   //   set default view
@@ -84,7 +95,6 @@ export function Map() {
           //  onLoad={onLoad}
         >
           <MarkerF position={location} />
-          <MarkerF position={destination} />
           <Polyline
             path={[location, destination]}
             options={{
@@ -94,6 +104,7 @@ export function Map() {
               geodesic: true,
             }}
           />
+          <MarkerF position={destination} />
         </GoogleMap>
       )}
     </div>
