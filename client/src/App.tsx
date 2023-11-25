@@ -1,12 +1,13 @@
 import "./App.css"
+import AddTrip from "./components/AddTrip"
 
 function App() {
   return (
     <div className="App">
         
-        <p>
-          This is Voyagr app 
-        </p>
+        
+          <AddTrip />
+        
       </div>
   )
 }
