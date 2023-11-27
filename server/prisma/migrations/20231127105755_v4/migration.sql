@@ -1,0 +1,9 @@
+-- AlterTable
+ALTER TABLE "Activity" ALTER COLUMN "date" SET DATA TYPE TEXT;
+
+-- AlterTable
+ALTER TABLE "Comment" ALTER COLUMN "timestamp" SET DEFAULT CURRENT_TIMESTAMP;
+
+-- AlterTable
+ALTER TABLE "Trip" ALTER COLUMN "start_date" SET DATA TYPE TEXT,
+ALTER COLUMN "end_date" SET DATA TYPE TEXT;

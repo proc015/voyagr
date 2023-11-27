@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id         Int         @id @default(autoincrement())
+  first_name      String
+  last_name       String
+  display_name    String?
+  display_pic_src String?
+  email           String      @unique
+  trips           Trip[]      @relation("owner")
+  following       String[]
+  followers       String[]
+  comments        Comment[]
+  // For being participants //
+  trip            Trip?       @relation(fields: [tripId], references: [trip_id])
+  tripId          Int?        
+  activity        Activity?   @relation(fields: [activityId], references: [activity_id])
+  activityId      Int?        
+}
+
+model Trip {
+  trip_id         Int         @id @default(autoincrement())
+  user            User        @relation("owner", fields: [userId], references: [user_id])
+  userId          Int         
+  participants    User[] 
+  trip_name       String
+  start_loc       String
+  start_lat_lon   Decimal[]
+  destination     String
+  dest_lat_lon    Decimal[]
+  start_date      String
+  end_date        String?
+  picture_src     String?
+  activities      Activity[]
+  comments        Comment[]
+}
+
+model Activity {
+  activity_id     Int         @id @default(autoincrement())
+  trip            Trip        @relation(fields: [tripId], references: [trip_id])
+  tripId          Int         
+  participants    User[]
+  activity_name   String
+  location        String
+  type            String
+  tags            Tag[]
+  description     String?
+  date            String
+  picture_src     String?
+  comments        Comment[]
+}
+
+model Comment {
+  comment_id      Int         @id @default(autoincrement())
+  author          User        @relation(fields: [authorId], references: [user_id])
+  authorId        Int         
+  body            String
+  timestamp       DateTime    @default(now())
+  // Attaching to correct type of post //
+  trip            Trip?       @relation(fields: [tripId], references: [trip_id])
+  tripId          Int?        
+  activity        Activity?   @relation(fields: [activityId], references: [activity_id])
+  activityId      Int?        
+}
+
+
+model Tag {
+  tag_id          Int         @id @default(autoincrement())
+
+  activity        Activity    @relation(fields: [activityId], references: [activity_id])
+  activityId      Int         
+}
