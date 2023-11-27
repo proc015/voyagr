@@ -23,15 +23,15 @@ model User {
   comments        Comment[]
   // For being participants //
   trip            Trip?       @relation(fields: [tripId], references: [trip_id])
-  tripId          Int?        @unique
+  tripId          Int?        
   activity        Activity?   @relation(fields: [activityId], references: [activity_id])
-  activityId      Int?        @unique
+  activityId      Int?        
 }
 
 model Trip {
   trip_id         Int         @id @default(autoincrement())
   user            User        @relation("owner", fields: [userId], references: [user_id])
-  userId          Int         @unique
+  userId          Int         
   participants    User[] 
   trip_name       String
   start_loc       String
@@ -48,7 +48,7 @@ model Trip {
 model Activity {
   activity_id     Int         @id @default(autoincrement())
   trip            Trip        @relation(fields: [tripId], references: [trip_id])
-  tripId          Int         @unique
+  tripId          Int         
   participants    User[]
   activity_name   String
   location        String
@@ -63,14 +63,14 @@ model Activity {
 model Comment {
   comment_id      Int         @id @default(autoincrement())
   author          User        @relation(fields: [authorId], references: [user_id])
-  authorId        Int         @unique
+  authorId        Int         
   body            String
   timestamp       DateTime    @default(now())
   // Attaching to correct type of post //
   trip            Trip?       @relation(fields: [tripId], references: [trip_id])
-  tripId          Int?        @unique
+  tripId          Int?        
   activity        Activity?   @relation(fields: [activityId], references: [activity_id])
-  activityId      Int?        @unique
+  activityId      Int?        
 }
 
 
@@ -78,5 +78,5 @@ model Tag {
   tag_id          Int         @id @default(autoincrement())
 
   activity        Activity    @relation(fields: [activityId], references: [activity_id])
-  activityId      Int         @unique
+  activityId      Int         
 }
