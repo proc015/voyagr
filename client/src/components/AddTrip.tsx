@@ -16,6 +16,7 @@ const AddTrip = () => {
   const [start_date, setStartDate] = useState<string>('');
   const [end_date, setEndDate] = useState<string>('');
 
+
   const [newTrip, setNewTrip] = useState<Trip>({
     user_id,
     trip_name,
@@ -24,6 +25,7 @@ const AddTrip = () => {
     start_date,
     end_date,
   });
+
 
   const newTripObj: Trip = {
     user_id,
@@ -40,6 +42,7 @@ const AddTrip = () => {
     const convertStringtoNum = Number(event.target.value);
     setUserId(convertStringtoNum);
   };
+
 
   const handleTripNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTripName(event.target.value);

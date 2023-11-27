@@ -14,3 +14,4 @@ export interface Trip {
   // start_lat_lon: number[]; // Representing an array of numbers
   // dest_lat_lon: number[];
 }
+ 
