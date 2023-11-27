@@ -1,4 +1,7 @@
 // TODO create map config file for options objects & initialisation
+import { Libraries } from '@react-google-maps/api/dist/utils/make-load-script-url';
+import { memo } from 'react';
+
 import {
   useLoadScript,
   GoogleMap,
@@ -8,6 +11,8 @@ import {
 
 import { Autocompletion } from './autocompletion';
 import { fitBounds, centerMap } from './utils';
+
+const libraries: Libraries = ['places'];
 
 import { useState, useRef, useMemo, useEffect } from 'react';
 
@@ -21,7 +26,7 @@ type Props = {
   setDestinationAddress: (address: string) => void;
 };
 
-export function TripMap({ setLocationAddress, setDestinationAddress }: Props) {
+function TripMapComp({ setLocationAddress, setDestinationAddress }: Props) {
   const [locationCoordinates, setLocationCoordinates] =
     useState<LatLngLiteral>();
 
@@ -40,7 +45,7 @@ export function TripMap({ setLocationAddress, setDestinationAddress }: Props) {
   const { isLoaded } = useLoadScript({
     id: 'google-map-script',
     googleMapsApiKey: 'AIzaSyA-Hi2FgH2KdyCeKTUNCy4BcExpre_suew',
-    libraries: ['places'],
+    libraries: libraries,
   });
 
   // default center = Europe
@@ -135,3 +140,5 @@ export function TripMap({ setLocationAddress, setDestinationAddress }: Props) {
     </div>
   );
 }
+
+export const TripMap = memo(TripMapComp);
