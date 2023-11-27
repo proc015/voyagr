@@ -4,6 +4,8 @@ const prisma = new PrismaClient()
 
 async function main() {
   // ~ test queries here ~ \\
+  // const test =
+  // console.log(test);
 }
 
 main()
@@ -17,26 +19,8 @@ main()
   })
 
   /*  
-  BAD BAD NOT GOOD
-  const trip = await prisma.trip.create({
-    data: {
-      user: {
-        create: {
-          first_name: 'hello',
-          last_name: 'there',
-          email: 'hello@there.com'
-        }
-      },
-      trip_name: 'tester',
-      start_loc: 'sydney',
-      start_lat_lon: [-33, 151],
-      destination: 'cardiff',
-      dest_lat_lon: [51, -3],
-      start_date: new Date(),
-    }
-  })
-  console.log(trip);
----------------------------
+
+-----------------------------
 FIND BY USER ID AND RETURN THEIR TRIPS
     const user = await prisma.user.findUnique({
     where: {
@@ -47,7 +31,7 @@ FIND BY USER ID AND RETURN THEIR TRIPS
       }
     })
   console.log(user);
-----------------------------
+-----------------------------
 CREATE NEW TRIP AND CONNECT TO CURRENT USER
 const trip = await prisma.trip.create({
     data: {
