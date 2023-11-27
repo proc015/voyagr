@@ -11,6 +11,8 @@ const NavBar = () => {
         </div>
       </div>
       <div className='headerVoyagrPosition'></div> 
+      
+      
       <div className='navbar'>
         <NavLink
           to='/feed'
@@ -26,7 +28,7 @@ const NavBar = () => {
             isActive ? 'nav-link nav-link-active' : 'nav-link'
           }
         >
-          Placeholder 1
+          ... 
         </NavLink>
         <NavLink
           to='/addtrip'
@@ -42,7 +44,7 @@ const NavBar = () => {
             isActive ? 'nav-link nav-link-active' : 'nav-link'
           }
         >
-          Placeholder 2
+          ...
         </NavLink>
         <NavLink
           to='/profile'
