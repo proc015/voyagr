@@ -35,9 +35,9 @@ model Trip {
   participants    User[] 
   trip_name       String
   start_loc       String
-  start_lat_lon   Int[]
+  start_lat_lon   Decimal[]
   destination     String
-  dest_lat_lon    Int[]
+  dest_lat_lon    Decimal[]
   start_date      DateTime
   end_date        DateTime?
   picture_src     String?
