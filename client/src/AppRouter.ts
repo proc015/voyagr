@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
 import FeedPage from './pages/FeedPage';
+import LoginPage from './pages/LoginPage';
+import LandingPage from './pages/LandingPage';
+import ProfilePage from './pages/ProfilePage';
+import AddTripPage from './components/AddTripPage';
 
-// Since this component does not use any props or state,
-// the refactoring is minimal. Just change the file extension to .tsx
 const AppRouter: React.FC = () => {
   return (
     <Router>
