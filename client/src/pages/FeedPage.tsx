@@ -4,9 +4,6 @@ function FeedPage() {
   return (
     <>
       This is the FeedPage
-      <Link to='/login' className='loginLP'>
-        login
-      </Link>
     </>
   );
 }

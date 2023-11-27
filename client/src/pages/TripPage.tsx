@@ -4,9 +4,6 @@ function TripPage() {
   return (
     <>
       This is the TripPage
-      <Link to='/login' className='loginLP'>
-        login
-      </Link>
     </>
   );
 }

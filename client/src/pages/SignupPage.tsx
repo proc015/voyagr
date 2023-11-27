@@ -4,9 +4,6 @@ function SignupPage() {
   return (
     <>
       This is the SignupPage
-      <Link to='/login' className='loginLP'>
-        login
-      </Link>
     </>
   );
 }

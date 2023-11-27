@@ -4,7 +4,7 @@ function LoginPage() {
   return (
     <>
       This is the LoginPage
-      <Link to='/login' className='loginLP'>
+      <Link to='/feed' className='loginLP'>
         login
       </Link>
     </>

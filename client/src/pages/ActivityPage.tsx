@@ -4,9 +4,6 @@ function ActivityPage() {
   return (
     <>
       This is the ActivityPage
-      <Link to='/login' className='loginLP'>
-        login
-      </Link>
     </>
   );
 }
