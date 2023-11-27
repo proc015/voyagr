@@ -16,7 +16,6 @@ const AddTrip = () => {
   const [start_date, setStartDate] = useState<string>('');
   const [end_date, setEndDate] = useState<string>('');
 
-
   const [newTrip, setNewTrip] = useState<Trip>({
     user_id,
     trip_name,
@@ -25,7 +24,6 @@ const AddTrip = () => {
     start_date,
     end_date,
   });
-
 
   const newTripObj: Trip = {
     user_id,
@@ -37,12 +35,10 @@ const AddTrip = () => {
   };
 
   const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-    
-    // convert event.target.value to a number from a string 
+    // convert event.target.value to a number from a string
     const convertStringtoNum = Number(event.target.value);
     setUserId(convertStringtoNum);
   };
-
 
   const handleTripNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTripName(event.target.value);
@@ -60,41 +56,39 @@ const AddTrip = () => {
     setStartDate(event.target.value);
   };
 
-    const handleEndDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setEndDate(event.target.value)
-    }
+  const handleEndDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEndDate(event.target.value);
+  };
 
-     
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); 
-        postTrip(newTripObj).then((createdTrip)=>
-        dispatch(addTrip(createdTrip)));
-        setNewTrip({
-        user_id: 0, 
-        trip_name: '',
-        start_loc: '', 
-        destination: '', 
-        start_date: '',
-        end_date: '',
-        });
-        };
-    
-    // const dateTest = dayjs('2019-01-30').format('MM/YY') 
-    // console.log(dateTest)
-  
-    return (
-    <form onSubmit={handleSubmit} className="add-trip-form-container">
-        
-        <label> User ID: 
-            <input
-                id="user_id"
-                type="value"
-                required={true}
-                placeholder="Insert number"
-                value={user_id}
-                onChange={handleUserIdChange}
-                />
-        </label>
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    postTrip(newTripObj).then((createdTrip) => dispatch(addTrip(createdTrip)));
+    setNewTrip(newTripObj);
+    setUserId(0);
+    setTripName('');
+    setStartLoc('');
+    setDestination('');
+    setStartDate('');
+    setEndDate('');
+  };
+
+  // const dateTest = dayjs('2019-01-30').format('MM/YY')
+  // console.log(dateTest)
+
+  return (
+    <form onSubmit={handleSubmit} className='add-trip-form-container'>
+      <label>
+        {' '}
+        User ID:
+        <input
+          id='user_id'
+          type='value'
+          required={true}
+          placeholder='Insert number'
+          value={user_id}
+          onChange={handleUserIdChange}
+        />
+      </label>
 
       <label>
         Trip Name:
