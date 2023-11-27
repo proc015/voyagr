@@ -1,10 +1,11 @@
 import './App.css';
-import AddTrip from './components/AddTrip';
+import AppRouter from './AppRouter';
 
 function App() {
   return (
     <div className='App'>
-      <AddTrip />
+      <AppRouter />
+
     </div>
   );
 }
