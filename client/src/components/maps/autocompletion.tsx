@@ -1,7 +1,7 @@
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
-} from "use-places-autocomplete";
+} from 'use-places-autocomplete';
 
 type latLng = { lat: number; lng: number };
 type Props = {
@@ -18,7 +18,7 @@ export function Autocompletion({ setCoordinates, setAddress }: Props) {
     clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
-      types: ["(regions)"],
+      types: ['(regions)'],
     },
   });
 
@@ -47,13 +47,13 @@ export function Autocompletion({ setCoordinates, setAddress }: Props) {
   };
 
   return (
-    <div className="Places">
+    <div className='Places'>
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
         disabled={!ready}
       />
-      {status === "OK" && <ul>{renderSuggestions()}</ul>}
+      {status === 'OK' && <ul>{renderSuggestions()}</ul>}
     </div>
   );
 }
