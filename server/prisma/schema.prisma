@@ -38,8 +38,8 @@ model Trip {
   start_lat_lon   Decimal[]
   destination     String
   dest_lat_lon    Decimal[]
-  start_date      DateTime
-  end_date        DateTime?
+  start_date      String
+  end_date        String?
   picture_src     String?
   activities      Activity[]
   comments        Comment[]
@@ -55,7 +55,7 @@ model Activity {
   type            String
   tags            Tag[]
   description     String?
-  date            DateTime
+  date            String
   picture_src     String?
   comments        Comment[]
 }
@@ -65,7 +65,7 @@ model Comment {
   author          User        @relation(fields: [authorId], references: [user_id])
   authorId        Int         @unique
   body            String
-  timestamp       DateTime
+  timestamp       DateTime    @default(now())
   // Attaching to correct type of post //
   trip            Trip?       @relation(fields: [tripId], references: [trip_id])
   tripId          Int?        @unique

@@ -49,6 +49,7 @@ FIND BY USER ID AND RETURN THEIR TRIPS
   console.log(user);
 ----------------------------
 CREATE NEW TRIP AND CONNECT TO CURRENT USER
+const trip = await prisma.trip.create({
     data: {
       user: {
         connect: {
