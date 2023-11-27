@@ -19,3 +19,12 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
 }
+
+.gm-style-cc {
+  display: none !important;
+}
+
+.gm-style a[href^="https://maps.google.com/maps"]
+{
+  display: none !important;
+}
