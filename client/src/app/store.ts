@@ -1,8 +1,9 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
-
+import tripReducer from "../redux/addTripSlice" 
 
 export const store = configureStore({
   reducer: {
+    trip: tripReducer, 
     
   },
 })
