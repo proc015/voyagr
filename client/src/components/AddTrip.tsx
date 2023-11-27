@@ -3,7 +3,7 @@ import { Trip } from '../types/Trip';
 import { postTrip } from '../services/apiService';
 import { addTrip } from '../redux/addTripSlice';
 import { ChangeEvent, FormEvent, useState } from 'react';
-
+import { TripMap } from './maps/tripMap';
 // import * as dayjs from 'dayjs';
 
 const AddTrip = () => {
@@ -44,14 +44,6 @@ const AddTrip = () => {
     setTripName(event.target.value);
   };
 
-  const handleStartLocChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setStartLoc(event.target.value);
-  };
-
-  const handleDestinationChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDestination(event.target.value);
-  };
-
   const handleStartDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     setStartDate(event.target.value);
   };
@@ -63,13 +55,14 @@ const AddTrip = () => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     postTrip(newTripObj).then((createdTrip) => dispatch(addTrip(createdTrip)));
-    setNewTrip(newTripObj);
-    setUserId(0);
-    setTripName('');
-    setStartLoc('');
-    setDestination('');
-    setStartDate('');
-    setEndDate('');
+    setNewTrip({
+      user_id: 0,
+      trip_name: '',
+      start_loc: '',
+      destination: '',
+      start_date: '',
+      end_date: '',
+    });
   };
 
   // const dateTest = dayjs('2019-01-30').format('MM/YY')
@@ -78,7 +71,6 @@ const AddTrip = () => {
   return (
     <form onSubmit={handleSubmit} className='add-trip-form-container'>
       <label>
-        {' '}
         User ID:
         <input
           id='user_id'
@@ -102,29 +94,10 @@ const AddTrip = () => {
         />
       </label>
 
-      <label>
-        Start Location:
-        <input
-          id='start_loc'
-          type='text'
-          required={true}
-          placeholder=''
-          value={start_loc}
-          onChange={handleStartLocChange}
-        />
-      </label>
-
-      <label>
-        Destination:
-        <input
-          id='destination'
-          type='text'
-          required={true}
-          placeholder=''
-          value={destination}
-          onChange={handleDestinationChange}
-        />
-      </label>
+      <TripMap
+        setLocationAddress={setStartLoc}
+        setDestinationAddress={setDestination}
+      ></TripMap>
 
       <label>
         Start Date:

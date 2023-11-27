@@ -1,13 +1,11 @@
 import './App.css';
-import AddActivity from './components/AddActivity';
-import AddTrip from './components/AddTrip';
+import AppRouter from './AppRouter';
 
 function App() {
   return (
     <div className='App'>
-      <AddTrip />
+      <AppRouter />
 
-      <AddActivity />
     </div>
   );
 }
