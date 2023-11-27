@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../app/store"
-import { Trip, TripActionPayload } from "../types/Trip"
+import { Trip } from "../types/Trip"
 
  const initialState: Trip[] = [];
 

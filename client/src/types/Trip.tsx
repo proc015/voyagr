@@ -2,7 +2,7 @@
 export interface Trip {
     // trip_id: number;
     // user: User; // Assuming User is a custom type defined elsewhere
-    // userId: number;
+    user_id: string;
     // participants: User[]; // Array of User objects
     trip_name: string;
     start_loc: string;
@@ -16,8 +16,3 @@ export interface Trip {
     // dest_lat_lon: number[];
   }
   
-  
-export interface TripActionPayload {
-  field:string; 
-  value: string; 
-}
