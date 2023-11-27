@@ -9,5 +9,5 @@ app.use(cors());
 app.use(router);
 
 app.listen(3000, () => {
-  console.log(`T-minus 3000 to launch`)
-})
+  console.log(`T-minus 3000 to launch`);
+});

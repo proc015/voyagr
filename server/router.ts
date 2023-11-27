@@ -1,7 +1,7 @@
-import { Router } from "express"
-import { PrismaClient } from '@prisma/client'
+import { Router } from 'express';
+import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 const router = Router();
 
@@ -9,7 +9,7 @@ const router = Router();
 router.get('/all', async (req, res) => {
   const user = await prisma.user.findMany();
   res.send(user);
-})
+});
 
 router.post('/trip', async (req, res) => {
   try {
@@ -19,8 +19,8 @@ router.post('/trip', async (req, res) => {
         // connect user field in Trip table to primary key of User table
         user: {
           connect: {
-            user_id: newTrip.user_id
-          }
+            user_id: newTrip.user_id,
+          },
         },
         // build rest of required Trip fields
         trip_name: newTrip.trip_name,
@@ -29,15 +29,15 @@ router.post('/trip', async (req, res) => {
         destination: newTrip.destination,
         dest_lat_lon: newTrip.dest_lat_lon,
         start_date: newTrip.start_date,
-        end_date: newTrip.end_date
-      }
-    })
+        end_date: newTrip.end_date,
+      },
+    });
     res.send(createdTrip);
     console.log(createdTrip);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-})
+});
 
 export default router;
 
