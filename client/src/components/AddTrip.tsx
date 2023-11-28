@@ -1,9 +1,10 @@
 import { useAppDispatch } from '../app/hooks';
 import { Trip } from '../types/Trip';
-import { postTrip } from '../services/apiService';
+import { postTrip, uploadPhoto } from '../services/apiService';
 import { addTrip } from '../redux/addTripSlice';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { TripMap } from './maps/tripMap';
+import { Cloudinary } from '@cloudinary/url-gen';
 // import * as dayjs from 'dayjs';
 
 const AddTrip = () => {
@@ -15,6 +16,7 @@ const AddTrip = () => {
   const [destination, setDestination] = useState<string>('');
   const [start_date, setStartDate] = useState<string>('');
   const [end_date, setEndDate] = useState<string>('');
+  const [picture_src, setPicture_src] = useState('');
 
   const [newTrip, setNewTrip] = useState<Trip>({
     user_id,
@@ -23,6 +25,7 @@ const AddTrip = () => {
     destination,
     start_date,
     end_date,
+    picture_src,
   });
 
   const newTripObj: Trip = {
@@ -32,7 +35,10 @@ const AddTrip = () => {
     destination,
     start_date,
     end_date,
+    picture_src,
   };
+
+  const cld = new Cloudinary({ cloud: { cloudName: 'dwskyhib9' } });
 
   const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
     // convert event.target.value to a number from a string
@@ -52,6 +58,12 @@ const AddTrip = () => {
     setEndDate(event.target.value);
   };
 
+  const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const filename = event.target.files![0].name;
+    setPicture_src(filename);
+    uploadPhoto(event.target.files);
+  };
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     postTrip(newTripObj).then((createdTrip) => dispatch(addTrip(createdTrip)));
@@ -62,6 +74,7 @@ const AddTrip = () => {
       destination: '',
       start_date: '',
       end_date: '',
+      picture_src: '',
     });
   };
 
@@ -117,6 +130,16 @@ const AddTrip = () => {
           type='date'
           value={end_date}
           onChange={handleEndDateChange}
+        />
+      </label>
+
+      <label>
+        Add a photo!
+        <input
+          id='photo'
+          type='file'
+          accept='image/png, image/jpeg'
+          onChange={handlePhotoUpload}
         />
       </label>
 

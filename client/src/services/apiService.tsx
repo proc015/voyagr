@@ -1,11 +1,8 @@
 import { Trip } from '../types/Trip';
 
-
-const url = "http://localhost:3000";
-
+const url = 'http://localhost:3000';
 
 // const mockUrl = 'https://d5c1edd4-13c7-496b-a7d7-fbcbfc009602.mock.pstmn.io';
-
 
 export async function postTrip(newTrip: Trip) {
   console.log('newTrip sent to backend', newTrip);
@@ -24,4 +21,16 @@ export async function postTrip(newTrip: Trip) {
   } catch (err) {
     console.log(err);
   }
+}
+
+export async function uploadPhoto(files: any) {
+  const formData = new FormData();
+  formData.append('file', files[0]);
+  formData.append('upload_preset', 'hs3oue2u');
+  await fetch('https://api.cloudinary.com/v1_1/dwskyhib9/upload', {
+    method: 'POST',
+    body: formData,
+  }).then((response) => {
+    console.log(response);
+  });
 }
