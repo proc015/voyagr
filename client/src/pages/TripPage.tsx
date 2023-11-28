@@ -1,40 +1,25 @@
 import { Link } from 'react-router-dom';
 import { Trip } from '../types/Trip';
-import { getUserTrips } from '../services/apiService';
-import TripList from '../components/TripList';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../app/store';
+import { fetchUserTrips } from '../services/fetchTrip';
+import TripComponent from '../components/TripComponent';
 
 function TripPage() {
-  const [trip, setTrip] = useState<Trip>({
-    // user: User; // Assuming User is a custom type defined elsewhere
-    user_id: 0,
-    // participants: User[]; // Array of User objects
-    trip_name: '',
-    start_loc: '',
-    destination: '',
-    start_date: '',
-    end_date: '',
-    picture_src: '',
-    // activities: Activity[]; // Assuming Activity is a custom type defined elsewhere
-    // comments: Comment[]; // Assuming Comment is a custom type defined elsewhere
-    start_lat_lon: [0, 0], // Representing an array of numbers
-    dest_lat_lon: [0, 0],
-  });
+  const dispatch = useDispatch<AppDispatch>();
 
-  const user_id = 2;
+  //hardcoding user_id until we create actual functionality 
+  const user_id = 1; 
 
   useEffect(() => {
-    getUserTrips(user_id).then((userTrip) => {
-      setTrip(userTrip);
-    });
-  }, [user_id]);
-
-  // console.log('TripPage', trip)
+    dispatch(fetchUserTrips(user_id));
+  }, [dispatch, user_id]);
 
   return (
-    <>
-      <TripList trip={trip} />
-    </>
+    <div>
+      <TripComponent />
+    </div>
   );
 }
 
