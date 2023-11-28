@@ -3,6 +3,7 @@ import { Activity } from '../types/Activity';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch } from '../app/hooks';
 import { addActivity } from '../redux/addActivitySlice';
+import { DynamicMap } from './maps/dynamicMap';
 
 const AddActivity = () => {
   const dispatch = useAppDispatch();
@@ -12,6 +13,7 @@ const AddActivity = () => {
   const [location, setLocation] = useState<string>('');
   const [type, setType] = useState<string>('');
   const [date, setDate] = useState<string>('');
+  const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
 
   const [newActivity, setNewActivity] = useState<Activity>({
     trip_id,
@@ -19,6 +21,7 @@ const AddActivity = () => {
     location,
     type,
     date,
+    loc_lat_lon,
   });
 
   const newActivityObj: Activity = {
@@ -27,6 +30,7 @@ const AddActivity = () => {
     location,
     type,
     date,
+    loc_lat_lon,
   };
 
   const handleTripIdChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -95,14 +99,7 @@ const AddActivity = () => {
 
       <label>
         Location:
-        <input
-          id='location'
-          type='text'
-          required={true}
-          placeholder=''
-          value={location}
-          onChange={handleLocationChange}
-        />
+        <DynamicMap setLocationAddress={setLocation} isActivity={true} />
       </label>
 
       <label>

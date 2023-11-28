@@ -2,14 +2,21 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
+import { autocompletionRequestOptions as requestOptions } from './config';
+import { ChangeEvent, MouseEvent } from 'react';
 
 type latLng = { lat: number; lng: number };
 type Props = {
-  setCoordinates: (coordinates: latLng) => void;
+  setCoordinates?: (coordinates: latLng) => void;
   setAddress: (address: string) => void;
+  isActivity?: boolean;
 };
 
-export function Autocompletion({ setCoordinates, setAddress }: Props) {
+export function Autocompletion({
+  setCoordinates,
+  setAddress,
+  isActivity,
+}: Props) {
   const {
     ready,
     value,
@@ -17,9 +24,7 @@ export function Autocompletion({ setCoordinates, setAddress }: Props) {
     suggestions: { status, data },
     clearSuggestions,
   } = usePlacesAutocomplete({
-    requestOptions: {
-      types: ['(regions)'],
-    },
+    requestOptions: isActivity ? requestOptions.activity : requestOptions.trip,
   });
 
   const renderSuggestions = () =>
@@ -29,21 +34,27 @@ export function Autocompletion({ setCoordinates, setAddress }: Props) {
         structured_formatting: { main_text, secondary_text },
       } = suggestion;
       return (
-        <li key={place_id} onClick={() => handleSelect(suggestion.description)}>
+        <li
+          key={place_id}
+          onClick={(e: MouseEvent<HTMLLIElement>) =>
+            handleSelect(e, suggestion.description)
+          }
+        >
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
       );
     });
 
   // when user selects a suggestion, set address to selected and set coordinates to lat-lng
-  const handleSelect = async (val: string) => {
+  const handleSelect = async (e: MouseEvent<HTMLLIElement>, val: string) => {
+    e.preventDefault();
     setValue(val, false);
     setAddress(val);
     clearSuggestions();
 
     const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
-    setCoordinates({ lat, lng });
+    if (setCoordinates) setCoordinates({ lat, lng });
   };
 
   return (
