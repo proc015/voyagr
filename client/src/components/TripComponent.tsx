@@ -7,7 +7,6 @@ interface TripProps {
 const TripComponent = ({ trip }: TripProps) => {
  
  console.log('trip component', trip)
-
   return (
     <div>
       <p> {trip.trip_name}</p>
@@ -15,7 +14,6 @@ const TripComponent = ({ trip }: TripProps) => {
       <p> {trip.destination}</p>
       <p> {trip.start_date}</p>
       <p> {trip.end_date}</p>
-
     </div>
   );
 };
