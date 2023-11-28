@@ -1,21 +1,24 @@
 import { Trip } from '../types/Trip';
+import { RootState } from '../app/store';
+import { useSelector } from 'react-redux';
 
-interface TripProps {
-  trip: Trip; 
-}
+const TripComponent = () => {
+  const userTrip = useSelector((state: RootState) => state.getTrip.trip);
+  // const status = useSelector((state: RootState) => state.getTrip.status);
 
-const TripComponent = ({ trip }: TripProps) => {
- 
- console.log('trip component', trip)
-  return (
-    <div>
-      <p> {trip.trip_name}</p>
-      <p> {trip.start_loc}</p>
-      <p> {trip.destination}</p>
-      <p> {trip.start_date}</p>
-      <p> {trip.end_date}</p>
-    </div>
-  );
+  console.log(userTrip);
+
+  if (userTrip) {
+    return (
+      <div>
+        <h1>{userTrip.trip_name}</h1>
+        <p>Start Location: {userTrip.start_loc}</p>
+        <p>Destination: {userTrip.destination}</p>
+        <p>Start Date: {userTrip.start_date}</p>
+        <p>End Date: {userTrip.end_date}</p>
+      </div>
+    );
+  }
 };
 
 export default TripComponent;
