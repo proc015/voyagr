@@ -5,12 +5,6 @@ const prisma = new PrismaClient();
 
 const router = Router();
 
-// Test GET, just returns all users
-router.get('/all', async (req, res) => {
-  const user = await prisma.user.findMany();
-  res.send(user);
-});
-
 // POST new trip
 router.post('/trip', async (req, res) => {
   try {
@@ -98,13 +92,3 @@ router.get('/trips/:id/all', async (req, res) => {
 // })
 
 export default router;
-
-// JUST LEAVING THIS HERE FOR NOW IN CASE THIS IS NEEDED IN QUERIES
-// .then(async () => {
-//   await prisma.$disconnect()
-// })
-// .catch(async (e) => {
-//   console.error(e)
-//   await prisma.$disconnect()
-//   process.exit(1)
-// })
