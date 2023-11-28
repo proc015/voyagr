@@ -4,7 +4,6 @@ import { postTrip, uploadPhoto } from '../services/apiService';
 import { addTrip } from '../redux/addTripSlice';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { TripMap } from './maps/tripMap';
-import { Cloudinary } from '@cloudinary/url-gen';
 // import * as dayjs from 'dayjs';
 
 const AddTrip = () => {
@@ -38,8 +37,6 @@ const AddTrip = () => {
     picture_src,
   };
 
-  const cld = new Cloudinary({ cloud: { cloudName: 'dwskyhib9' } });
-
   const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
     // convert event.target.value to a number from a string
     const convertStringtoNum = Number(event.target.value);
@@ -61,6 +58,7 @@ const AddTrip = () => {
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const filename = event.target.files![0].name;
     setPicture_src(filename);
+    console.log(filename);
     uploadPhoto(event.target.files);
   };
 
@@ -135,6 +133,7 @@ const AddTrip = () => {
 
       <label>
         Add a photo!
+        {/* THIS INITS PHOTO UPLOAD AS SOON AS FILE IS SELECTED */}
         <input
           id='photo'
           type='file'
