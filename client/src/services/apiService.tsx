@@ -54,3 +54,16 @@ export async function postActivity(newActivity: Activity) {
     console.log(err);
   }
 }
+
+export async function getUserTrips(user_id: number): Promise<Trip> {
+  try {
+    const userTrips = await fetch (`${url}/trips/${user_id}`);
+    console.log('userTrips', userTrips)
+    const response = await userTrips.json(); 
+    console.log('userTrips response', response)
+    return response; 
+  } catch (err) {
+    console.log(err)
+    throw err; 
+  }
+}
