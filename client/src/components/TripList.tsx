@@ -7,7 +7,7 @@ interface TripListProps {
 
 const TripList = ({ trips }: TripListProps) => {
   
-    console.log('trip list', trips)
+    // console.log('trip list', trips)
   
     return (
     <div className='trip-list'>

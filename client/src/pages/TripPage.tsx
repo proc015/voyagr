@@ -8,19 +8,19 @@ import { useEffect, useState } from 'react';
 function TripPage() {
   const [trips, setTrips] = useState<Trip[]>([])
 
-// const user_id = 3; 
-
-useEffect(()=> {
-  getUserTrips().then((userTrips) => {
-    setTrips(userTrips);
-  });
-}, [])
+const user_id = 1; 
 
 // useEffect(()=> {
-//     getUserTrips(user_id).then((userTrips) => {
-//       setTrips(userTrips);
-//     });
-//   }, [user_id])
+//   getUserTrips().then((userTrips) => {
+//     setTrips(userTrips);
+//   });
+// }, [])
+
+useEffect(()=> {
+    getUserTrips(user_id).then((userTrips) => {
+      setTrips(userTrips);
+    });
+  }, [user_id])
 
 console.log('TripPage', trips)
 
