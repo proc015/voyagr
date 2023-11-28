@@ -1,7 +1,7 @@
 export interface Activity {
-  activity_id: number;
+  // activity_id: number;
   //trip
-  //tripID
+  trip_id: number;
   //participants
   activity_name: string;
   location: string;

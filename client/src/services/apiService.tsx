@@ -40,7 +40,7 @@ export async function postActivity(newActivity: Activity) {
   console.log('newActivity sent to backend', newActivity);
 
   try {
-    const data = await fetch(`${mockUrl}/activity`, {
+    const data = await fetch(`${url}/activity`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -70,25 +70,26 @@ router.get('/trips/:id/all', async (req, res) => {
   }
 });
 
-// router.post('/activity', async (req, res) => {
-//   try {
-//     const newActivity = await req.body;
-//     const createdActivity = await prisma.activity.create({
-//       data: {
-//         trip: {
-//           connect: {
-//             trip_id: newActivity.trip_id,
-//           }
-//         },
-//         activity_name:
-//         location:
-//         type:
-//         date:
-//       }
-//     })
-//   } catch (error) {
-//     console.log(error)
-//   }
-// })
+router.post('/activity', async (req, res) => {
+  try {
+    const newActivity = await req.body;
+    const createdActivity = await prisma.activity.create({
+      data: {
+        trip: {
+          connect: {
+            trip_id: newActivity.trip_id,
+          },
+        },
+        activity_name: newActivity.activity_name,
+        location: newActivity.location,
+        type: newActivity.type,
+        date: newActivity.date,
+      },
+    });
+    res.send(createdActivity);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 export default router;
