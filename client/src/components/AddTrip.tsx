@@ -16,8 +16,8 @@ const AddTrip = () => {
   const [start_date, setStartDate] = useState<string>('');
   const [end_date, setEndDate] = useState<string>('');
   const [picture_src, setPicture_src] = useState('');
-  const [start_lat_lon] = useState<number[]>([])
-  const [dest_lat_lon] = useState<number[]>([])
+  const [start_lat_lon] = useState<number[]>([]);
+  const [dest_lat_lon] = useState<number[]>([]);
 
   const [newTrip, setNewTrip] = useState<Trip>({
     user_id,

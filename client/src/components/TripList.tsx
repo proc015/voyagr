@@ -2,16 +2,22 @@ import { Trip } from '../types/Trip';
 import TripComponent from './TripComponent';
 
 interface TripListProps {
-    trips: Trip[]; 
-  }
+  trip: Trip;
+}
 
-const TripList = ({ trips }: TripListProps) => {
-  
-    // console.log('trip list', trips)
-  
-    return (
+const TripList = ({ trip }: TripListProps) => {
+  console.log('trip list', trip);
+
+  return (
     <div className='trip-list'>
-      {trips.length ? (
+      <TripComponent trip={trip} />
+    </div>
+  );
+};
+
+export default TripList;
+
+/* {trips.length ? (
         trips.map((trip) => {
           return (
             <TripComponent key={trip.trip_id} trip={trip} />
@@ -19,9 +25,4 @@ const TripList = ({ trips }: TripListProps) => {
         })
       ) : (
         <p> no trips to show at this time </p>
-      )}
-    </div>
-  );
-};
-
-export default TripList;
+      )} */
