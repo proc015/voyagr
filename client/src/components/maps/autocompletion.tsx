@@ -3,20 +3,14 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from 'use-places-autocomplete';
 import { autocompletionRequestOptions as requestOptions } from './config';
-import { ChangeEvent, MouseEvent } from 'react';
-
-type latLng = { lat: number; lng: number };
-type Props = {
-  setCoordinates?: (coordinates: latLng) => void;
-  setAddress: (address: string) => void;
-  isActivity?: boolean;
-};
+import { MouseEvent } from 'react';
+import { AutoCompleteProps } from './types';
 
 export function Autocompletion({
   setCoordinates,
   setAddress,
   isActivity,
-}: Props) {
+}: AutoCompleteProps) {
   const {
     ready,
     value,

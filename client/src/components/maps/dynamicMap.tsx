@@ -5,29 +5,20 @@ import { Autocompletion } from './autocompletion';
 import { fitBounds, centerMap, setPolyline } from './utils';
 
 import { useState, useRef, useEffect } from 'react';
-
-type LatLngLiteral = google.maps.LatLngLiteral;
-// FIXME: amend below to work in useRef hook
-// type MutableMap = GoogleMap | null;
-
-type Props = {
-  setLocationAddress: (address: string) => void;
-  setDestinationAddress?: (address: string) => void;
-  isActivity?: boolean;
-};
+import { LatLngLiteral, DynamicMapProps } from './types';
 
 function DynamicMapComponent({
   setLocationAddress,
   setDestinationAddress,
   isActivity,
-}: Props) {
+}: DynamicMapProps) {
   const [locationCoordinates, setLocationCoordinates] =
     useState<LatLngLiteral>();
 
   const [destinationCoordinates, setDestinationCoordinates] =
     useState<LatLngLiteral>();
 
-  const mapRef = useRef<any>(null); // FIXME: using any because of problems on mapRef.current on the onLoad prop of GoogleMap
+  const mapRef = useRef<google.maps.Map | null>();
 
   useEffect(() => {
     centerMap(
