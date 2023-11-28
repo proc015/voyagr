@@ -62,7 +62,7 @@ function DynamicMapComponent({
 
             {locationCoordinates &&
               destinationCoordinates &&
-              setPolyline(locationCoordinates!, destinationCoordinates!)}
+              setPolyline(locationCoordinates, destinationCoordinates)}
           </GoogleMap>
 
           <Autocompletion

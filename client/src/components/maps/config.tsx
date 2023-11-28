@@ -1,4 +1,5 @@
 import { Libraries } from '@react-google-maps/api/dist/utils/make-load-script-url';
+import { LatLngLiteral } from './types';
 
 // used libraries
 const libraries: Libraries = ['places'];
@@ -26,7 +27,7 @@ const devStyling = {
 };
 
 // default center = Europe
-const center = { lat: 57, lng: 18 };
+const center: LatLngLiteral = { lat: 57, lng: 18 };
 
 // choose map layout - one ID for activity, another for trip
 type MapOptions = google.maps.MapOptions;
