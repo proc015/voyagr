@@ -1,5 +1,5 @@
 export interface Trip {
-  // trip_id: number;
+  trip_id: number;
   // user: User; // Assuming User is a custom type defined elsewhere
   user_id: number;
   // participants: User[]; // Array of User objects
