@@ -11,7 +11,7 @@ export interface Trip {
   // picture_src: string;
   // activities: Activity[]; // Assuming Activity is a custom type defined elsewhere
   // comments: Comment[]; // Assuming Comment is a custom type defined elsewhere
-  // start_lat_lon: number[]; // Representing an array of numbers
-  // dest_lat_lon: number[];
+  start_lat_lon: number[]; // Representing an array of numbers
+  dest_lat_lon: number[];
 }
  
