@@ -6,7 +6,7 @@ type Props = {
   location: string;
 };
 
-export const ActivityMap = ({ setAddress, location }: Props) => {
+export const StaticMap = ({ setAddress, location }: Props) => {
   // Markers will take either an address with correct format (e.g. '+' instead of whitespace) OR lat-lang nums
   const options = {
     markers: [],
