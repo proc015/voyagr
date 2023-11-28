@@ -64,6 +64,7 @@ const AddTrip = () => {
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const filename = event.target.files![0].name;
     setPicture_src(filename);
+    console.log(filename);
     uploadPhoto(event.target.files);
   };
 
@@ -140,6 +141,7 @@ const AddTrip = () => {
 
       <label>
         Add a photo!
+        {/* THIS INITS PHOTO UPLOAD AS SOON AS FILE IS SELECTED */}
         <input
           id='photo'
           type='file'
