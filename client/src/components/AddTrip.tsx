@@ -15,6 +15,8 @@ const AddTrip = () => {
   const [destination, setDestination] = useState<string>('');
   const [start_date, setStartDate] = useState<string>('');
   const [end_date, setEndDate] = useState<string>('');
+  const [start_lat_lon] = useState<number[]>([])
+  const [dest_lat_lon] = useState<number[]>([])
 
   const [newTrip, setNewTrip] = useState<Trip>({
     user_id,
@@ -23,6 +25,8 @@ const AddTrip = () => {
     destination,
     start_date,
     end_date,
+    start_lat_lon,
+    dest_lat_lon
   });
 
   const newTripObj: Trip = {
@@ -32,6 +36,8 @@ const AddTrip = () => {
     destination,
     start_date,
     end_date,
+    start_lat_lon,
+    dest_lat_lon
   };
 
   const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -62,6 +68,8 @@ const AddTrip = () => {
       destination: '',
       start_date: '',
       end_date: '',
+      start_lat_lon: [],
+      dest_lat_lon: []
     });
   };
 
