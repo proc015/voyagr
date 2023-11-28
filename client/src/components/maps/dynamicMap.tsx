@@ -7,9 +7,6 @@ import { fitBounds, centerMap, setPolyline } from './utils';
 import { useState, useRef, useEffect } from 'react';
 import { LatLngLiteral, DynamicMapProps } from './types';
 
-// FIXME: amend below to work in useRef hook
-// type MutableMap = GoogleMap | null;
-
 function DynamicMapComponent({
   setLocationAddress,
   setDestinationAddress,
@@ -21,7 +18,7 @@ function DynamicMapComponent({
   const [destinationCoordinates, setDestinationCoordinates] =
     useState<LatLngLiteral>();
 
-  const mapRef = useRef<any>(null); // FIXME: using any because of problems on mapRef.current on the onLoad prop of GoogleMap
+  const mapRef = useRef<google.maps.Map | null>();
 
   useEffect(() => {
     centerMap(

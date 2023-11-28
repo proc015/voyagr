@@ -11,7 +11,7 @@ const centerMap = (
   if (coordinates || destinationCoordinates) {
     map.current?.panTo(coordinates || destinationCoordinates);
   } else {
-    return;
+    map.current?.panTo(defaultCenter);
   }
 };
 
