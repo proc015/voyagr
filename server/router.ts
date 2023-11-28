@@ -30,6 +30,7 @@ router.post('/trip', async (req, res) => {
         dest_lat_lon: newTrip.dest_lat_lon,
         start_date: newTrip.start_date,
         end_date: newTrip.end_date,
+        picture_src: newTrip.picture_src,
       },
     });
     res.send(createdTrip);

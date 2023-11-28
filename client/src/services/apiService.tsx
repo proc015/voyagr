@@ -24,6 +24,18 @@ export async function postTrip(newTrip: Trip) {
   }
 }
 
+export async function uploadPhoto(files: any) {
+  const formData = new FormData();
+  formData.append('file', files[0]);
+  formData.append('upload_preset', 'hs3oue2u');
+  await fetch('https://api.cloudinary.com/v1_1/dwskyhib9/upload', {
+    method: 'POST',
+    body: formData,
+  }).then((response) => {
+    console.log(response);
+  });
+}
+
 export async function postActivity(newActivity: Activity) {
   console.log('newActivity sent to backend', newActivity);
 
