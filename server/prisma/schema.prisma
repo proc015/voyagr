@@ -43,6 +43,7 @@ model Trip {
   picture_src     String?
   activities      Activity[]
   comments        Comment[]
+  published       Boolean     @default(false)
 }
 
 model Activity {
