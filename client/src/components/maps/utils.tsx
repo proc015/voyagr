@@ -1,6 +1,9 @@
+import { Polyline } from '@react-google-maps/api';
+import { lineOptions } from './config';
+
 type LatLngLiteral = google.maps.LatLngLiteral;
 
-export const centerMap = (
+const centerMap = (
   coordinates: LatLngLiteral,
   destinationCoordinates: LatLngLiteral,
   map: any,
@@ -13,7 +16,7 @@ export const centerMap = (
   }
 };
 
-export const fitBounds = (
+const fitBounds = (
   locationCoordinates: LatLngLiteral,
   destinationCoordinates: LatLngLiteral,
   map: any
@@ -28,3 +31,14 @@ export const fitBounds = (
     }
   }
 };
+
+const setPolyline = (
+  locationCoordinates: LatLngLiteral,
+  destinationCoordinates: LatLngLiteral
+) => {
+  const path = [locationCoordinates!, destinationCoordinates!];
+
+  return <Polyline path={path} options={lineOptions} />;
+};
+
+export { centerMap, fitBounds, setPolyline };
