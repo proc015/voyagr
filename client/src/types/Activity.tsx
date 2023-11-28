@@ -10,6 +10,7 @@ export interface Activity {
   date: string;
   //picture_src
   //comments
+  loc_lat_lon: number[];
 }
 
 // model Activity {

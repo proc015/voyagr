@@ -3,7 +3,7 @@ import { Trip } from '../types/Trip';
 import { postTrip, uploadPhoto } from '../services/apiService';
 import { addTrip } from '../redux/addTripSlice';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { TripMap } from './maps/tripMap';
+import { DynamicMap } from './maps/dynamicMap';
 // import * as dayjs from 'dayjs';
 
 const AddTrip = () => {
@@ -113,10 +113,10 @@ const AddTrip = () => {
         />
       </label>
 
-      <TripMap
+      <DynamicMap
         setLocationAddress={setStartLoc}
         setDestinationAddress={setDestination}
-      ></TripMap>
+      />
 
       <label>
         Start Date:

@@ -16,7 +16,7 @@ type Props = {
   isActivity?: boolean;
 };
 
-function TripMapComp({
+function DynamicMapComponent({
   setLocationAddress,
   setDestinationAddress,
   isActivity,
@@ -92,4 +92,4 @@ function TripMapComp({
   );
 }
 
-export const TripMap = memo(TripMapComp);
+export const DynamicMap = memo(DynamicMapComponent);
