@@ -7,14 +7,14 @@ import { addActivity } from '../redux/addActivitySlice';
 const AddActivity = () => {
   const dispatch = useAppDispatch();
 
-  const [activity_id, setActivityId] = useState<number>(0);
+  const [trip_id, setTripId] = useState<number>(0);
   const [activity_name, setActivityName] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [type, setType] = useState<string>('');
   const [date, setDate] = useState<string>('');
 
   const [newActivity, setNewActivity] = useState<Activity>({
-    activity_id,
+    trip_id,
     activity_name,
     location,
     type,
@@ -22,17 +22,17 @@ const AddActivity = () => {
   });
 
   const newActivityObj: Activity = {
-    activity_id,
+    trip_id,
     activity_name,
     location,
     type,
     date,
   };
 
-  const handleActivityIdChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleTripIdChange = (event: ChangeEvent<HTMLInputElement>) => {
     // convert event.target.value to a number from a string
     const convertStringtoNum = Number(event.target.value);
-    setActivityId(convertStringtoNum);
+    setTripId(convertStringtoNum);
   };
 
   const handleActivityNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +59,7 @@ const AddActivity = () => {
       // Update the grouped state
       setNewActivity(newActivityObj);
       // Reset individual state variables
-      setActivityId(0);
+      setTripId(0);
       setActivityName('');
       setLocation('');
       setType('');
@@ -70,14 +70,14 @@ const AddActivity = () => {
   return (
     <form onSubmit={handleSubmit} className='add-trip-form-container'>
       <label>
-        Activity ID:
+        Trip ID:
         <input
-          id='activity_id'
+          id='trip_id'
           type='value'
           required={true}
           placeholder='Insert number'
-          value={activity_id}
-          onChange={handleActivityIdChange}
+          value={trip_id}
+          onChange={handleTripIdChange}
         />
       </label>
 
