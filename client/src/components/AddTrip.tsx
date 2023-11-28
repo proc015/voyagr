@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../app/hooks';
 import { Trip } from '../types/Trip';
-import { postTrip } from '../services/apiService';
+import { postTrip, uploadPhoto } from '../services/apiService';
 import { addTrip } from '../redux/addTripSlice';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { TripMap } from './maps/tripMap';
@@ -15,6 +15,7 @@ const AddTrip = () => {
   const [destination, setDestination] = useState<string>('');
   const [start_date, setStartDate] = useState<string>('');
   const [end_date, setEndDate] = useState<string>('');
+  const [picture_src, setPicture_src] = useState('');
   const [start_lat_lon] = useState<number[]>([])
   const [dest_lat_lon] = useState<number[]>([])
 
@@ -26,7 +27,8 @@ const AddTrip = () => {
     start_date,
     end_date,
     start_lat_lon,
-    dest_lat_lon
+    dest_lat_lon,
+    picture_src,
   });
 
   const newTripObj: Trip = {
@@ -37,7 +39,8 @@ const AddTrip = () => {
     start_date,
     end_date,
     start_lat_lon,
-    dest_lat_lon
+    dest_lat_lon,
+    picture_src,
   };
 
   const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +61,12 @@ const AddTrip = () => {
     setEndDate(event.target.value);
   };
 
+  const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const filename = event.target.files![0].name;
+    setPicture_src(filename);
+    uploadPhoto(event.target.files);
+  };
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     postTrip(newTripObj).then((createdTrip) => dispatch(addTrip(createdTrip)));
@@ -69,7 +78,8 @@ const AddTrip = () => {
       start_date: '',
       end_date: '',
       start_lat_lon: [],
-      dest_lat_lon: []
+      dest_lat_lon: [],
+      picture_src: '',
     });
   };
 
@@ -125,6 +135,16 @@ const AddTrip = () => {
           type='date'
           value={end_date}
           onChange={handleEndDateChange}
+        />
+      </label>
+
+      <label>
+        Add a photo!
+        <input
+          id='photo'
+          type='file'
+          accept='image/png, image/jpeg'
+          onChange={handlePhotoUpload}
         />
       </label>
 
