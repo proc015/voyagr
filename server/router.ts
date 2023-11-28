@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 const router = Router();
 
-// POST new trip
+// POST NEW TRIP
 router.post('/trip', async (req, res) => {
   try {
     const newTrip = await req.body;
@@ -54,7 +54,6 @@ router.get('/trips/:id', async (req, res) => {
 //GET ALL TRIPS FROM USER
 router.get('/trips/:id/all', async (req, res) => {
   try {
-    console.log(req.params);
     const userId = Number(req.params.id);
     const allTrips = await prisma.user.findUnique({
       where: {
@@ -70,6 +69,7 @@ router.get('/trips/:id/all', async (req, res) => {
   }
 });
 
+// POST NEW ACTIVITY
 router.post('/activity', async (req, res) => {
   try {
     const newActivity = await req.body;
@@ -87,6 +87,25 @@ router.post('/activity', async (req, res) => {
       },
     });
     res.send(createdActivity);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// GET ALL ACTIVITIES FROM TRIP
+router.get('/activity/:tripId/all', async (req, res) => {
+  try {
+    const tripId = Number(req.params.tripId);
+    console.log(tripId);
+    const allActivities = await prisma.trip.findUnique({
+      where: {
+        trip_id: tripId,
+      },
+      select: {
+        activities: true,
+      },
+    });
+    res.send(allActivities);
   } catch (error) {
     console.log(error);
   }
