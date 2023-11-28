@@ -11,6 +11,7 @@ router.get('/all', async (req, res) => {
   res.send(user);
 });
 
+// POST new trip
 router.post('/trip', async (req, res) => {
   try {
     const newTrip = await req.body;
@@ -39,6 +40,62 @@ router.post('/trip', async (req, res) => {
     console.log(error);
   }
 });
+
+// GET MOST RECENT TRIP FROM USER
+router.get('/trips/:id', async (req, res) => {
+  try {
+    const userId = Number(req.params.id);
+    const trip = await prisma.trip.findFirst({
+      where: {
+        userId: userId,
+      },
+      take: -1,
+    });
+    res.send(trip);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//GET ALL TRIPS FROM USER
+router.get('/trips/:id/all', async (req, res) => {
+  try {
+    console.log(req.params);
+    const userId = Number(req.params.id);
+    const allTrips = await prisma.user.findUnique({
+      where: {
+        user_id: userId,
+      },
+      select: {
+        trips: true,
+      },
+    });
+    res.send(allTrips);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// router.post('/activity', async (req, res) => {
+//   try {
+//     const newActivity = await req.body;
+//     const createdActivity = await prisma.activity.create({
+//       data: {
+//         trip: {
+//           connect: {
+//             trip_id: newActivity.trip_id,
+//           }
+//         },
+//         activity_name:
+//         location:
+//         type:
+//         date:
+//       }
+//     })
+//   } catch (error) {
+//     console.log(error)
+//   }
+// })
 
 export default router;
 
