@@ -53,6 +53,7 @@ model Activity {
   participants    User[]
   activity_name   String
   location        String
+  loc_lat_lon     Decimal[]
   type            String
   tags            Tag[]
   description     String?
