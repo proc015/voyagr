@@ -1,7 +1,6 @@
 import { Polyline } from '@react-google-maps/api';
 import { lineOptions } from './config';
-
-type LatLngLiteral = google.maps.LatLngLiteral;
+import { LatLngLiteral } from './types';
 
 const centerMap = (
   coordinates: LatLngLiteral,

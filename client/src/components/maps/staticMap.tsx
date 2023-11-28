@@ -1,12 +1,7 @@
 import { Autocompletion } from './autocompletion';
-import { useState } from 'react';
+import { StaticMapProps } from './types';
 
-type Props = {
-  setAddress: (address: string) => void;
-  location: string;
-};
-
-export const StaticMap = ({ setAddress, location }: Props) => {
+export const StaticMap = ({ setAddress, location }: StaticMapProps) => {
   // Markers will take either an address with correct format (e.g. '+' instead of whitespace) OR lat-lang nums
   const options = {
     markers: [],
