@@ -1,17 +1,47 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Trip } from '../types/Trip';
-import { fetchUserTrips } from '../services/fetchTrip';
+import { Activity } from '../types/Activity';
+import { fetchUserFeed } from '../services/fetchUserFeed';
+
+
+
+export interface ActivityFeed {
+  activity_id: number; 
+  activity_name: string;
+  date: string;
+  description: string; 
+  location: string;
+  tripId: number;
+  type: string;
+  loc_lat_lon: number[];
+}
+
+
+export interface TripFeed {
+  trip_id: number;
+  userId: number;
+  trip_name: string;
+  start_loc: string;
+  destination: string;
+  start_date: string;
+  end_date: string;
+  start_lat_lon: number[]; 
+  dest_lat_lon: number[]; 
+  picture_src: string;
+  published: boolean;
+  activities: ActivityFeed[]; 
+}
 
 
 export interface TripFeedState {
-  trip: Trip;
+  tripFeed: TripFeed[];
   status: 'idle' | 'loading' | 'failed';
   error: string;
 }
 
 const initialState = {
-  trip: {
-    user_id: 0,
+  tripFeed: [{
+    trip_id: 0,
+    userId: 0,
     trip_name: '',
     start_loc: '',
     destination: '',
@@ -20,9 +50,20 @@ const initialState = {
     start_lat_lon: [0, 0],
     dest_lat_lon: [0, 0],
     picture_src: '',
-    published: true, 
-    activities: [], 
-  },
+    published: false, 
+    activities: [
+      {
+        activity_id: 0, 
+        activity_name: '',
+        date: '',
+        description: '', 
+        location: '',
+        tripId: 0,
+        type: '',
+        loc_lat_lon: [0],
+      },
+    ], 
+  }],
   status: 'idle',
   error: '',
 };
@@ -35,14 +76,14 @@ export const fetchTripSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserTrips.pending, (state) => {
+      .addCase(fetchUserFeed.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchUserTrips.fulfilled, (state, action) => {
+      .addCase(fetchUserFeed.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.trip = action.payload;
+        state.tripFeed = action.payload;
       })
-      .addCase(fetchUserTrips.rejected, (state, action) => {
+      .addCase(fetchUserFeed.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
       });
