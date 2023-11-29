@@ -6,6 +6,9 @@ const router = Router();
 // POST NEW TRIP
 router.post('/trip', c.postTrip);
 
+//GET ALL PUBLISHED TRIPS
+router.get('/trip/all', c.getPublishedTrips);
+
 // GET MOST RECENT TRIP FROM USER
 router.get('/trip/:id', c.getLastTrip);
 
@@ -14,9 +17,6 @@ router.get('/trip/:id/all', c.getAllUserTrips);
 
 //PUBLISH CURRENT TRIP
 router.put('/trip/:id/publish', c.publishTrip);
-
-//GET ALL PUBLISHED TRIPS
-router.get('/trip/all', c.getPublishedTrips);
 
 // POST NEW ACTIVITY
 router.post('/activity', c.postActivity);
