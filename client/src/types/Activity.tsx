@@ -10,19 +10,21 @@ export interface Activity {
   date: string;
   //picture_src
   //comments
-  loc_lat_lon: number[];
+  loc_lat_lon?: number[];
 }
 
 // model Activity {
-//     activity_id     Int         @id @default(autoincrement())
-//     trip            Trip        @relation(fields: [tripId], references: [trip_id])
-//     tripId          Int
-//     participants    User[]
-//     activity_name   String
-//     location        String
-//     type            String
-//     tags            Tag[]
-//     date            String
-//     picture_src     String?
-//     comments        Comment[]
-//   }
+//   activity_id     Int         @id @default(autoincrement())
+//   trip            Trip        @relation(fields: [tripId], references: [trip_id])
+//   tripId          Int         
+//   participants    User[]
+//   activity_name   String
+//   location        String
+//   loc_lat_lon     Decimal[]
+//   type            String
+//   tags            Tag[]
+//   description     String?
+//   date            String
+//   picture_src     String?
+//   comments        Comment[]
+// }
