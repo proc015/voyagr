@@ -10,7 +10,7 @@ export const fetchUserTrips = createAsyncThunk<Trip, number, { rejectValue: stri
   'getTrip/fetchUserTrips',
   async (user_id, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${url}/trips/${user_id}`);
+      const response = await fetch(`${url}/trip/${user_id}`);
       const data = await response.json();
       return data;  
     } catch (err) {

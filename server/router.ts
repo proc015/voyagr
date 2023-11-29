@@ -7,10 +7,10 @@ const router = Router();
 router.post('/trip', c.postTrip);
 
 // GET MOST RECENT TRIP FROM USER
-router.get('/trips/:id', c.getLastTrip);
+router.get('/trip/:id', c.getLastTrip);
 
 //GET ALL TRIPS FROM USER
-router.get('/trips/:id/all', c.getAllUserTrips);
+router.get('/trip/:id/all', c.getAllUserTrips);
 
 //PUBLISH CURRENT TRIP
 router.put('/trip/:id/publish', c.publishTrip);
