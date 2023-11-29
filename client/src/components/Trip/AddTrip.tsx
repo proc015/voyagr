@@ -112,14 +112,14 @@ const AddTrip = () => {
         />
       </label>
 
-      <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-zinc-300 border p-2 flex mx-auto mb-5'>
+      <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
         <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
           <p className='p-3 pb-3 pt-3'>Trip Name</p>
           <input
             id='trip_name'
             type='text'
             required={true}
-            className='mt-1 block w-[95%] px-5 py-4 border border-gray-300 rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+            className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
             placeholder='add trip name'
             value={trip_name}
             onChange={handleTripNameChange}
@@ -127,7 +127,7 @@ const AddTrip = () => {
         </label>
       </div>
 
-      <div className='w-[95%] h-full bg-stone-50 rounded-[20px] shadow-lg border-zinc-300 border p-2 flex mx-auto mb-5'>
+      <div className='w-[95%] h-full bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
         <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
           <p className='p-3 pb-3 pt-3'>Where to?</p>
           <DynamicMap
@@ -143,7 +143,7 @@ const AddTrip = () => {
         </label>
       </div>
 
-      <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-zinc-300 border p-2 mx-auto mb-5'>
+      <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
         <p className='p-3 pt-3 w-full text-zinc-800 text-3xl font-normal font-noto'>
           When?
         </p>
@@ -152,7 +152,7 @@ const AddTrip = () => {
             id='start_date'
             type='date'
             required={true}
-            className='mt-1 block w-[95%] px-5 py-4 border border-gray-300 rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+            className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
             value={start_date}
             onChange={handleStartDateChange}
           />
@@ -161,25 +161,30 @@ const AddTrip = () => {
           <input
             id='end_date'
             type='date'
-            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-gray-300 rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
             value={end_date}
             onChange={handleEndDateChange}
           />
         </label>
       </div>
 
-      <label>
-        Add a photo!
-        {/* THIS INITS PHOTO UPLOAD AS SOON AS FILE IS SELECTED */}
-        <input
-          id='photo'
-          type='file'
-          accept='image/png, image/jpeg'
-          onChange={handlePhotoUpload}
-        />
-      </label>
-
-      <input type='submit' value='Submit' />
+      <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+          <p className='p-3 pb-3 pt-3'>Trip Name</p>
+          <input
+            id='photo'
+            type='file'
+            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+            accept='image/png, image/jpeg'
+            onChange={handlePhotoUpload}
+          />
+        </label>
+      </div>
+      <input
+        type='submit'
+        value='Submit'
+        className='w-[20%] h-auto bg-#ffffff rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 content-center'
+      />
     </form>
   );
 };
