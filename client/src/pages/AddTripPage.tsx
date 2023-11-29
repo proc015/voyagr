@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import AddTrip from '../components/AddTrip';
-import AddActivity from '../components/AddActivity';
+import AddTrip from '../components/Trip/AddTrip';
+import AddActivity from '../components/Activity/AddActivity';
 
 
 function AddTripPage() {

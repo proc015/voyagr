@@ -1,5 +1,5 @@
-import { Trip } from '../types/Trip';
-import { RootState } from '../app/store';
+import { Trip } from '../../types/Trip';
+import { RootState } from '../../app/store';
 import { useSelector } from 'react-redux';
 
 const TripComponent = () => {

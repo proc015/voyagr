@@ -1,9 +1,9 @@
-import { useAppDispatch } from '../app/hooks';
-import { Trip } from '../types/Trip';
-import { postTrip, uploadPhoto } from '../services/apiService';
-import { addTrip } from '../redux/addTripSlice';
+import { useAppDispatch } from '../../app/hooks';
+import { Trip } from '../../types/Trip';
+import { postTrip, uploadPhoto } from '../../services/apiService';
+import { addTrip } from '../../redux/addTripSlice';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { DynamicMap } from './maps/dynamicMap';
+import { DynamicMap } from '../maps/dynamicMap';
 // import * as dayjs from 'dayjs';
 
 const AddTrip = () => {
@@ -101,13 +101,15 @@ const AddTrip = () => {
         />
       </label>
 
+
+      
       <label>
         Trip Name:
         <input
           id='trip_name'
           type='text'
           required={true}
-          placeholder=''
+          placeholder='add trip name'
           value={trip_name}
           onChange={handleTripNameChange}
         />
