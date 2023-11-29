@@ -44,3 +44,36 @@ export const getLastTrip = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const publishTrip = async (req: Request, res: Response) => {
+  try {
+    const tripId = Number(req.params.id);
+    const updateTrip = await prisma.trip.update({
+      where: {
+        trip_id: tripId,
+      },
+      data: {
+        published: true,
+      },
+    });
+    res.send(updateTrip);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPublishedTrips = async (req: Request, res: Response) => {
+  try {
+    const publishedTrips = await prisma.trip.findMany({
+      where: {
+        published: true,
+      },
+      include: {
+        activities: true,
+      },
+    });
+    res.send(publishedTrips);
+  } catch (error) {
+    console.log(error);
+  }
+};
