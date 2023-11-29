@@ -16,6 +16,7 @@ export const postActivity = async (req: Request, res: Response) => {
         location: newActivity.location,
         type: newActivity.type,
         date: newActivity.date,
+        loc_lat_lon: newActivity.loc_lat_lon,
       },
     });
     res.send(createdActivity);
