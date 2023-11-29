@@ -40,4 +40,48 @@ const setPolyline = (
   return <PolylineF path={path} options={lineOptions} />;
 };
 
-export { centerMap, fitBounds, setPolyline };
+// const formatToLatLng = useCallback(() => {
+//   if (!locationCoordinates || !destinationCoordinates) return;
+//   console.log(
+//     'format to loclat',
+//     locationCoordinates,
+//     destinationCoordinates
+//   );
+//   return [
+//     { lat: locationCoordinates[0], lng: locationCoordinates[1] },
+//     { lat: destinationCoordinates[0], lng: destinationCoordinates[1] },
+//   ];
+// }, [locationCoordinates, destinationCoordinates]);
+
+// const formatted = formatToLatLng(locationCoordinates, destinationCoordinates);
+
+// if (formatted) {
+//   console.log(formatted);
+
+//   setLocationLatLng(formatted[0]);
+//   setDestinationLatLng(formatted[1]);
+// }
+
+// const formatToArray = useCallback(() => {
+//   if (!locationLatLng || !destinationLatLng) return;
+//   console.log('format to array', locationLatLng.lat, destinationLatLng.lng);
+//   return [
+//     [locationLatLng.lat, locationLatLng.lng],
+//     [destinationLatLng.lat, destinationLatLng.lng],
+//   ];
+// }, [locationLatLng, destinationLatLng]);
+
+const convert = {
+  toLatLngObj: (loc: number[]) => {
+    console.log('format to loclat', loc);
+    return { lat: loc[0], lng: loc[1] };
+  },
+
+  toArray: (loc: LatLngLiteral): number[] => {
+    console.log('format to array', loc);
+
+    return [loc.lat, loc.lng];
+  },
+};
+
+export { centerMap, fitBounds, setPolyline, convert };

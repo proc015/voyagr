@@ -9,7 +9,7 @@ import { AutoCompleteProps } from './types';
 export function Autocompletion({
   setCoordinates,
   setAddress,
-  isActivity,
+  type,
 }: AutoCompleteProps) {
   const {
     ready,
@@ -18,7 +18,8 @@ export function Autocompletion({
     suggestions: { status, data },
     clearSuggestions,
   } = usePlacesAutocomplete({
-    requestOptions: isActivity ? requestOptions.activity : requestOptions.trip,
+    requestOptions:
+      type === 'activity' ? requestOptions.activity : requestOptions.trip,
   });
 
   const renderSuggestions = () =>

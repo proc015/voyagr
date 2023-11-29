@@ -16,8 +16,8 @@ const AddTrip = () => {
   const [start_date, setStartDate] = useState<string>('');
   const [end_date, setEndDate] = useState<string>('');
   const [picture_src, setPicture_src] = useState('');
-  const [start_lat_lon] = useState<number[]>([]);
-  const [dest_lat_lon] = useState<number[]>([]);
+  const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
+  const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
 
   const [newTrip, setNewTrip] = useState<Trip>({
     user_id,
@@ -114,8 +114,14 @@ const AddTrip = () => {
       </label>
 
       <DynamicMap
+        locationCoordinates={start_lat_lon}
+        destinationCoordinates={dest_lat_lon}
+        setLocationCoordinates={setStart_lat_lon}
+        setDestinationCoordinates={setDest_lat_lon}
         setLocationAddress={setStartLoc}
         setDestinationAddress={setDestination}
+        type={'trip'}
+        action={'create'}
       />
 
       <label>
