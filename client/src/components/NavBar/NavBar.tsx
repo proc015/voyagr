@@ -12,7 +12,6 @@ const NavBar = () => {
       </div>
       <div className='headerVoyagrPosition'></div> 
       
-      
       <div className='navbar'>
         <NavLink
           to='/feed'

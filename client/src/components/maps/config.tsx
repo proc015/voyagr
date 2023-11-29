@@ -20,9 +20,14 @@ const devStyling = {
     gap: '20px',
   },
   mapContainerStyle: {
-    width: '300px',
-    height: '300px',
-    borderRadius: '20px',
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center',
+    width: 'auto',
+    height: '225px',
+    borderRadius: '15px',
+    margin: '10px',
+    marginTop: '20px',
   },
 };
 
