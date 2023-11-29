@@ -1,17 +1,22 @@
 import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 import logo from '../../assets/logo/Voyagr-white-big.png';
+import travelIcon from '../../assets/icons/button-active.svg';
+import travelIconnoBackground from '../../assets/icons/traveller.svg';
+import { useMatch } from 'react-router-dom';
 
 const NavBar = () => {
+  const addTripMatch = useMatch('/addtrip');
+
   return (
     <>
       <div className='headerVoyagr'>
         <div className='logo'>
-          <img src={logo} alt='logo'/>
+          <img src={logo} alt='logo' />
         </div>
       </div>
-      <div className='headerVoyagrPosition'></div> 
-      
+      <div className='headerVoyagrPosition'></div>
+
       <div className='navbar'>
         <NavLink
           to='/feed'
@@ -27,18 +32,22 @@ const NavBar = () => {
             isActive ? 'nav-link nav-link-active' : 'nav-link'
           }
         >
-          ... 
+          ...
         </NavLink>
+        <div className='nav-link-container'>
+          {addTripMatch ? (
+            <img src={travelIcon} alt='travelIcon' className='active-icon' />
+          ) : null}
+          <NavLink
+            to='/addtrip'
+            className='nav-link'
+            activeClassName='nav-link-active'
+          >
+          <img src={travelIconnoBackground} alt='travelIcon'/>
+          </NavLink>
+        </div>
         <NavLink
-          to='/addtrip'
-          className={({ isActive }) =>
-            isActive ? 'nav-link nav-link-active' : 'nav-link'
-          }
-        >
-          + Trip
-        </NavLink>
-        <NavLink
-          to='abc'
+          to='/abc'
           className={({ isActive }) =>
             isActive ? 'nav-link nav-link-active' : 'nav-link'
           }
