@@ -40,4 +40,17 @@ const setPolyline = (
   return <PolylineF path={path} options={lineOptions} />;
 };
 
-export { centerMap, fitBounds, setPolyline };
+const convert = {
+  toLatLngObj: (loc: number[]) => {
+    console.log('format to loclat', loc);
+    return { lat: loc[0], lng: loc[1] };
+  },
+
+  toArray: (loc: LatLngLiteral): number[] => {
+    console.log('format to array', loc);
+
+    return [loc.lat, loc.lng];
+  },
+};
+
+export { centerMap, fitBounds, setPolyline, convert };

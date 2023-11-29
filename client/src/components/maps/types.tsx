@@ -3,13 +3,18 @@ type LatLngLiteral = google.maps.LatLngLiteral;
 type AutoCompleteProps = {
   setCoordinates?: (coordinates: LatLngLiteral) => void;
   setAddress: (address: string) => void;
-  isActivity?: boolean;
+  type: 'activity' | 'trip';
 };
 
 type DynamicMapProps = {
+  locationCoordinates: number[];
+  destinationCoordinates?: number[];
+  setLocationCoordinates: (coordinates: number[]) => void;
+  setDestinationCoordinates?: (coordinates: number[]) => void;
   setLocationAddress: (address: string) => void;
   setDestinationAddress?: (address: string) => void;
-  isActivity?: boolean;
+  type: 'activity' | 'trip';
+  action: 'create' | 'view';
 };
 
 type StaticMapProps = {

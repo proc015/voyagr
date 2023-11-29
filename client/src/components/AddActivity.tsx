@@ -99,7 +99,13 @@ const AddActivity = () => {
 
       <label>
         Location:
-        <DynamicMap setLocationAddress={setLocation} isActivity={true} />
+        <DynamicMap
+          locationCoordinates={loc_lat_lon}
+          setLocationCoordinates={setLoc_lat_lon}
+          setLocationAddress={setLocation}
+          type={'activity'}
+          action={'create'}
+        />
       </label>
 
       <label>
