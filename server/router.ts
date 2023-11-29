@@ -12,6 +12,12 @@ router.get('/trips/:id', c.getLastTrip);
 //GET ALL TRIPS FROM USER
 router.get('/trips/:id/all', c.getAllUserTrips);
 
+//PUBLISH CURRENT TRIP
+router.put('/trip/:id/publish', c.publishTrip);
+
+//GET ALL PUBLISHED TRIPS
+router.get('/trip/all', c.getPublishedTrips);
+
 // POST NEW ACTIVITY
 router.post('/activity', c.postActivity);
 
