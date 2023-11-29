@@ -5,8 +5,8 @@ const config: Config = {
   theme: {
     extend: {},
     fontFamily: {
-      'noto': [],
-      'didactic': [],
+      'noto': ['Noto Serif Display', 'serif'],
+      'didact': ['Didact Gothic', 'sans-serif'],
     }
   },
   plugins: [],

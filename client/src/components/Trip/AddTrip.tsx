@@ -88,7 +88,7 @@ const AddTrip = () => {
   // console.log(dateTest)
 
   return (
-    <form onSubmit={handleSubmit} className='add-trip-form-container'>
+    <form onSubmit={handleSubmit} className=''>
       <label>
         User ID:
         <input
@@ -101,19 +101,20 @@ const AddTrip = () => {
         />
       </label>
 
-
-      
-      <label>
-        Trip Name:
-        <input
-          id='trip_name'
-          type='text'
-          required={true}
-          placeholder='add trip name'
-          value={trip_name}
-          onChange={handleTripNameChange}
-        />
-      </label>
+      <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-zinc-300 border p-2 flex mx-auto mb-5'>
+        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+          <p className='p-3 pb-3 pt-3'>Trip Name</p>
+          <input
+            id='trip_name'
+            type='text'
+            required={true}
+            className='mt-1 block w-[95%] px-5 py-4 border border-gray-300 rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+            placeholder='add trip name'
+            value={trip_name}
+            onChange={handleTripNameChange}
+          />
+        </label>
+      </div>
 
       <DynamicMap
         locationCoordinates={start_lat_lon}
