@@ -1,21 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Activity } from '../types/Activity';
 import { fetchUserActivity } from '../services/fetchActivity';
 
 export interface ActivityState {
-  activity: Activity[];
+  activities: Activity[];
   status: 'idle' | 'loading' | 'failed';
   error: string;
 }
 
 const initialState = {
-  activities: [{
-    trip_id: 0, 
-    activity_name: '', 
-    location: '', 
-    type: '', 
-    date: '',
-  }],
+  activities: [
+    {
+      trip_id: 0,
+      activity_name: '',
+      location: '',
+      type: '',
+      date: '',
+    },
+  ],
   status: 'idle',
   error: '',
 };
@@ -23,7 +25,7 @@ const initialState = {
 export const fetchActivitySlice = createSlice({
   name: 'getActivity',
   initialState,
-  
+
   reducers: {},
 
   extraReducers: (builder) => {

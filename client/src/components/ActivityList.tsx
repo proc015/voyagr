@@ -32,14 +32,10 @@ const ActivityList = () => {
   // Display activities or a message if there are none
   return (
     <div className='activity-list'>
-      {userActivity.activities.length > 0 ? (
-        userActivity.activities.map((act, index) => { 
-            return (
-          
-          <ActivityComponent key={index} activity={act} 
-          />
-            )}
-            )
+      {userActivity.length > 0 ? (
+        userActivity.map((activity, index) => {
+          return <ActivityComponent key={index} activity={activity} />;
+        })
       ) : (
         <p>No activities to show</p>
       )}
