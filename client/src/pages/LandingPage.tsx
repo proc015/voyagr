@@ -4,10 +4,12 @@ function LandingPage() {
   return (
     <div>
       This is the LandingPage
-      <Link to='/login' className='something'>
-        login
+      <Link to='/login'>
+        <div>Login</div>
       </Link>
-      <div className='registerLP'>register</div>
+      <Link to='/signup'>
+      <div>Register</div>
+      </Link>
     </div>
   );
 }

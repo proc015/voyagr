@@ -24,4 +24,7 @@ router.post('/activity', c.postActivity);
 // GET ALL ACTIVITIES FROM TRIP
 router.get('/activity/:tripId/all', c.getAllTripActivities);
 
+// CREATE NEW USER
+router.post('/user', c.createUser);
+
 export default router;
