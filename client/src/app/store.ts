@@ -3,6 +3,7 @@ import tripReducer from '../redux/addTripSlice';
 import activityReducer from '../redux/addActivitySlice'
 import fetchTripReducer from '../redux/fetchTripSlice';
 import fetchActivityReducer from '../redux/fetchActivitySlice';
+import fetchTripFeedReducer from '../redux/fetchUserFeedSlice'
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     activity: activityReducer, 
     getTrip: fetchTripReducer, 
     getActivity: fetchActivityReducer, 
+    getAllTrips: fetchTripFeedReducer
   },
 });
 

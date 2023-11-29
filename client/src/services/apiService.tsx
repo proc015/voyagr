@@ -54,3 +54,17 @@ export async function postActivity(newActivity: Activity) {
     console.log(err);
   }
 }
+
+export async function publishTrip(trip_id: number) {
+  try {
+    const data = await fetch(`${url}/trip/${trip_id}/publish`, {
+      method: 'PUT',
+    });
+    console.log('data service', data)
+    const response = await data.json();
+    console.log(response)
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+}
