@@ -5,7 +5,6 @@ function FeedPage() {
   return (
     <>
       This is the FeedPage
-      
     </>
   );
 }

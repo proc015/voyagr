@@ -6,16 +6,16 @@ const url = 'http://localhost:3000';
 
 
 
-export const fetchUserFeed = createAsyncThunk<Trip, number, { rejectValue: string }>(
+export const fetchUserFeed = createAsyncThunk<Trip>(
   'getTrip/fetchUserTrips',
-  async (user_id, { rejectWithValue }) => {
+  async () => {
     try {
       // confirm with MR on the endpoint 
-      const response = await fetch(`${url}/feed/${user_id}`);
+      const response = await fetch(`${url}/trip/all`);
       const data = await response.json();
       return data;  
     } catch (err) {
-      return rejectWithValue('this is an error');  
+      console.log(err);  
     }
   }
 );
