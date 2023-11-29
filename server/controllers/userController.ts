@@ -18,3 +18,20 @@ export const getAllUserTrips = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    const newUser = await req.body;
+    const createdUser = await prisma.user.create({
+      data: {
+        first_name: newUser.first_name,
+        last_name: newUser.last_name,
+        email: newUser.email,
+        // pass_hash: newUser.pass_hash, <= create password field
+      },
+    });
+    res.send(createdUser);
+  } catch (error) {
+    console.log(error);
+  }
+};
