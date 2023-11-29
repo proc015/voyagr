@@ -1,9 +1,14 @@
 import { Link } from 'react-router-dom';
+import ActivityList from '../components/ActivityList';
+
+
 
 function ActivityPage() {
+
+  
   return (
     <>
-      This is the ActivityPage
+      <ActivityList />
     </>
   );
 }
