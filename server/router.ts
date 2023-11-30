@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import * as c from './controllers/controller';
 
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
+
 const router = Router();
 
 // POST NEW TRIP
@@ -26,5 +29,12 @@ router.get('/activity/:tripId/all', c.getAllTripActivities);
 
 // CREATE NEW USER
 router.post('/user', c.createUser);
+
+
+
+  // TESTING ENDPOINT FOR QUERIES \\
+router.get('/testing/test', async (req, res) => {
+  // ~ write test queries here ~ \\
+});
 
 export default router;

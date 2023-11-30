@@ -49,4 +49,27 @@ const trip = await prisma.trip.create({
     }
   })
   console.log(newTrip);
+  ---------------------------
+  // const test = await prisma.user.findMany({
+  //   // FIND USERS THAT HAVE AT LEAST ONE PUBLISHED TRIP
+  //   where: {
+  //     trips: {
+  //       some: {
+  //         published: true,
+  //       },
+  //     },
+  //   },
+  //   // INCLUDE TRIPS ARRAY WITH ACTIVITIES FOR THOSE PUBLISHED TRIPS
+  //   include: {
+  //     trips: {
+  //       where: {
+  //         published: true,
+  //       },
+  //       include: {
+  //         activities: true,
+  //       },
+  //     },
+  //   },
+  // });
+  // console.log(test);
 */

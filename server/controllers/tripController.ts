@@ -37,6 +37,9 @@ export const getLastTrip = async (req: Request, res: Response) => {
       where: {
         userId: userId,
       },
+      include: {
+        activities: true,
+      },
       take: -1,
     });
     res.send(trip);
