@@ -25,45 +25,6 @@ const Login = () => {
     const user = { email, password };
     // console.log('user', user);
 
-<<<<<<< HEAD
-}
-    
-  
-return (
-    <section>
-        <h3>Login</h3>
-        <form className="login-form" onSubmit={handleSubmit}>
-            <input 
-                type="text"
-                placeholder="insert email..."
-                name="email"
-                value={}
-                onChange={handleChange}
-            />
-            <input 
-<<<<<<< HEAD
-                type="password"
-                placeholder="type password..."
-                name="password"
-                value={}
-                onChange={handleChange}
-            />
-            <button className="form-submit" type="submit"/>
-        </form>
-=======
-                type="text"
-                placeholder="insert email..."
-                name="email"
-                value={}
-                onChange={handleChange}
-            />
-        </form>
-      
->>>>>>> ba469a5 (feat: WIP login)
-    </section>
-  )
-}
-=======
     const response = await postLogin(user);
  
     if (response.error) {
@@ -73,7 +34,6 @@ return (
       navigate('/profile');
     }
   };
->>>>>>> 3c1921a (feat: added frontend login and connected sign up to backend)
 
   const validateForm = () => {
     return !loginState.email || !loginState.password;

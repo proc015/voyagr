@@ -8,7 +8,7 @@ function AddTripPage() {
     <>
       <AddTrip />
       <AddActivity />
-      
+
     </>
   );
 }
