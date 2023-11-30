@@ -8,26 +8,27 @@ const libraries: Libraries = ['places'];
 const zoom = {
   activity: 15,
   trip: 3,
+  feed: 10,
 };
 
 //DEV styling to have during dev phase
 const devStyling = {
   mapDiv: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '20px',
+    // display: 'flex',
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // gap: '20px',
   },
   mapContainerStyle: {
-    display: 'flex', 
-    justifyContent: 'center', 
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
-    width: 'auto',
-    height: '225px',
-    borderRadius: '15px',
-    margin: '10px',
-    marginTop: '20px',
+    width: '150px',
+    height: '224px',
+    borderRadius: '6px',
+    // margin: '10px',
+    // marginTop: '20px',
   },
 };
 
@@ -38,12 +39,20 @@ const center: LatLngLiteral = { lat: 57, lng: 18 };
 type MapOptions = google.maps.MapOptions;
 const mapOptions = {
   activity: {
-    mapId: '3a4cf4c2057289d0',
+    // 3a4cf4c2057289d0
+    //'15ae66f9535bc582'
+    mapTypeId: 'roadmap',
     disableDefaultUI: true,
     keyboardShortcuts: false,
   },
   trip: {
     mapId: 'b7dd5188bff05f31',
+    disableDefaultUI: true,
+    keyboardShortcuts: false,
+    gestureHandling: 'greedy',
+  },
+  feed: {
+    mapTypeId: 'roadmap',
     disableDefaultUI: true,
     keyboardShortcuts: false,
   },

@@ -1,18 +1,17 @@
 import { PolylineF } from '@react-google-maps/api';
-import { lineOptions } from './config';
+import { lineOptions, center } from './config';
 import { LatLngLiteral } from './types';
 import { Activity } from '../../types/Activity';
 
 const centerMap = (
-  coordinates: LatLngLiteral,
-  destinationCoordinates: LatLngLiteral,
   map: any,
-  defaultCenter: LatLngLiteral
+  coordinates?: LatLngLiteral,
+  destinationCoordinates?: LatLngLiteral
 ) => {
   if (coordinates && !destinationCoordinates) {
     map.current?.panTo(coordinates);
   } else {
-    map.current?.panTo(defaultCenter);
+    map.current?.panTo(center);
   }
 };
 
@@ -46,6 +45,7 @@ const setPolyline = (
 
 const convert = {
   toLatLngObj: (loc: number[]) => {
+    if (!loc) return;
     return { lat: Number(loc[0]), lng: Number(loc[1]) };
   },
 

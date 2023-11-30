@@ -6,6 +6,18 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { DynamicMap } from '../maps/dynamicMap';
 // import * as dayjs from 'dayjs';
 
+export interface NewTripType {
+  userId: number
+  trip_name: string
+  start_loc: string
+  destination: string
+  start_date: string
+  end_date: string
+  start_lat_lon: number[]
+  dest_lat_lon: number[]
+  picture_src: string
+}
+
 const AddTrip = () => {
   const dispatch = useAppDispatch();
 
@@ -20,8 +32,7 @@ const AddTrip = () => {
   const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
 
-  const [newTrip, setNewTrip] = useState<Trip>({
-    trip_id,
+  const [newTrip, setNewTrip] = useState<NewTripType>({
     userId,
     trip_name,
     start_loc,
@@ -35,8 +46,7 @@ const AddTrip = () => {
     activities,
   });
 
-  const newTripObj: Trip = {
-    trip_id, 
+  const newTripObj: NewTripType = {
     userId,
     trip_name,
     start_loc,
@@ -88,7 +98,6 @@ const AddTrip = () => {
         dispatch(addTrip(createdTrip))
       );
       setNewTrip({
-        trip_id: 0,
         userId: 0,
         trip_name: '',
         start_loc: '',
@@ -116,7 +125,7 @@ const AddTrip = () => {
           type='value'
           required={true}
           placeholder='Insert number'
-          value={user_id}
+          value={userId}
           onChange={handleUserIdChange}
         />
       </label>
