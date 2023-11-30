@@ -1,12 +1,13 @@
 
-import { Trip } from '../types/Trip';
+import { TripFeed } from '../redux/fetchUserFeedSlice';
+// import { Trip } from '../types/Trip';
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 const url = 'http://localhost:3000';
 
 
 
-export const fetchUserTrips = createAsyncThunk<Trip, number, { rejectValue: string }>(
+export const fetchUserTrips = createAsyncThunk<TripFeed, number, { rejectValue: string }>(
   'getTrip/fetchUserTrips',
   async (user_id, { rejectWithValue }) => {
     try {
