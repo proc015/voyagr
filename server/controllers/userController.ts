@@ -22,8 +22,15 @@ export const getAllUserTrips = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    //hash password here
     const newUser = await req.body;
+    // CHECK IF EMAIL EXISTS IN DB
+    const accountCheck = await prisma.user.findUnique({
+      where: {
+        email: newUser.email,
+      },
+    });
+    if (accountCheck) throw new Error();
+    // CONTINUE USER CREATION
     const hashedPassword = await bcrypt.hash(newUser.password, 10);
     const createdUser = await prisma.user.create({
       data: {
@@ -35,7 +42,7 @@ export const createUser = async (req: Request, res: Response) => {
     });
     res.send(createdUser);
   } catch (error) {
-    console.log(error);
+    res.send({error: '400', message: 'This email is already associated with an account!'})
   }
 };
 
@@ -71,6 +78,6 @@ export const userLogin = async (req: Request, res: Response) => {
     if (!validatedPass) throw new Error();
     res.send(user);
   } catch (error) {
-    res.send({error: '401', message: 'Username or password is wrong'});
+    res.send({ error: '401', message: 'Email or password is wrong' });
   }
 };
