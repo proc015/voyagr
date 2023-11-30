@@ -154,7 +154,7 @@ const AddActivity = () => {
 
         <div className='flex w-[95%] mx-auto space-x-5'>
           <label>
-            <p className='ml-0 mr-0pt-3 w-full h-[60px] text-zinc-800 text-3xl font-normal font-noto'>
+            <p className='ml-0 mr-0 pt-3 w-full h-[60px] text-zinc-800 text-3xl font-normal font-noto'>
               When?
             </p>{' '}
             <input

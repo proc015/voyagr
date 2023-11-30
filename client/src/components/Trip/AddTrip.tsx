@@ -8,15 +8,15 @@ import AddActivity from '../Activity/AddActivity';
 // import * as dayjs from 'dayjs';
 
 export interface NewTripType {
-  userId: number
-  trip_name: string
-  start_loc: string
-  destination: string
-  start_date: string
-  end_date: string
-  start_lat_lon: number[]
-  dest_lat_lon: number[]
-  picture_src: string
+  userId: number;
+  trip_name: string;
+  start_loc: string;
+  destination: string;
+  start_date: string;
+  end_date: string;
+  start_lat_lon: number[];
+  dest_lat_lon: number[];
+  picture_src: string;
 }
 
 const AddTrip = () => {
@@ -33,6 +33,14 @@ const AddTrip = () => {
   const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
   const [participants, setParticipants] = useState('');
+
+  const [isDiv1Visible, setDiv1Visible] = useState(true);
+  const [isDiv2Visible, setDiv2Visible] = useState(false);
+
+  const toggleDivVisibility = () => {
+    setDiv1Visible(!isDiv1Visible);
+    setDiv2Visible(!isDiv2Visible);
+  };
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
     userId,
@@ -58,7 +66,7 @@ const AddTrip = () => {
     start_lat_lon,
     dest_lat_lon,
     picture_src,
-    // published, 
+    // published,
     // activities,
   };
 
@@ -110,7 +118,7 @@ const AddTrip = () => {
 
   const handleParticipantsChange = (event: ChangeEvent<HTMLInputElement>) => {
     // convert event.target.value to a number from a string
-    const convertStringtoNum = Number(event.target.value);          // nw: this is not right, but I keep it for now to change it tomorrow
+    const convertStringtoNum = Number(event.target.value); // nw: this is not right, but I keep it for now to change it tomorrow
     setUserId(convertStringtoNum);
   };
 
@@ -130,7 +138,7 @@ const AddTrip = () => {
         start_lat_lon: [],
         dest_lat_lon: [],
         picture_src: '',
-        // published: false, 
+        // published: false,
         // activities: [],
       });
     }
@@ -141,6 +149,19 @@ const AddTrip = () => {
 
   return (
     <>
+      {/* <div>
+        {isDiv1Visible && (
+          <div onClick={toggleDivVisibility}>
+            <div className='div1'>Div 1</div>
+          </div>
+        )}
+
+        {isDiv2Visible && (
+          <div onClick={toggleDivVisibility}>
+            <div className='div2'>Div 2</div>
+          </div>
+        )}
+      </div> */}
       <form onSubmit={handleSubmit} className=''>
         <label>
           User ID:
@@ -154,11 +175,65 @@ const AddTrip = () => {
           />
         </label>
 
-        <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+        <div>
+          {isDiv1Visible && (
+            <div onClick={toggleDivVisibility}>
+              {/* <div className='div1'>Div 1</div> */}
+              <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+                <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+                  <p className='p-3 pb-3 pt-3'>Trip name?</p>
+                  <div className='flex w-[95%] mx-auto'>
+                    <div className=''>
+                      <input
+                        type='file'
+                        ref={hiddenFileInput}
+                        className='hidden'
+                        accept='image/png, image/jpeg'
+                        onChange={handlePhotoUpload}
+                      />
+                      <button
+                        onClick={handleClick}
+                        className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+                      >
+                        +
+                      </button>
+                    </div>
+                    <input
+                      id='trip_name'
+                      className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+                      type='text'
+                      required={true}
+                      placeholder='add trip name'
+                      value={trip_name}
+                      onChange={handleTripNameChange}
+                    />
+                  </div>
+                </label>
+              </div>
+            </div>
+          )}
+
+          {isDiv2Visible && (
+            <div onClick={toggleDivVisibility}>
+              <div className='div2'>Div 2</div>
+              <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+                <label className='w-full font-normal flex font-didact items-center justify-between'>
+                  <p className='p-3 pb-3 text-voyagrLightGrey text-2xl'>
+                    Trip name
+                  </p>
+                  <div className='font-didact text-xl text-right text-black mr-5'>
+                    {trip_name}
+                  </div>
+                </label>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
           <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
             <p className='p-3 pb-3 pt-3'>Trip name?</p>
             <div className='flex w-[95%] mx-auto'>
-              <div>
                 <input
                   type='file'
                   ref={hiddenFileInput}
@@ -166,54 +241,25 @@ const AddTrip = () => {
                   accept='image/png, image/jpeg'
                   onChange={handlePhotoUpload}
                 />
-                <button
-                  onClick={handleClick}
-                  className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
-                >
-                  +
-                </button>
-              </div>
-              <input
-                id='trip_name'
-                className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-                type='text'
-                required={true}
-                placeholder='add trip name'
-                value={trip_name}
-                onChange={handleTripNameChange}
-              />
+              
             </div>
           </label>
-
-          {/* <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-            <p className='p-3 pb-3 pt-3'>Trip Name</p>
-            <input
-              id='trip_name'
-              type='text'
-              required={true}
-              className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-              placeholder='add trip name'
-              value={trip_name}
-              onChange={handleTripNameChange}
-            />
-          </label> */}
-        </div>
+        </div> */}
 
         <div className='w-[95%] h-full bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
           <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
             <p className='p-3 pb-3 pt-3'>Where to?</p>
             <div className='95%'>
-            <DynamicMap
-              locationCoordinates={start_lat_lon}
-              destinationCoordinates={dest_lat_lon}
-              setLocationCoordinates={setStart_lat_lon}
-              setDestinationCoordinates={setDest_lat_lon}
-              setLocationAddress={setStartLoc}
-              setDestinationAddress={setDestination}
-              type={'trip'}
-              action={'create'}
-              
-            />
+              <DynamicMap
+                locationCoordinates={start_lat_lon}
+                destinationCoordinates={dest_lat_lon}
+                setLocationCoordinates={setStart_lat_lon}
+                setDestinationCoordinates={setDest_lat_lon}
+                setLocationAddress={setStartLoc}
+                setDestinationAddress={setDestination}
+                type={'trip'}
+                action={'create'}
+              />
             </div>
           </label>
         </div>
@@ -258,7 +304,7 @@ const AddTrip = () => {
         </div>
 
         <div className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'>
-          <input type='submit' value='Submit'  className='mx-auto'/>
+          <input type='submit' value='Submit' className='mx-auto' />
         </div>
       </form>
       <AddActivity />
