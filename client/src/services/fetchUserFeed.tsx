@@ -1,24 +1,18 @@
-
-// import { Trip } from '../types/Trip';
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { TripFeed } from '../redux/fetchUserFeedSlice';
-
-
+import { Trip } from '../types/Trip';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const url = 'http://localhost:3000';
 
-
-
-export const fetchUserFeed = createAsyncThunk<TripFeed[]>(
+export const fetchUserFeed = createAsyncThunk<Trip[]>(
   'getTrip/fetchUserTrips',
   async () => {
     try {
-      // confirm with MR on the endpoint 
+      // confirm with MR on the endpoint
       const response = await fetch(`${url}/trip/all`);
       const data = await response.json();
-      return data;  
+      return data;
     } catch (err) {
-      console.log(err);  
+      console.log(err);
     }
   }
 );

@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import { Trip } from '../types/Trip';
+import { Trip } from '../types/Trip';
 import { fetchUserTrips } from '../services/fetchTrip';
-import { TripFeed } from './fetchUserFeedSlice';
+// import { TripFeed } from './fetchUserFeedSlice';
 
 export interface TripState {
-  trip: TripFeed;
+  trip: Trip;
   status: 'idle' | 'loading' | 'failed';
   error: string;
 }

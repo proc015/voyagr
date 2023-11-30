@@ -1,7 +1,7 @@
-import { TripFeed } from '../redux/fetchUserFeedSlice'
+import { Trip } from '../types/Trip';
 
 interface FeedTripProp {
-  feedTrip: TripFeed;
+  feedTrip: Trip;
 }
 
 const FeedComponent = ({ feedTrip }: FeedTripProp) => {
