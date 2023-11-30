@@ -77,7 +77,6 @@ const AddActivity = () => {
     hiddenFileInput.current?.click();
   };
 
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -110,33 +109,34 @@ const AddActivity = () => {
 
       <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
         <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-          <p className='p-3 pb-3 pt-3'>Activity Name</p>
-          <input
-            id='activity_name'
-            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-            type='text'
-            required={true}
-            placeholder='add activity name'
-            value={activity_name}
-            onChange={handleActivityNameChange}
-          />
+          <p className='p-3 pb-3 pt-3'>Activities?</p>
+          <div className='flex w-[95%] mx-auto'>
+            <div>
+              <input
+                type='file'
+                ref={hiddenFileInput}
+                className='hidden'
+                accept='image/png, image/jpeg'
+                onChange={handlePhotoUpload}
+              />
+              <button
+                onClick={handleClick}
+                className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+              >
+                +
+              </button>
+            </div>
+            <input
+              id='activity_name'
+              className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+              type='text'
+              required={true}
+              placeholder='add activity name'
+              value={activity_name}
+              onChange={handleActivityNameChange}
+            />
+          </div>
         </label>
-
-        <div>
-          <input
-            type='file'
-            ref={hiddenFileInput}
-            className='hidden'
-            accept='image/png, image/jpeg'
-            onChange={handlePhotoUpload}
-          />
-          <button
-            onClick={handleClick}
-            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
-          >
-            +
-          </button>
-        </div>
 
         <label>
           <DynamicMap
@@ -149,29 +149,47 @@ const AddActivity = () => {
         </label>
 
         <label>
-          Type:
-          <input
-            id='type'
-            type='text'
-            required={true}
-            placeholder=''
-            value={type}
-            onChange={handleTypeChange}
-          />
-        </label>
-
-        <label>
-          Date:
+          <p className='p-3 pt-3 w-full text-zinc-800 text-3xl font-normal font-noto'>
+            When?
+          </p>{' '}
           <input
             id='date'
             type='date'
+            className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
             required={true}
             value={date}
             onChange={handleDateChange}
           />
         </label>
 
-        <input type='submit' value='Submit' />
+        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+          <p className='p-3 pb-3 pt-3'>Type</p>
+          <select
+            id='type'
+            required={true}
+            value={type}
+            onChange={handleTypeChange}
+            className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+          >
+            <option value='option1'>Option 1</option>
+            <option value='option2'>Option 2</option>
+            <option value='option3'>Option 3</option>
+          </select>
+        </label>
+
+        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+          <p className='p-3 pb-3 pt-3'>Who?</p>
+          <input
+            id='participants'
+            type='text'
+            placeholder='add buddies'
+            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+          />
+        </label>
+
+        <div className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto'>
+          <input type='submit' value='Submit' className='mx-auto' />
+        </div>
       </div>
     </form>
   );

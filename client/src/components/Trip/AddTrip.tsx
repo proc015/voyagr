@@ -2,7 +2,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { Trip } from '../../types/Trip';
 import { postTrip, uploadPhoto } from '../../services/apiService';
 import { addTrip } from '../../redux/addTripSlice';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { DynamicMap } from '../maps/dynamicMap';
 import AddActivity from '../Activity/AddActivity';
 // import * as dayjs from 'dayjs';
@@ -32,6 +32,7 @@ const AddTrip = () => {
   const [picture_src, setPicture_src] = useState('');
   const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
+  const [participants, setParticipants] = useState('');
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
     userId,
@@ -85,11 +86,32 @@ const AddTrip = () => {
     setEndDate(event.target.value);
   };
 
+  const hiddenFileInput = useRef<HTMLInputElement>(null);
+
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const filename = event.target.files![0].name;
-    setPicture_src(filename);
-    console.log(filename);
-    uploadPhoto(event.target.files);
+    if (event.target.files && event.target.files.length > 0) {
+      const filename = event.target.files[0].name;
+      setPicture_src(filename);
+      console.log(filename);
+      uploadPhoto(event.target.files);
+    }
+  };
+
+  const handleClick = () => {
+    hiddenFileInput.current?.click();
+  };
+
+  // const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const filename = event.target.files![0].name;
+  //   setPicture_src(filename);
+  //   console.log(filename);
+  //   uploadPhoto(event.target.files);
+  // };
+
+  const handleParticipantsChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // convert event.target.value to a number from a string
+    const convertStringtoNum = Number(event.target.value);          // nw: this is not right, but I keep it for now to change it tomorrow
+    setUserId(convertStringtoNum);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -134,6 +156,36 @@ const AddTrip = () => {
 
         <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
           <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+            <p className='p-3 pb-3 pt-3'>Trip name?</p>
+            <div className='flex w-[95%] mx-auto'>
+              <div>
+                <input
+                  type='file'
+                  ref={hiddenFileInput}
+                  className='hidden'
+                  accept='image/png, image/jpeg'
+                  onChange={handlePhotoUpload}
+                />
+                <button
+                  onClick={handleClick}
+                  className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+                >
+                  +
+                </button>
+              </div>
+              <input
+                id='trip_name'
+                className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+                type='text'
+                required={true}
+                placeholder='add trip name'
+                value={trip_name}
+                onChange={handleTripNameChange}
+              />
+            </div>
+          </label>
+
+          {/* <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
             <p className='p-3 pb-3 pt-3'>Trip Name</p>
             <input
               id='trip_name'
@@ -144,7 +196,7 @@ const AddTrip = () => {
               value={trip_name}
               onChange={handleTripNameChange}
             />
-          </label>
+          </label> */}
         </div>
 
         <div className='w-[95%] h-full bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
@@ -190,21 +242,21 @@ const AddTrip = () => {
 
         <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
           <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-            <p className='p-3 pb-3 pt-3'>Trip Name</p>
+            <p className='p-3 pb-3 pt-3'>Who?</p>
             <input
-              id='photo'
-              type='file'
+              id='participants'
+              type='text'
+              placeholder='add buddies'
               className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-              accept='image/png, image/jpeg'
-              onChange={handlePhotoUpload}
+              value={participants}
+              onChange={handleParticipantsChange}
             />
           </label>
         </div>
-        <input
-          type='submit'
-          value='Submit'
-          className='w-[20%] h-auto bg-#ffffff rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 content-center'
-        />
+
+        <div className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'>
+          <input type='submit' value='Submit'  className='mx-auto'/>
+        </div>
       </form>
       <AddActivity />
       <div className='h-[100px]'></div> {/* spacer div */}

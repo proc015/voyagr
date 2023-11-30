@@ -69,3 +69,14 @@ export async function publishTrip(trip_id: number) {
     console.log(err);
   }
 }
+
+// export async function searchUserByDisplayName(display_name: string) {
+//   try {
+//     const data = await fetch(`${url}/user/${display_name}`);
+//     const response = await data.json();
+//     console.log(response);
+//     return response;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
