@@ -42,6 +42,8 @@ const AddTrip = () => {
     start_lat_lon,
     dest_lat_lon,
     picture_src,
+    published,
+    activities,
   });
 
   const newTripObj: NewTripType = {
@@ -54,6 +56,8 @@ const AddTrip = () => {
     start_lat_lon,
     dest_lat_lon,
     picture_src,
+    published, 
+    activities,
   };
 
   const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +107,8 @@ const AddTrip = () => {
         start_lat_lon: [],
         dest_lat_lon: [],
         picture_src: '',
+        published: false, 
+        activities: [],
       });
     }
   };
