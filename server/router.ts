@@ -33,6 +33,9 @@ router.post('/user', c.createUser);
 // GET USER DETAILS
 router.get('/user/:id', c.getUserDetails);
 
+// USER LOGIN
+router.post('/login', c.userLogin);
+
 // TESTING ENDPOINT FOR QUERIES \\
 router.get('/testing/test', async (req, res) => {
   const test = await prisma.user.findMany({
