@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
+import { createUser } from '../services/signupService';
+import { RegisterUser } from '../types/RegisterUser';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -6,9 +8,26 @@ function Signup() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
+  const userInfo: RegisterUser = {
+    email,
+    password, 
+    firstName, 
+    lastName, 
+  }
+
+  const handleCreateUser = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // console.log(userInfo);
+    createUser(userInfo); 
+
+  }
+  
+  
   return (
     // lol css
-    <form style={{ display: 'flex', justifyContent: 'center' }}>
+    <form 
+    onSubmit={handleCreateUser}
+    style={{ display: 'flex', justifyContent: 'center' }}>
       <div
         id='parent-container'
         style={{ display: 'flex', flexDirection: 'column', width: '70%' }}
@@ -37,13 +56,11 @@ function Signup() {
           onChange={(e) => setLastName(e.target!.value)}
         />
 
-        <button
+        <input
           type='submit'
-          // onClick={handleClick}
-          // send these states to backend
-        >
-          Register
-        </button>
+          value='Register'
+        />
+          
       </div>
     </form>
   );
