@@ -44,7 +44,7 @@ export function Autocompletion({
   const handleSelect = async (e: MouseEvent<HTMLLIElement>, val: string) => {
     e.preventDefault();
     setValue(val, false);
-    setAddress(val);
+    if (setAddress) setAddress(val);
     clearSuggestions();
 
     const results = await getGeocode({ address: val });

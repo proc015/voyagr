@@ -14,8 +14,10 @@ const AddActivity = () => {
   const [type, setType] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
+  const [activity_id] = useState(0);
 
   const [newActivity, setNewActivity] = useState<Activity>({
+    activity_id,
     trip_id,
     activity_name,
     location,
@@ -25,6 +27,7 @@ const AddActivity = () => {
   });
 
   const newActivityObj: Activity = {
+    activity_id,
     trip_id,
     activity_name,
     location,
