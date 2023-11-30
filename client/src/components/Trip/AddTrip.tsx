@@ -37,9 +37,12 @@ const AddTrip = () => {
   const [isDiv1Visible, setDiv1Visible] = useState(true);
   const [isDiv2Visible, setDiv2Visible] = useState(false);
 
-  const toggleDivVisibility = () => {
-    setDiv1Visible(!isDiv1Visible);
-    setDiv2Visible(!isDiv2Visible);
+  const toggleDivVisibility = (event) => {
+    // Check if the click target is not an input element
+    if (event.target.tagName.toLowerCase() !== 'input' && 'button') {
+      setDiv1Visible(!isDiv1Visible);
+      setDiv2Visible(!isDiv2Visible);
+    }
   };
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
@@ -97,12 +100,10 @@ const AddTrip = () => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const filename = event.target.files[0].name;
-      setPicture_src(filename);
-      console.log(filename);
-      uploadPhoto(event.target.files);
-    }
+    const filename = event.target.files![0].name;
+    setPicture_src(filename);
+    console.log(filename);
+    uploadPhoto(event.target.files);
   };
 
   const handleClick = () => {
@@ -178,23 +179,22 @@ const AddTrip = () => {
         <div>
           {isDiv1Visible && (
             <div onClick={toggleDivVisibility}>
-              {/* <div className='div1'>Div 1</div> */}
-              <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+              <div className='ToggleDiv w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
                 <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
                   <p className='p-3 pb-3 pt-3'>Trip name?</p>
                   <div className='flex w-[95%] mx-auto'>
                     <div className=''>
-                      <input
-                        type='file'
-                        ref={hiddenFileInput}
-                        className='hidden'
-                        accept='image/png, image/jpeg'
-                        onChange={handlePhotoUpload}
-                      />
                       <button
                         onClick={handleClick}
                         className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
                       >
+                        <input
+                          type='file'
+                          ref={hiddenFileInput}
+                          className='hidden'
+                          accept='image/png, image/jpeg'
+                          onChange={handlePhotoUpload}
+                        />
                         +
                       </button>
                     </div>
@@ -215,13 +215,12 @@ const AddTrip = () => {
 
           {isDiv2Visible && (
             <div onClick={toggleDivVisibility}>
-              <div className='div2'>Div 2</div>
-              <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
                 <label className='w-full font-normal flex font-didact items-center justify-between'>
-                  <p className='p-3 pb-3 text-voyagrLightGrey text-2xl'>
+                  <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     Trip name
                   </p>
-                  <div className='font-didact text-xl text-right text-black mr-5'>
+                  <div className='w-[60%] font-didact text-xl text-right text-black mr-5'>
                     {trip_name}
                   </div>
                 </label>
