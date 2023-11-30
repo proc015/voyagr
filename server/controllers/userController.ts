@@ -21,6 +21,7 @@ export const getAllUserTrips = async (req: Request, res: Response) => {
 
 export const createUser = async (req: Request, res: Response) => {
   try {
+    //hash password here
     const newUser = await req.body;
     const createdUser = await prisma.user.create({
       data: {

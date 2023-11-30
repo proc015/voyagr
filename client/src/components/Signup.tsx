@@ -1,15 +1,8 @@
 import { useState } from 'react';
-// import bcrypt from 'bcrypt';
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  //doesnt work on frontend lmaooooooo
-  // const handleClick = async () => {
-  //   const hashPass = await bcrypt.hash(password, 10);
-  //   console.log(hashPass);
-  // };
 
   return (
     // lol css
