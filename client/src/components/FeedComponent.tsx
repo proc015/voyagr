@@ -4,13 +4,10 @@ import { Profilebar } from './Profilebar';
 import { Tripbox } from './Tripbox';
 
 interface FeedTripProp {
-  feedTrip: TripFeed;
+  feedTrip: Trip;
   picture: string; //NOTE mock prop
 }
 
-const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
-  console.log('feedTrip', feedTrip);
-  console.log('feedTrip activity', feedTrip.activities);
 const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
   console.log('feedTrip', feedTrip);
   console.log('feedTrip activity', feedTrip.activities);

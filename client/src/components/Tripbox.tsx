@@ -1,4 +1,4 @@
-import { ActivityFeed } from '../redux/fetchUserFeedSlice';
+import { Activity } from '../types/Activity';
 import Carousel from 'react-material-ui-carousel';
 import { DynamicMap } from './maps/dynamicMap';
 import { StaticMap } from './maps/staticMap';
@@ -8,7 +8,7 @@ type Props = {
   destination: number[];
   startDate: string;
   endDate: string;
-  activities: ActivityFeed[];
+  activities: Activity[];
   picture: string;
 };
 //

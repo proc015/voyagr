@@ -8,19 +8,21 @@ import { DynamicMap } from '../maps/dynamicMap';
 const AddActivity = () => {
   const dispatch = useAppDispatch();
 
-  const [trip_id, setTripId] = useState<number>(0);
+  const [tripId, setTripId] = useState<number>(0);
   const [activity_name, setActivityName] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [type, setType] = useState<string>('');
   const [date, setDate] = useState<string>('');
+  const [description, setDescription] = useState<string>(''); // this  is unwanted
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
   const [activity_id] = useState(0);
 
   const [newActivity, setNewActivity] = useState<Activity>({
     activity_id,
-    trip_id,
+    tripId,
     activity_name,
     location,
+    description,
     type,
     date,
     loc_lat_lon,
@@ -28,9 +30,10 @@ const AddActivity = () => {
 
   const newActivityObj: Activity = {
     activity_id,
-    trip_id,
+    tripId,
     activity_name,
     location,
+    description,
     type,
     date,
     loc_lat_lon,
@@ -83,7 +86,7 @@ const AddActivity = () => {
           type='value'
           required={true}
           placeholder='Insert number'
-          value={trip_id}
+          value={tripId}
           onChange={handleTripIdChange}
         />
       </label>

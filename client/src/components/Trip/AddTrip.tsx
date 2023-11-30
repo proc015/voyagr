@@ -6,10 +6,22 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { DynamicMap } from '../maps/dynamicMap';
 // import * as dayjs from 'dayjs';
 
+export interface NewTripType {
+  userId: number
+  trip_name: string
+  start_loc: string
+  destination: string
+  start_date: string
+  end_date: string
+  start_lat_lon: number[]
+  dest_lat_lon: number[]
+  picture_src: string
+}
+
 const AddTrip = () => {
   const dispatch = useAppDispatch();
 
-  const [user_id, setUserId] = useState<number>(0);
+  const [userId, setUserId] = useState<number>(0);
   const [trip_name, setTripName] = useState<string>('');
   const [tripNameError, setTripNameError] = useState('');
   const [start_loc, setStartLoc] = useState<string>('');
@@ -20,8 +32,8 @@ const AddTrip = () => {
   const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
 
-  const [newTrip, setNewTrip] = useState<Trip>({
-    user_id,
+  const [newTrip, setNewTrip] = useState<NewTripType>({
+    userId,
     trip_name,
     start_loc,
     destination,
@@ -32,8 +44,8 @@ const AddTrip = () => {
     picture_src,
   });
 
-  const newTripObj: Trip = {
-    user_id,
+  const newTripObj: NewTripType = {
+    userId,
     trip_name,
     start_loc,
     destination,
@@ -82,7 +94,7 @@ const AddTrip = () => {
         dispatch(addTrip(createdTrip))
       );
       setNewTrip({
-        user_id: 0,
+        userId: 0,
         trip_name: '',
         start_loc: '',
         destination: '',
@@ -107,7 +119,7 @@ const AddTrip = () => {
           type='value'
           required={true}
           placeholder='Insert number'
-          value={user_id}
+          value={userId}
           onChange={handleUserIdChange}
         />
       </label>

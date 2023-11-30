@@ -11,10 +11,11 @@ export interface ActivityState {
 const initialState = {
   activities: [
     {
-      trip_id: 0,
+      tripId: 0,
       activity_name: '',
       activity_id: 0,
       location: '',
+      description: '',
       type: '',
       date: '',
       loc_lat_lon: [0, 0],
