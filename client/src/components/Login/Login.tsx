@@ -23,14 +23,14 @@ return (
                 onChange={handleChange}
             />
             <input 
-                type="text"
-                placeholder="insert email..."
-                name="email"
+                type="password"
+                placeholder="type password..."
+                name="password"
                 value={}
                 onChange={handleChange}
             />
+            <button className="form-submit" type="submit"/>
         </form>
-      
     </section>
   )
 }
