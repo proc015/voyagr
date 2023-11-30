@@ -1,9 +1,9 @@
-import { postActivity } from '../services/apiService';
-import { Activity } from '../types/Activity';
+import { postActivity } from '../../services/apiService';
+import { Activity } from '../../types/Activity';
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch } from '../app/hooks';
-import { addActivity } from '../redux/addActivitySlice';
-import { DynamicMap } from './maps/dynamicMap';
+import { useAppDispatch } from '../../app/hooks';
+import { addActivity } from '../../redux/addActivitySlice';
+import { DynamicMap } from '../maps/dynamicMap';
 
 const AddActivity = () => {
   const dispatch = useAppDispatch();

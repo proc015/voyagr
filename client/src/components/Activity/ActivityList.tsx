@@ -1,10 +1,10 @@
-import { RootState } from '../app/store';
+import { RootState } from '../../app/store';
 import { useSelector, useDispatch } from 'react-redux';
 import ActivityComponent from './ActivityComponent';
-import { AppDispatch } from '../app/store';
-import { fetchUserActivity } from '../services/fetchActivity';
+import { AppDispatch } from '../../app/store';
+import { fetchUserActivity } from '../../services/fetchActivity';
 import { useEffect } from 'react';
-import { DynamicMap } from './maps/dynamicMap';
+import { DynamicMap } from '../maps/dynamicMap';
 
 const ActivityList = () => {
   const dispatch = useDispatch<AppDispatch>();

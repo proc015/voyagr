@@ -74,6 +74,20 @@ function DynamicMapComponent({
     <div className='Map'>
       {isLoaded && (
         <>
+          <Autocompletion
+            type={type}
+            setCoordinates={setLocLatLng}
+            setAddress={setLocationAddress}
+          ></Autocompletion>
+
+          {setDestinationAddress && (
+            <Autocompletion
+              type={type}
+              setCoordinates={setDestLatLng}
+              setAddress={setDestinationAddress}
+            ></Autocompletion>
+          )}
+
           <GoogleMap
             onLoad={(map) => {
               mapRef.current = map;
@@ -105,20 +119,6 @@ function DynamicMapComponent({
 
             {locLatLng && destLatLng && setPolyline(locLatLng, destLatLng)}
           </GoogleMap>
-
-          <Autocompletion
-            type={type}
-            setCoordinates={setLocLatLng}
-            setAddress={setLocationAddress}
-          ></Autocompletion>
-
-          {setDestinationAddress && (
-            <Autocompletion
-              type={type}
-              setCoordinates={setDestLatLng}
-              setAddress={setDestinationAddress}
-            ></Autocompletion>
-          )}
         </>
       )}
     </div>

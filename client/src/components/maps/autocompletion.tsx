@@ -55,6 +55,8 @@ export function Autocompletion({
   return (
     <div className='Places'>
       <input
+        className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+        placeholder='enter a location'
         value={value}
         onChange={(e) => setValue(e.target.value)}
         disabled={!ready}

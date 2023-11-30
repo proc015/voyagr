@@ -1,34 +1,34 @@
-.headerVoyagr{
+.headerVoyagr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e84323; 
-    border-bottom: 1px solid #bababa; 
+    background-color: #e84323;
+    border-bottom: 1px solid #bababa;
     position: fixed;
     top: 0;
     width: 100%;
-    height: 100px; 
+    height: 100px;
     z-index: 9;
 }
 
-.headerVoyagrPosition{
+.headerVoyagrPosition {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     width: 100%;
-    height: 100px; 
+    height: 100px;
     z-index: 8;
 }
 
-.logo{
+.logo {
     display: flex;
     justify-content: center;
     position: relative;
     top: 18px;
     width: 100%;
-    height: 40px; 
+    height: 40px;
     z-index: 8;
 }
 
@@ -36,19 +36,19 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: #f9f9f7; 
-    border-top: 1px solid #bababa; 
+    background-color: #f9f9f7;
+    border-top: 1px solid #bababa;
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 80px; 
+    height: 80px;
     z-index: 10;
 }
 
 .nav-link {
     text-decoration: none;
     color: #28292B;
-    font-size: 12px; 
+    font-size: 12px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@
 }
 
 .nav-link-active {
-    color: #e84323; 
+    color: #e84323;
     font-weight: bold;
 }
 
@@ -66,7 +66,18 @@
     .navbar {
         height: 80px;
     }
+
     .nav-link {
         font-size: 14px;
     }
+}
+
+.active-icon {
+    height: 100px;
+    width: auto;
+    z-index: 20;
+    position: fixed;
+    bottom: 2.5em; /* Vertically center it */
+    right: 50%; /* Horizontally center it */
+    transform: translate(50%, 50%); /* Use transform to center it precisely */
 }
