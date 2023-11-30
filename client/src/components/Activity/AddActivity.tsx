@@ -1,6 +1,7 @@
+import React, { useRef, useState } from 'react';
 import { postActivity, uploadPhoto } from '../../services/apiService';
 import { Activity } from '../../types/Activity';
-import { ChangeEvent, FormEvent, useState, useRef } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { addActivity } from '../../redux/addActivitySlice';
 import { DynamicMap } from '../maps/dynamicMap';
@@ -14,7 +15,7 @@ const AddActivity = () => {
   const [type, setType] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [description, setDescription] = useState<string>(''); // this  is unwanted
-  const [picture_src, setPicture_src] = useState('');
+  const [picture_src, setPicture_src] = useState<string | null>(null); // Updated to store the image URL
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
   const [activity_id] = useState(0);
 
@@ -41,7 +42,6 @@ const AddActivity = () => {
   };
 
   const handleTripIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // convert event.target.value to a number from a string
     const convertStringtoNum = Number(event.target.value);
     setTripId(convertStringtoNum);
   };
@@ -62,14 +62,24 @@ const AddActivity = () => {
     setDate(event.target.value);
   };
 
+  const handleTagChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setActivityName(event.target.value);
+  };
+
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       const filename = event.target.files[0].name;
       setPicture_src(filename);
-      console.log(filename);
-      uploadPhoto(event.target.files);
+      uploadPhoto(event.target.files)
+        .then((photoUrl) => {
+          // Updated to store the image URL in state
+          setPicture_src(photoUrl);
+        })
+        .catch((error) => {
+          console.error('Error uploading photo:', error);
+        });
     }
   };
 
@@ -77,23 +87,24 @@ const AddActivity = () => {
     hiddenFileInput.current?.click();
   };
 
-  const handleTagChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDate(event.target.value);
-  };
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    postActivity(newActivityObj).then((createdActivity) => {
+    // Updated to set the picture_src in newActivityObj
+    const updatedNewActivityObj = {
+      ...newActivityObj,
+      picture_src,
+    };
+
+    postActivity(updatedNewActivityObj).then((createdActivity) => {
       dispatch(addActivity(createdActivity));
-      // Update the grouped state
-      setNewActivity(newActivityObj);
-      // Reset individual state variables
+      setNewActivity(updatedNewActivityObj);
       setTripId(0);
       setActivityName('');
       setLocation('');
       setType('');
       setDate('');
+      setPicture_src(null); // Reset the image URL
     });
   };
 
@@ -123,12 +134,20 @@ const AddActivity = () => {
                 accept='image/png, image/jpeg'
                 onChange={handlePhotoUpload}
               />
-              <button
-                onClick={handleClick}
-                className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
-              >
-                +
-              </button>
+              {picture_src ? (
+                <img
+                  src={picture_src}
+                  alt='Preview'
+                  className='mb-3 block mx-auto border border-voyagrBorders rounded-[15px]'
+                />
+              ) : (
+                <button
+                  onClick={handleClick}
+                  className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+                >
+                  +
+                </button>
+              )}
             </div>
             <input
               id='activity_name'
@@ -154,9 +173,9 @@ const AddActivity = () => {
 
         <div className='flex w-[95%] mx-auto space-x-5'>
           <label>
-            <p className='ml-0 mr-0 pt-3 w-full h-[60px] text-zinc-800 text-3xl font-normal font-noto'>
+            <p className='pt-3 w-full h-[60px] text-zinc-800 text-3xl font-normal font-noto'>
               When?
-            </p>{' '}
+            </p>
             <input
               id='date'
               type='date'
