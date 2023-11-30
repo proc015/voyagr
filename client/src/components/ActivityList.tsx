@@ -13,7 +13,7 @@ const ActivityList = () => {
   );
   const status = useSelector((state: RootState) => state.getActivity.status);
 
-  const trip_id = 17;
+  const trip_id = 22;
 
   useEffect(() => {
     dispatch(fetchUserActivity(trip_id));

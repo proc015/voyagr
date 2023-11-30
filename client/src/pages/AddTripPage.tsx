@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import AddTrip from '../components/AddTrip';
 import AddActivity from '../components/AddActivity';
+import Publish from '../components/Publish';
 
 
 function AddTripPage() {
@@ -8,7 +9,7 @@ function AddTripPage() {
     <>
       <AddTrip />
       <AddActivity />
-      
+      < Publish />
     </>
   );
 }
