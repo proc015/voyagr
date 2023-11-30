@@ -13,7 +13,7 @@ import {
 import { useState, useRef, useEffect } from 'react';
 import { LatLngLiteral, DynamicMapProps } from './types';
 
-function DynamicMapComponent({
+const DynamicMapComponent = ({
   locationCoordinates,
   destinationCoordinates,
   setLocationCoordinates,
@@ -23,7 +23,7 @@ function DynamicMapComponent({
   type,
   action,
   activities,
-}: DynamicMapProps) {
+}: DynamicMapProps) => {
   const [locLatLng, setLocLatLng] = useState<LatLngLiteral>();
 
   const [destLatLng, setDestLatLng] = useState<LatLngLiteral>();
@@ -39,6 +39,14 @@ function DynamicMapComponent({
 
   const locations =
     action == 'view' && activities ? getActivityLocations(activities) : null;
+
+  useEffect(() => {
+    // FEED VIEW
+    // center map on trip
+    if (locationCoordinates && action == 'view') {
+      centerMap(mapRef, convert.toLatLngObj(locationCoordinates));
+    }
+  }, [locationCoordinates]);
 
   useEffect(() => {
     // TRIP VIEW
@@ -63,22 +71,26 @@ function DynamicMapComponent({
       }
 
       // center the map to location, destination or default center
-      centerMap(locLatLng!, destLatLng!, mapRef, config.center);
+      centerMap(mapRef, locLatLng, destLatLng!);
 
       // make map fit the location & destination markers
-      if (destLatLng) fitBounds([locLatLng!, destLatLng!], mapRef);
+      if (destLatLng) fitBounds([locLatLng, destLatLng], mapRef);
     }
+
+    console.log(locLatLng);
   }, [locLatLng, destLatLng]);
 
   return (
     <div className='Map'>
       {isLoaded && (
         <>
-          <Autocompletion
-            type={type}
-            setCoordinates={setLocLatLng}
-            setAddress={setLocationAddress}
-          ></Autocompletion>
+          {setLocationAddress && (
+            <Autocompletion
+              type={type}
+              setCoordinates={setLocLatLng}
+              setAddress={setLocationAddress}
+            ></Autocompletion>
+          )}
 
           {setDestinationAddress && (
             <Autocompletion
@@ -93,15 +105,21 @@ function DynamicMapComponent({
               mapRef.current = map;
             }}
             zoom={
-              type == 'activity' && locLatLng
-                ? config.zoom.activity
-                : config.zoom.trip
+              config.zoom[type]
+              // type == 'activity' && locLatLng
+              //   ? config.zoom.activity
+              //   : action == 'view'
+              //   ? config.zoom.feed
+              //   : config.zoom.trip
             }
             center={config.center}
             options={
-              type == 'activity'
-                ? config.mapOptions.activity
-                : config.mapOptions.trip
+              config.mapOptions[type]
+              // type == 'activity'
+              //   ? config.mapOptions.activity
+              //   : action == 'view'
+              //   ? config.mapOptions.feed
+              //   : config.mapOptions.trip
             }
             mapContainerStyle={config.devStyling.mapContainerStyle}
           >
@@ -114,7 +132,9 @@ function DynamicMapComponent({
                   ></MarkerF>
                 );
               })}
-            <MarkerF position={locLatLng!} />
+            <MarkerF
+              position={convert.toLatLngObj(locationCoordinates!) || locLatLng!}
+            />
             <MarkerF position={destLatLng!} />
 
             {locLatLng && destLatLng && setPolyline(locLatLng, destLatLng)}
@@ -123,6 +143,6 @@ function DynamicMapComponent({
       )}
     </div>
   );
-}
+};
 
 export const DynamicMap = memo(DynamicMapComponent);
