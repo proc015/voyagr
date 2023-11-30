@@ -38,3 +38,20 @@ export const createUser = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const getUserDetails = async (req: Request, res: Response) => {
+  try {
+    const userId = Number(req.params.id);
+    const userDetails = await prisma.user.findUnique({
+      where: {
+        user_id: userId,
+      },
+      include: {
+        trips: true,
+      },
+    });
+    res.send(userDetails);
+  } catch (error) {
+    console.log(error);
+  }
+};

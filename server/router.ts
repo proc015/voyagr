@@ -30,11 +30,33 @@ router.get('/activity/:tripId/all', c.getAllTripActivities);
 // CREATE NEW USER
 router.post('/user', c.createUser);
 
+// GET USER DETAILS
+router.get('/user/:id', c.getUserDetails);
 
-
-  // TESTING ENDPOINT FOR QUERIES \\
+// TESTING ENDPOINT FOR QUERIES \\
 router.get('/testing/test', async (req, res) => {
-  // ~ write test queries here ~ \\
+  const test = await prisma.user.findMany({
+    // FIND USERS THAT HAVE AT LEAST ONE PUBLISHED TRIP
+    where: {
+      trips: {
+        some: {
+          published: true,
+        },
+      },
+    },
+    // INCLUDE TRIPS ARRAY WITH ACTIVITIES FOR THOSE PUBLISHED TRIPS
+    include: {
+      trips: {
+        where: {
+          published: true,
+        },
+        include: {
+          activities: true,
+        },
+      },
+    },
+  });
+  res.send(test);
 });
 
 export default router;
