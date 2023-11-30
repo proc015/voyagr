@@ -11,6 +11,9 @@ interface FeedTripProp {
 const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
   console.log('feedTrip', feedTrip);
   console.log('feedTrip activity', feedTrip.activities);
+const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
+  console.log('feedTrip', feedTrip);
+  console.log('feedTrip activity', feedTrip.activities);
 
   if (!feedTrip) {
     return null;
