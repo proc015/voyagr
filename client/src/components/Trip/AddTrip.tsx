@@ -202,6 +202,7 @@ const AddTrip = () => {
         <div className='w-[95%] h-full bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
           <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
             <p className='p-3 pb-3 pt-3'>Where to?</p>
+            <div className='95%'>
             <DynamicMap
               locationCoordinates={start_lat_lon}
               destinationCoordinates={dest_lat_lon}
@@ -211,7 +212,9 @@ const AddTrip = () => {
               setDestinationAddress={setDestination}
               type={'trip'}
               action={'create'}
+              
             />
+            </div>
           </label>
         </div>
 

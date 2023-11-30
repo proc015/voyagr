@@ -54,7 +54,7 @@ const AddActivity = () => {
     setLocation(event.target.value);
   };
 
-  const handleTypeChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
     setType(event.target.value);
   };
 
@@ -75,6 +75,10 @@ const AddActivity = () => {
 
   const handleClick = () => {
     hiddenFileInput.current?.click();
+  };
+
+  const handleTagChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setDate(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -148,34 +152,38 @@ const AddActivity = () => {
           />
         </label>
 
-        <label>
-          <p className='p-3 pt-3 w-full text-zinc-800 text-3xl font-normal font-noto'>
-            When?
-          </p>{' '}
-          <input
-            id='date'
-            type='date'
-            className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-            required={true}
-            value={date}
-            onChange={handleDateChange}
-          />
-        </label>
+        <div className='flex w-[95%] mx-auto space-x-5'>
+          <label>
+            <p className='ml-0 mr-0 pt-3 w-full h-[60px] text-zinc-800 text-3xl font-normal font-noto'>
+              When?
+            </p>{' '}
+            <input
+              id='date'
+              type='date'
+              className='mt-1 w-full block px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto mr-6'
+              required={true}
+              value={date}
+              onChange={handleDateChange}
+            />
+          </label>
 
-        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-          <p className='p-3 pb-3 pt-3'>Type</p>
-          <select
-            id='type'
-            required={true}
-            value={type}
-            onChange={handleTypeChange}
-            className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
-          >
-            <option value='option1'>Option 1</option>
-            <option value='option2'>Option 2</option>
-            <option value='option3'>Option 3</option>
-          </select>
-        </label>
+          <label className='w-[100%] text-zinc-800 text-3xl font-normal font-noto'>
+            <p className='pb-3 pt-3'>Type</p>
+            <select
+              id='type'
+              required={true}
+              value={type}
+              onChange={handleTypeChange}
+              className='mt-1 block w-full h-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+            >
+              <option value='nightlife'>Nightlife</option>
+              <option value='restaurant'>Restaurant</option>
+              <option value='sightseeing'>Sightseeing</option>
+              <option value='leisure'>Leisure</option>
+              <option value='other'>Other</option>
+            </select>
+          </label>
+        </div>
 
         <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
           <p className='p-3 pb-3 pt-3'>Who?</p>
@@ -187,7 +195,20 @@ const AddActivity = () => {
           />
         </label>
 
-        <div className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto'>
+        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+          <p className='p-3 pb-3 pt-3'>Tags!</p>
+          <input
+            id='tags'
+            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+            type='text'
+            required={false}
+            placeholder='add tags'
+            // value={tag} //missing state variable
+            onChange={handleTagChange}
+          />
+        </label>
+
+        <div className='w-full text-zinc-800 text-xl font-normal flex font-noto '>
           <input type='submit' value='Submit' className='mx-auto' />
         </div>
       </div>
