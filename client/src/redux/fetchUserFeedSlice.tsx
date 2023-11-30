@@ -1,39 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Activity } from '../types/Activity';
 import { fetchUserFeed } from '../services/fetchUserFeed';
-
-
-
-export interface ActivityFeed {
-  activity_id: number; 
-  activity_name: string;
-  date: string;
-  description: string; 
-  location: string;
-  tripId: number;
-  type: string;
-  loc_lat_lon: number[];
-}
-
-
-export interface TripFeed {
-  trip_id: number;
-  userId: number;
-  trip_name: string;
-  start_loc: string;
-  destination: string;
-  start_date: string;
-  end_date: string;
-  start_lat_lon: number[]; 
-  dest_lat_lon: number[]; 
-  picture_src: string;
-  published: boolean;
-  activities: ActivityFeed[]; 
-}
+import { Trip } from '../types/Trip';
 
 
 export interface TripFeedState {
-  tripFeed: TripFeed[];
+  tripFeed: Trip[];
   status: 'idle' | 'loading' | 'failed';
   error: string;
 }

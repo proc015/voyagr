@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Trip } from '../types/Trip';
 import { fetchUserTrips } from '../services/fetchTrip';
+// import { TripFeed } from './fetchUserFeedSlice';
 
 export interface TripState {
   trip: Trip;
@@ -10,7 +11,8 @@ export interface TripState {
 
 const initialState = {
   trip: {
-    user_id: 0,
+    trip_id: 0,
+    userId: 0,
     trip_name: '',
     start_loc: '',
     destination: '',
@@ -19,6 +21,19 @@ const initialState = {
     start_lat_lon: [0, 0],
     dest_lat_lon: [0, 0],
     picture_src: '',
+    published: false,
+    activities: [
+      {
+        activity_id: 0,
+        activity_name: '',
+        date: '',
+        description: '',
+        location: '',
+        tripId: 0,
+        type: '',
+        loc_lat_lon: [0],
+      },
+    ],
   },
   status: 'idle',
   error: '',
