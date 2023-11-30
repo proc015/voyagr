@@ -1,6 +1,6 @@
-import { postActivity } from '../../services/apiService';
+import { postActivity, uploadPhoto } from '../../services/apiService';
 import { Activity } from '../../types/Activity';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { addActivity } from '../../redux/addActivitySlice';
 import { DynamicMap } from '../maps/dynamicMap';
@@ -14,6 +14,7 @@ const AddActivity = () => {
   const [type, setType] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [description, setDescription] = useState<string>(''); // this  is unwanted
+  const [picture_src, setPicture_src] = useState('');
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
   const [activity_id] = useState(0);
 
@@ -61,6 +62,22 @@ const AddActivity = () => {
     setDate(event.target.value);
   };
 
+  const hiddenFileInput = useRef<HTMLInputElement>(null);
+
+  const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const filename = event.target.files[0].name;
+      setPicture_src(filename);
+      console.log(filename);
+      uploadPhoto(event.target.files);
+    }
+  };
+
+  const handleClick = () => {
+    hiddenFileInput.current?.click();
+  };
+
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -91,53 +108,71 @@ const AddActivity = () => {
         />
       </label>
 
-      <label>
-        Activity Name:
-        <input
-          id='activity_name'
-          type='text'
-          required={true}
-          placeholder=''
-          value={activity_name}
-          onChange={handleActivityNameChange}
-        />
-      </label>
+      <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
+        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+          <p className='p-3 pb-3 pt-3'>Activity Name</p>
+          <input
+            id='activity_name'
+            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+            type='text'
+            required={true}
+            placeholder='add activity name'
+            value={activity_name}
+            onChange={handleActivityNameChange}
+          />
+        </label>
 
-      <label>
-        Location:
-        <DynamicMap
-          locationCoordinates={loc_lat_lon}
-          setLocationCoordinates={setLoc_lat_lon}
-          setLocationAddress={setLocation}
-          type={'activity'}
-          action={'create'}
-        />
-      </label>
+        <div>
+          <input
+            type='file'
+            ref={hiddenFileInput}
+            className='hidden'
+            accept='image/png, image/jpeg'
+            onChange={handlePhotoUpload}
+          />
+          <button
+            onClick={handleClick}
+            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+          >
+            +
+          </button>
+        </div>
 
-      <label>
-        Type:
-        <input
-          id='type'
-          type='text'
-          required={true}
-          placeholder=''
-          value={type}
-          onChange={handleTypeChange}
-        />
-      </label>
+        <label>
+          <DynamicMap
+            locationCoordinates={loc_lat_lon}
+            setLocationCoordinates={setLoc_lat_lon}
+            setLocationAddress={setLocation}
+            type={'activity'}
+            action={'create'}
+          />
+        </label>
 
-      <label>
-        Date:
-        <input
-          id='date'
-          type='date'
-          required={true}
-          value={date}
-          onChange={handleDateChange}
-        />
-      </label>
+        <label>
+          Type:
+          <input
+            id='type'
+            type='text'
+            required={true}
+            placeholder=''
+            value={type}
+            onChange={handleTypeChange}
+          />
+        </label>
 
-      <input type='submit' value='Submit' />
+        <label>
+          Date:
+          <input
+            id='date'
+            type='date'
+            required={true}
+            value={date}
+            onChange={handleDateChange}
+          />
+        </label>
+
+        <input type='submit' value='Submit' />
+      </div>
     </form>
   );
 };
