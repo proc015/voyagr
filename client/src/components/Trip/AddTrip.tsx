@@ -9,7 +9,7 @@ import { DynamicMap } from '../maps/dynamicMap';
 const AddTrip = () => {
   const dispatch = useAppDispatch();
 
-  const [user_id, setUserId] = useState<number>(0);
+  const [userId, setUserId] = useState<number>(0);
   const [trip_name, setTripName] = useState<string>('');
   const [tripNameError, setTripNameError] = useState('');
   const [start_loc, setStartLoc] = useState<string>('');
@@ -21,7 +21,8 @@ const AddTrip = () => {
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
 
   const [newTrip, setNewTrip] = useState<Trip>({
-    user_id,
+    trip_id,
+    userId,
     trip_name,
     start_loc,
     destination,
@@ -30,10 +31,13 @@ const AddTrip = () => {
     start_lat_lon,
     dest_lat_lon,
     picture_src,
+    published,
+    activities,
   });
 
   const newTripObj: Trip = {
-    user_id,
+    trip_id, 
+    userId,
     trip_name,
     start_loc,
     destination,
@@ -42,6 +46,8 @@ const AddTrip = () => {
     start_lat_lon,
     dest_lat_lon,
     picture_src,
+    published, 
+    activities,
   };
 
   const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -82,7 +88,8 @@ const AddTrip = () => {
         dispatch(addTrip(createdTrip))
       );
       setNewTrip({
-        user_id: 0,
+        trip_id: 0,
+        userId: 0,
         trip_name: '',
         start_loc: '',
         destination: '',
@@ -91,6 +98,8 @@ const AddTrip = () => {
         start_lat_lon: [],
         dest_lat_lon: [],
         picture_src: '',
+        published: false, 
+        activities: [],
       });
     }
   };
