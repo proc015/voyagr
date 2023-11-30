@@ -64,6 +64,7 @@ export const publishTrip = async (req: Request, res: Response) => {
 
 export const getPublishedTrips = async (req: Request, res: Response) => {
   try {
+    // PULL USER ID WITH THIS
     const publishedTrips = await prisma.trip.findMany({
       where: {
         published: true,

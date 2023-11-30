@@ -17,6 +17,7 @@ model User {
   display_name    String?
   display_pic_src String?
   email           String      @unique
+  pass_hash       String?
   trips           Trip[]      @relation("owner")
   following       String[]
   followers       String[]
