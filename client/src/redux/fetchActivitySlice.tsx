@@ -13,9 +13,11 @@ const initialState = {
     {
       trip_id: 0,
       activity_name: '',
+      activity_id: 0,
       location: '',
       type: '',
       date: '',
+      loc_lat_lon: [0, 0],
     },
   ],
   status: 'idle',

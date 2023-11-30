@@ -4,6 +4,7 @@ import ActivityComponent from './ActivityComponent';
 import { AppDispatch } from '../app/store';
 import { fetchUserActivity } from '../services/fetchActivity';
 import { useEffect } from 'react';
+import { DynamicMap } from './maps/dynamicMap';
 
 const ActivityList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -32,6 +33,7 @@ const ActivityList = () => {
   // Display activities or a message if there are none
   return (
     <div className='activity-list'>
+      <DynamicMap activities={userActivity} type={'activity'} action={'view'} />
       {userActivity.length > 0 ? (
         userActivity.map((activity, index) => {
           return <ActivityComponent key={index} activity={activity} />;
