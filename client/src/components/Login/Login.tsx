@@ -23,6 +23,7 @@ return (
                 onChange={handleChange}
             />
             <input 
+<<<<<<< HEAD
                 type="password"
                 placeholder="type password..."
                 name="password"
@@ -31,6 +32,16 @@ return (
             />
             <button className="form-submit" type="submit"/>
         </form>
+=======
+                type="text"
+                placeholder="insert email..."
+                name="email"
+                value={}
+                onChange={handleChange}
+            />
+        </form>
+      
+>>>>>>> ba469a5 (feat: WIP login)
     </section>
   )
 }
