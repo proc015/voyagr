@@ -13,6 +13,7 @@ const initialState = {
     {
       trip_id: 0,
       activity_name: '',
+      activity_id: 0,
       location: '',
       type: '',
       date: '',

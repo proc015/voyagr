@@ -1,5 +1,5 @@
 export interface Activity {
-  // activity_id: number;
+  activity_id: number;
   //trip
   trip_id: number;
   //participants
