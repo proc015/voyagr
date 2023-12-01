@@ -23,6 +23,7 @@ export const Tripbox = ({
   picture,
 }: Props) => {
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
+  console.log(startLocation);
   return (
     <>
       <div className='dev-styling flex flex-col m-5 gap-3 align-middle justify-center'>
@@ -40,7 +41,9 @@ export const Tripbox = ({
           <div className=' h-fit w-fit mb-4 relative flex justify-center'>
             <div className=' z-50 bg-voyagrWhite pr-1 rounded-md'>
               <DynamicMap
-                locationCoordinates={[57.7, 12]}
+                locationCoordinates={startLocation.map((loc) => {
+                  return Number(loc);
+                })}
                 type={'feed'}
                 action={'view'}
               />
