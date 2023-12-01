@@ -14,10 +14,10 @@ function LandingPage() {
         <img src={logo} alt='logo' className='object-contain w-[90%] py-6'/>
         <img src={logo} alt='logo' className='object-contain w-[90%] py-6'/>
         <Link to='/login'>
-          <div className='flex h-10 w-40 my-7 font-noto text-voyagrBlack items-center justify-center rounded-3xl bg-voyagrWhite border-2 border-voyagrBlack'>Login</div>
+          <div className='landing-btn'>Login</div>
         </Link>
         <Link to='/signup'>
-          <div className='flex h-10 w-40 py-5 font-noto text-voyagrBlack items-center justify-center rounded-3xl bg-voyagrWhite border-2 border-voyagrBlack'>Register</div>
+          <div className='landing-btn'>Register</div>
         </Link>
       </div>  
     </main>
