@@ -23,9 +23,10 @@ export const Tripbox = ({
   picture,
 }: Props) => {
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
+  console.log(activities);
   return (
     <>
-      <div className='dev-styling flex flex-col m-5 gap-3 align-middle justify-center'>
+      <div className='dev-styling flex flex-col gap-3 align-middle justify-center'>
         <h3>{name}</h3>
         <Carousel
           navButtonsAlwaysInvisible={true}
@@ -40,7 +41,9 @@ export const Tripbox = ({
           <div className=' h-fit w-fit mb-4 relative flex justify-center'>
             <div className=' z-50 bg-voyagrWhite pr-1 rounded-md'>
               <DynamicMap
-                locationCoordinates={[57.7, 12]}
+                locationCoordinates={startLocation.map((loc) => {
+                  return Number(loc);
+                })}
                 type={'feed'}
                 action={'view'}
               />
@@ -84,11 +87,6 @@ export const Tripbox = ({
                 className='object-cover rounded-md h-56 '
                 src={`${IMG_BASE_URL}/nfmxmdamug9x5rk7icya`}
               ></img>
-              {/* <DynamicMap
-                locationCoordinates={[57.7, 12]}
-                type={'feed'}
-                action={'view'}
-              /> */}
             </div>
 
             <div className='rounded-md -ml-2 w-42 min-w-[135px] px-1 bg-voyagrWhite z-40'>
