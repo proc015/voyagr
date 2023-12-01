@@ -10,7 +10,7 @@ export const postTrip = async (req: Request, res: Response) => {
         // connect user field in Trip table to primary key of User table
         user: {
           connect: {
-            user_id: newTrip.user_id,
+            user_id: newTrip.userId,
           },
         },
         // build rest of required Trip fields
