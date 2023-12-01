@@ -16,13 +16,12 @@ const AppRouter: FC = () => {
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<LoginPage />} />
-        <Route path='/activity' element={<><NavBar /><ActivityPage /></>} />
-        <Route path='/addtrip' element={<><NavBar /><AddTripPage /></>} />
-        <Route path='/feed' element={<><NavBar /><FeedPage /></>} />
-        <Route path='/landing' element={<><NavBar /><LandingPage /></>} />
+        <Route path='/signup' element={<SignUpPage />} />
         <Route path='/profile' element={<><NavBar /><ProfilePage /></>} />
-        <Route path='/signup' element={<><NavBar /><SignUpPage /></>} />
+        <Route path='/feed' element={<><NavBar /><FeedPage /></>} />
+        <Route path='/addtrip' element={<><NavBar /><AddTripPage /></>} />
         <Route path='/trip' element={<><NavBar /><TripPage /></>} />
+        <Route path='/activity' element={<><NavBar /><ActivityPage /></>} />
       </Routes>
     </Router>
   );
