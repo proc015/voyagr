@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CUSTOM TAILWIND CLASSES */
+.landing-btn {
+  @apply flex h-12 w-52 mt-8 font-noto font-semibold text-voyagrBlack items-center justify-center rounded-3xl bg-voyagrWhite border-2 border-voyagrBlack
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
