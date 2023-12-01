@@ -5,6 +5,7 @@ import { addTrip } from '../../redux/addTripSlice';
 import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { DynamicMap } from '../maps/dynamicMap';
 import AddActivity from '../Activity/AddActivity';
+import { set } from '@cloudinary/url-gen/actions/variable';
 // import * as dayjs from 'dayjs';
 
 export interface NewTripType {
@@ -33,7 +34,7 @@ const AddTrip = () => {
   const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
   const [participants, setParticipants] = useState('');
-  const [visibleDiv, setVisibleDiv] = useState();
+  const [visibleDiv, setVisibleDiv] = useState('trip');
 
   // const toggleDivVisibility = (event) => {
   //   // Check if the click target is not an input element
@@ -217,61 +218,121 @@ const AddTrip = () => {
           )}
         </div>
 
-        <div className='w-[95%] h-full bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
-          <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-            <p className='p-3 pb-3 pt-3'>Where to?</p>
-            <div className='95%'>
-              <DynamicMap
-                locationCoordinates={start_lat_lon}
-                destinationCoordinates={dest_lat_lon}
-                setLocationCoordinates={setStart_lat_lon}
-                setDestinationCoordinates={setDest_lat_lon}
-                setLocationAddress={setStartLoc}
-                setDestinationAddress={setDestination}
-                type={'trip'}
-                action={'create'}
-              />
+        <div>
+          {visibleDiv == 'whereTo' ? (
+            <div onClick={() => changeVisibleDiv('')}>
+              <div className='w-[95%] h-full bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+                <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+                  <p className='p-3 pb-3 pt-3'>Where to?</p>
+                  <div className='95%' onClick={(e) => e.stopPropagation()}>
+                    <DynamicMap
+                      locationCoordinates={start_lat_lon}
+                      destinationCoordinates={dest_lat_lon}
+                      setLocationCoordinates={setStart_lat_lon}
+                      setDestinationCoordinates={setDest_lat_lon}
+                      setLocationAddress={setStartLoc}
+                      setDestinationAddress={setDestination}
+                      type={'trip'}
+                      action={'create'}
+                    />
+                  </div>
+                </label>
+              </div>
             </div>
-          </label>
+          ) : (
+            <div onClick={() => changeVisibleDiv('whereTo')}>
+              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
+                <label className='w-full font-normal flex font-didact items-center justify-between'>
+                  <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
+                    Where to?
+                  </p>
+                  <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
+                    {setStartLoc} ↔ {setDestination}
+                  </div>
+                </label>
+              </div>
+            </div>
+          )}
         </div>
 
-        <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
-          <p className='p-3 pt-3 w-full text-zinc-800 text-3xl font-normal font-noto'>
-            When?
-          </p>
-          <label>
-            <input
-              id='start_date'
-              type='date'
-              required={true}
-              className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-              value={start_date}
-              onChange={handleStartDateChange}
-            />
-          </label>
-          <label>
-            <input
-              id='end_date'
-              type='date'
-              className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-              value={end_date}
-              onChange={handleEndDateChange}
-            />
-          </label>
+        <div>
+          {visibleDiv == 'when' ? (
+            <div onClick={() => changeVisibleDiv('')}>
+              <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
+                <p className='p-3 pt-3 w-full text-zinc-800 text-3xl font-normal font-noto'>
+                  When?
+                </p>
+                <label>
+                  <input
+                    id='start_date'
+                    type='date'
+                    required={true}
+                    className='mt-1 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+                    value={start_date}
+                    onChange={handleStartDateChange}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </label>
+                <label>
+                  <input
+                    id='end_date'
+                    type='date'
+                    className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+                    value={end_date}
+                    onChange={handleEndDateChange}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </label>
+              </div>
+            </div>
+          ) : (
+            <div onClick={() => changeVisibleDiv('when')}>
+              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
+                <label className='w-full font-normal flex font-didact items-center justify-between'>
+                  <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
+                    When?
+                  </p>
+                  <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
+                    {start_date} ↔ {end_date}
+                  </div>
+                </label>
+              </div>
+            </div>
+          )}
         </div>
 
-        <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
-          <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-            <p className='p-3 pb-3 pt-3'>Who?</p>
-            <input
-              id='participants'
-              type='text'
-              placeholder='add buddies'
-              className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-              value={participants}
-              onChange={handleParticipantsChange}
-            />
-          </label>
+        <div>
+          {visibleDiv == 'who' ? (
+            <div onClick={() => changeVisibleDiv('')}>
+              <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+                <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+                  <p className='p-3 pb-3 pt-3'>Who?</p>
+                  <input
+                    id='participants'
+                    type='text'
+                    placeholder='add buddies'
+                    className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+                    value={participants}
+                    onChange={handleParticipantsChange}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </label>
+              </div>
+            </div>
+          ) : (
+            <div onClick={() => changeVisibleDiv('who')}>
+              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
+                <label className='w-full font-normal flex font-didact items-center justify-between'>
+                  <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
+                    Who?
+                  </p>
+                  <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
+                    {participants}
+                  </div>
+                </label>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'>
