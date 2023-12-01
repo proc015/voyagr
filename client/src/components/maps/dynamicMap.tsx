@@ -23,6 +23,7 @@ const DynamicMapComponent = ({
   type,
   action,
   activities,
+  style,
 }: DynamicMapProps) => {
   const [locLatLng, setLocLatLng] = useState<LatLngLiteral>();
 
@@ -104,24 +105,10 @@ const DynamicMapComponent = ({
             onLoad={(map) => {
               mapRef.current = map;
             }}
-            zoom={
-              config.zoom[type]
-              // type == 'activity' && locLatLng
-              //   ? config.zoom.activity
-              //   : action == 'view'
-              //   ? config.zoom.feed
-              //   : config.zoom.trip
-            }
+            zoom={config.zoom[type]}
             center={config.center}
-            options={
-              config.mapOptions[type]
-              // type == 'activity'
-              //   ? config.mapOptions.activity
-              //   : action == 'view'
-              //   ? config.mapOptions.feed
-              //   : config.mapOptions.trip
-            }
-            mapContainerStyle={config.devStyling.mapContainerStyle}
+            options={config.mapOptions[type]}
+            mapContainerStyle={style}
           >
             {locations &&
               locations.map((activity: any) => {

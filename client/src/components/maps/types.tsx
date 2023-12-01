@@ -17,6 +17,7 @@ type DynamicMapProps = {
   type: 'activity' | 'trip' | 'feed';
   action: 'create' | 'view';
   activities?: Activity[];
+  style?: any;
 };
 
 type StaticMapProps = {
