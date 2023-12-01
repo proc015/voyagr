@@ -1,6 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postLogin } from '../../services/loginService';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/userSlice';
 
 const initalState = {
   email: '',
@@ -8,6 +10,7 @@ const initalState = {
 };
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginState, setLoginState] = useState(initalState);
 
@@ -31,6 +34,8 @@ const Login = () => {
       alert(`${response.message}`);
       setLoginState(initalState);
     } else {
+      console.log("login response", response.user_id)
+      dispatch(setUser(response.user_id))
       navigate('/profile');
     }
   };
