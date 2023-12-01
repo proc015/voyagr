@@ -37,12 +37,19 @@ const AddTrip = () => {
   const [isDiv1Visible, setDiv1Visible] = useState(true);
   const [isDiv2Visible, setDiv2Visible] = useState(false);
 
-  const toggleDivVisibility = (event) => {
-    // Check if the click target is not an input element
-    if (event.target.tagName.toLowerCase() !== 'input' && 'button') {
-      setDiv1Visible(!isDiv1Visible);
-      setDiv2Visible(!isDiv2Visible);
-    }
+  const [visibleDiv, setVisibleDiv] = useState();
+
+  // const toggleDivVisibility = (event) => {
+  //   // Check if the click target is not an input element
+  //   if (event.target.tagName.toLowerCase() !== 'input' && 'button') {
+  //     setDiv1Visible(!isDiv1Visible);
+  //     setDiv2Visible(!isDiv2Visible);
+  //   }
+  // };
+
+  const changeVisibleDiv = (div) => {
+    setVisibleDiv(div);
+    console.log(visibleDiv == 'trip');
   };
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
@@ -100,13 +107,15 @@ const AddTrip = () => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    event.stopPropagation();
     const filename = event.target.files![0].name;
     setPicture_src(filename);
     console.log(filename);
     uploadPhoto(event.target.files);
   };
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     hiddenFileInput.current?.click();
   };
 
@@ -118,7 +127,6 @@ const AddTrip = () => {
   // };
 
   const handleParticipantsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // convert event.target.value to a number from a string
     const convertStringtoNum = Number(event.target.value); // nw: this is not right, but I keep it for now to change it tomorrow
     setUserId(convertStringtoNum);
   };
@@ -146,23 +154,9 @@ const AddTrip = () => {
   };
 
   // const dateTest = dayjs('2019-01-30').format('MM/YY')
-  // console.log(dateTest)
 
   return (
     <>
-      {/* <div>
-        {isDiv1Visible && (
-          <div onClick={toggleDivVisibility}>
-            <div className='div1'>Div 1</div>
-          </div>
-        )}
-
-        {isDiv2Visible && (
-          <div onClick={toggleDivVisibility}>
-            <div className='div2'>Div 2</div>
-          </div>
-        )}
-      </div> */}
       <form onSubmit={handleSubmit} className=''>
         <label>
           User ID:
@@ -177,8 +171,8 @@ const AddTrip = () => {
         </label>
 
         <div>
-          {isDiv1Visible && (
-            <div onClick={toggleDivVisibility}>
+          {visibleDiv == 'trip' ? (
+            <div onClick={() => changeVisibleDiv('')}>
               <div className='ToggleDiv w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
                 <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
                   <p className='p-3 pb-3 pt-3'>Trip name?</p>
@@ -186,7 +180,7 @@ const AddTrip = () => {
                     <div className=''>
                       <button
                         onClick={handleClick}
-                        className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+                        className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 font-didact mx-auto'
                       >
                         <input
                           type='file'
@@ -200,7 +194,7 @@ const AddTrip = () => {
                     </div>
                     <input
                       id='trip_name'
-                      className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+                      className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 font-didact mx-auto '
                       type='text'
                       required={true}
                       placeholder='add trip name'
@@ -211,11 +205,9 @@ const AddTrip = () => {
                 </label>
               </div>
             </div>
-          )}
-
-          {isDiv2Visible && (
-            <div onClick={toggleDivVisibility}>
-              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+          ) : (
+            <div onClick={() => changeVisibleDiv('trip')}>
+              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
                 <label className='w-full font-normal flex font-didact items-center justify-between'>
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     Trip name
