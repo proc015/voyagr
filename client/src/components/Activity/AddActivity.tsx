@@ -14,7 +14,7 @@ const AddActivity = () => {
   const [type, setType] = useState<string>('');
   const [date, setDate] = useState<string>('');
   const [description, setDescription] = useState<string>(''); // this  is unwanted
-  const [picture_src, setPicture_src] = useState<string | null>(null); // Updated to store the image URL
+  const [picture_src, setPicture_src] = useState<string>(''); // Updated to store the image URL
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
   const [activity_id] = useState(0);
 
@@ -27,6 +27,7 @@ const AddActivity = () => {
     type,
     date,
     loc_lat_lon,
+    picture_src,
   });
 
   const newActivityObj: Activity = {
@@ -38,6 +39,7 @@ const AddActivity = () => {
     type,
     date,
     loc_lat_lon,
+    picture_src
   };
 
   const handleTripIdChange = (event: ChangeEvent<HTMLInputElement>) => {

@@ -19,6 +19,7 @@ const initialState = {
       type: '',
       date: '',
       loc_lat_lon: [0, 0],
+      picture_src: ''
     },
   ],
   status: 'idle',
