@@ -336,7 +336,7 @@ const AddTrip = () => {
         </div>
 
         <div className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'>
-          <input type='submit' value='Submit' className='mx-auto' />
+          <input type='submit' value='Start Trip' className='mx-auto' />
         </div>
       </form>
       <AddActivity />
