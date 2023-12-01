@@ -5,7 +5,7 @@
 
 /* CUSTOM TAILWIND CLASSES */
 .landing-btn {
-  @apply flex h-10 w-40 my-7 font-noto text-voyagrBlack items-center justify-center rounded-3xl bg-voyagrWhite border-2 border-voyagrBlack
+  @apply flex h-12 w-52 mt-8 font-noto font-semibold text-voyagrBlack items-center justify-center rounded-3xl bg-voyagrWhite border-2 border-voyagrBlack
 }
 
 body {
