@@ -33,10 +33,6 @@ const AddTrip = () => {
   const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
   const [participants, setParticipants] = useState('');
-
-  const [isDiv1Visible, setDiv1Visible] = useState(true);
-  const [isDiv2Visible, setDiv2Visible] = useState(false);
-
   const [visibleDiv, setVisibleDiv] = useState();
 
   // const toggleDivVisibility = (event) => {
@@ -46,11 +42,6 @@ const AddTrip = () => {
   //     setDiv2Visible(!isDiv2Visible);
   //   }
   // };
-
-  const changeVisibleDiv = (div) => {
-    setVisibleDiv(div);
-    console.log(visibleDiv == 'trip');
-  };
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
     userId,
@@ -80,8 +71,11 @@ const AddTrip = () => {
     // activities,
   };
 
+  const changeVisibleDiv = (div: any) => {
+    setVisibleDiv(div);
+  };
+
   const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // convert event.target.value to a number from a string
     const convertStringtoNum = Number(event.target.value);
     setUserId(convertStringtoNum);
   };
@@ -180,6 +174,7 @@ const AddTrip = () => {
                     <div className=''>
                       <button
                         onClick={handleClick}
+                        // onClick={(e) => e.stopPropagation()}
                         className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 font-didact mx-auto'
                       >
                         <input
@@ -200,6 +195,7 @@ const AddTrip = () => {
                       placeholder='add trip name'
                       value={trip_name}
                       onChange={handleTripNameChange}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </div>
                 </label>
@@ -212,7 +208,7 @@ const AddTrip = () => {
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     Trip name
                   </p>
-                  <div className='w-[60%] font-didact text-xl text-right text-black mr-5'>
+                  <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
                     {trip_name}
                   </div>
                 </label>
@@ -220,22 +216,6 @@ const AddTrip = () => {
             </div>
           )}
         </div>
-
-        {/* <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
-          <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-            <p className='p-3 pb-3 pt-3'>Trip name?</p>
-            <div className='flex w-[95%] mx-auto'>
-                <input
-                  type='file'
-                  ref={hiddenFileInput}
-                  className='hidden'
-                  accept='image/png, image/jpeg'
-                  onChange={handlePhotoUpload}
-                />
-              
-            </div>
-          </label>
-        </div> */}
 
         <div className='w-[95%] h-full bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
           <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
