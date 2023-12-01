@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
 import SignUpPage from './pages/SignupPage';
 import TripPage from './pages/TripPage';
+import SearchBar from './components/SearchBar';
 
 const AppRouter: FC = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter: FC = () => {
         <Route path='/addtrip' element={<><NavBar /><AddTripPage /></>} />
         <Route path='/trip' element={<><NavBar /><TripPage /></>} />
         <Route path='/activity' element={<><NavBar /><ActivityPage /></>} />
+        <Route path='/search' element={<><NavBar /><SearchBar /></>} />
       </Routes>
     </Router>
   );
