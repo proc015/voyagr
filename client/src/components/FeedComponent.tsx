@@ -21,7 +21,7 @@ const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
   });
 
   return (
-    <div>
+    <div className='h-fit m-5'>
       {/* <Profilebar /> */}
       <Tripbox
         picture={picture}
