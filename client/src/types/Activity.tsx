@@ -7,4 +7,5 @@ export interface Activity {
   tripId: number;
   type: string;
   loc_lat_lon: number[];
+  picture_src: string; 
 }

@@ -32,6 +32,7 @@ const initialState = {
         tripId: 0,
         type: '',
         loc_lat_lon: [0],
+        picture_src: ''
       },
     ], 
   }],
