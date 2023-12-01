@@ -4,11 +4,14 @@ import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { addActivity } from '../../redux/addActivitySlice';
 import { DynamicMap } from '../maps/dynamicMap';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
+
 
 const AddActivity = () => {
   const dispatch = useAppDispatch();
 
-  const [tripId, setTripId] = useState<number>(0);
+  // const [tripId, setTripId] = useState<number>(0);
   const [activity_name, setActivityName] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [type, setType] = useState<string>('');
@@ -18,9 +21,12 @@ const AddActivity = () => {
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
   const [activity_id] = useState(0);
 
+  const tripId = useSelector((state: RootState) => state.tripid.currentTrip
+  );
+  
   const [newActivity, setNewActivity] = useState<Activity>({
     activity_id,
-    tripId,
+    tripId: tripId,
     activity_name,
     location,
     description,
@@ -42,11 +48,11 @@ const AddActivity = () => {
     picture_src
   };
 
-  const handleTripIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-    // convert event.target.value to a number from a string
-    const convertStringtoNum = Number(event.target.value);
-    setTripId(convertStringtoNum);
-  };
+  // const handleTripIdChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   // convert event.target.value to a number from a string
+  //   const convertStringtoNum = Number(event.target.value);
+  //   setTripId(convertStringtoNum);
+  // };
 
   const handleActivityNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setActivityName(event.target.value);
@@ -91,7 +97,7 @@ const AddActivity = () => {
       // Update the grouped state
       setNewActivity(newActivityObj);
       // Reset individual state variables
-      setTripId(0);
+      // setTripId(0);
       setActivityName('');
       setLocation('');
       setType('');
@@ -101,7 +107,7 @@ const AddActivity = () => {
 
   return (
     <form onSubmit={handleSubmit} className='add-trip-form-container'>
-      <label>
+      {/* <label>
         Trip ID:
         <input
           id='trip_id'
@@ -111,7 +117,7 @@ const AddActivity = () => {
           value={tripId}
           onChange={handleTripIdChange}
         />
-      </label>
+      </label> */}
 
       <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
         <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>

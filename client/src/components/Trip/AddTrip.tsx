@@ -2,10 +2,17 @@ import { useAppDispatch } from '../../app/hooks';
 import { Trip } from '../../types/Trip';
 import { postTrip, uploadPhoto } from '../../services/apiService';
 import { addTrip } from '../../redux/addTripSlice';
+import { setTrip } from '../../redux/saveTripIdSlice';
+
 import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { DynamicMap } from '../maps/dynamicMap';
 import AddActivity from '../Activity/AddActivity';
 import { set } from '@cloudinary/url-gen/actions/variable';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
+
+
+
 // import * as dayjs from 'dayjs';
 
 export interface NewTripType {
@@ -23,7 +30,7 @@ export interface NewTripType {
 const AddTrip = () => {
   const dispatch = useAppDispatch();
 
-  const [userId, setUserId] = useState<number>(0);
+  // const [userId, setUserId] = useState<number>(0);
   const [trip_name, setTripName] = useState<string>('');
   const [tripNameError, setTripNameError] = useState('');
   const [start_loc, setStartLoc] = useState<string>('');
@@ -44,8 +51,11 @@ const AddTrip = () => {
   //   }
   // };
 
+  const userId = useSelector((state: RootState) => state.user.currentUser
+  );
+
   const [newTrip, setNewTrip] = useState<NewTripType>({
-    userId,
+    userId: userId,
     trip_name,
     start_loc,
     destination,
@@ -76,10 +86,10 @@ const AddTrip = () => {
     setVisibleDiv(div);
   };
 
-  const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const convertStringtoNum = Number(event.target.value);
-    setUserId(convertStringtoNum);
-  };
+  // const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const convertStringtoNum = Number(event.target.value);
+  //   setUserId(convertStringtoNum);
+  // };
 
   const handleTripNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
@@ -123,28 +133,21 @@ const AddTrip = () => {
 
   const handleParticipantsChange = (event: ChangeEvent<HTMLInputElement>) => {
     const convertStringtoNum = Number(event.target.value); // nw: this is not right, but I keep it for now to change it tomorrow
-    setUserId(convertStringtoNum);
+    // setUserId(convertStringtoNum);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleStartTrip = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (tripNameError === '') {
-      postTrip(newTripObj).then((createdTrip) =>
-        dispatch(addTrip(createdTrip))
-      );
-      setNewTrip({
-        userId: 0,
-        trip_name: '',
-        start_loc: '',
-        destination: '',
-        start_date: '',
-        end_date: '',
-        start_lat_lon: [],
-        dest_lat_lon: [],
-        picture_src: '',
-        // published: false,
-        // activities: [],
-      });
+      try {
+        const createdTrip = await postTrip(newTripObj);
+        console.log('serv res', createdTrip);
+        dispatch(addTrip(createdTrip));
+        //sends the trip_id associated to this trip to the redux store
+        dispatch(setTrip(createdTrip.trip_id));
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   };
 
@@ -152,18 +155,8 @@ const AddTrip = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className=''>
-        <label>
-          User ID:
-          <input
-            id='user_id'
-            type='value'
-            required={true}
-            placeholder='Insert number'
-            value={userId}
-            onChange={handleUserIdChange}
-          />
-        </label>
+      <form onSubmit={handleStartTrip} className=''>
+
 
         <div>
           {visibleDiv == 'trip' ? (
