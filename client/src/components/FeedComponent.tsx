@@ -17,7 +17,7 @@ const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
   }
 
   return (
-    <div>
+    <div className='h-fit m-5'>
       {/* <Profilebar /> */}
       <Tripbox
         picture={picture}
@@ -28,7 +28,7 @@ const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
         endDate={feedTrip.end_date}
         activities={feedTrip.activities}
       />
-      {/* <Buttonbar /> */}
+      <Buttonbar />
       {/* <h1>{feedTrip.trip_name}</h1>
       <p>Start Location: {feedTrip.start_loc}</p>
       <p>Destination: {feedTrip.destination}</p>

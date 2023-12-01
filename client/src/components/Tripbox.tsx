@@ -26,7 +26,7 @@ export const Tripbox = ({
   console.log(startLocation);
   return (
     <>
-      <div className='dev-styling flex flex-col m-5 gap-3 align-middle justify-center'>
+      <div className='dev-styling flex flex-col gap-3 align-middle justify-center'>
         <h3>{name}</h3>
         <Carousel
           navButtonsAlwaysInvisible={true}
