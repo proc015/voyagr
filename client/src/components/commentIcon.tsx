@@ -1,4 +1,8 @@
-export const CommentIcon = () => {
+type Props = {
+  className: string;
+};
+
+export const CommentIcon = ({ className }: Props) => {
   return (
     <>
       <svg
@@ -7,7 +11,7 @@ export const CommentIcon = () => {
         viewBox='0 0 24 24'
         strokeWidth={1}
         stroke='black'
-        className='w-6 h-6'
+        className={className}
       >
         <path
           strokeLinecap='round'
