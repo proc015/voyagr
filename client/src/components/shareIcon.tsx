@@ -2,7 +2,7 @@ type Props = {
   className: string;
 };
 
-export const ShareIcon = ({ className }) => {
+export const ShareIcon = ({ className }: Props) => {
   return (
     <>
       <svg

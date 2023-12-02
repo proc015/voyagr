@@ -31,16 +31,6 @@ const FeedList = () => {
     return <div>Error loading activities.</div>;
   }
 
-  // MOCK PICTURES
-  const pictures = [
-    'bok6px8p8axqzfzffir4',
-    'pmwlwslbcuwqckupvzj5',
-    'bgl6sjrlnctacufsiahd',
-    'vove2dv8d9mqa37xbztt',
-    'siejyrv7mcux3pivk2k0',
-    'ntnewpztc8qjopvtqsj1',
-  ];
-
   console.log('filteredUserFeed', filteredUserTrip);
   // Display activities or a message if there are none
   return (
