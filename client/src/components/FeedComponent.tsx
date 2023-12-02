@@ -5,10 +5,9 @@ import { Tripbox } from './Tripbox';
 
 interface FeedTripProp {
   feedTrip: Trip;
-  picture: string; //NOTE mock prop
 }
 
-const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
+const FeedComponent = ({ feedTrip }: FeedTripProp) => {
   console.log('feedTrip', feedTrip);
   console.log('feedTrip activity', feedTrip.activities);
 
@@ -24,7 +23,6 @@ const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
     <div className='h-fit m-5'>
       {/* <Profilebar /> */}
       <Tripbox
-        picture={picture}
         name={feedTrip.trip_name}
         startLocation={location}
         destination={feedTrip.dest_lat_lon}

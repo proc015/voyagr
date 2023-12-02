@@ -12,7 +12,6 @@ type Props = {
   startDate: string;
   endDate: string;
   activities: Activity[];
-  picture: string;
 };
 //
 
@@ -23,7 +22,6 @@ export const Tripbox = ({
   startDate,
   endDate,
   activities,
-  picture,
 }: Props) => {
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
   console.log('ACTIVITIES', activities);
@@ -32,7 +30,7 @@ export const Tripbox = ({
   console.log('PICTURES', name, pictures);
   return (
     <>
-      <div className='dev-styling mx-4 flex flex-col gap-3 align-middle justify-center'>
+      <div className='dev-styling mx-4 my-5 flex flex-col gap-2 align-middle justify-center'>
         <h3>{name}</h3>
         <DynamicMap
           locationCoordinates={startLocation}
@@ -55,7 +53,7 @@ export const Tripbox = ({
               return (
                 <SplideSlide className={'flex'}>
                   <img
-                    className='rounded-md max-h-[250px] max-w-[106px]'
+                    className='rounded-md max-h-[250px] '
                     src={`${IMG_BASE_URL}/${pic}`}
                   />
                 </SplideSlide>

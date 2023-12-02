@@ -25,7 +25,7 @@ export const Buttonbar = () => {
         <div className='line bg-voyagrBorders w-[1px] h-full'></div>
 
         <button>
-          <ShareIcon />
+          <ShareIcon className='w-6' />
         </button>
       </div>
       <div className='mt-2 line bg-voyagrBorders h-[1px] w-full'></div>
