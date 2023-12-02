@@ -45,6 +45,9 @@ router.put('/profile/follow', c.followUser);
 // UNFFOLLOW A USER
 router.put('/profile/unfollow', c.unFollowUser);
 
+// USER LAST TRIP
+router.get('/lastTrip/:id', c.getLastTrip);
+
 // TESTING ENDPOINT FOR QUERIES \\
 router.get('/testing/test', async (req, res) => {
   const test = await prisma.user.findMany({
