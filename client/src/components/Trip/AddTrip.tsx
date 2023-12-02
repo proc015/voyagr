@@ -11,8 +11,6 @@ import { set } from '@cloudinary/url-gen/actions/variable';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 
-
-
 // import * as dayjs from 'dayjs';
 
 export interface NewTripType {
@@ -51,8 +49,7 @@ const AddTrip = () => {
   //   }
   // };
 
-  const userId = useSelector((state: RootState) => state.user.currentUser
-  );
+  const userId = useSelector((state: RootState) => state.user.currentUser);
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
     userId: userId,
@@ -85,11 +82,6 @@ const AddTrip = () => {
   const changeVisibleDiv = (div: any) => {
     setVisibleDiv(div);
   };
-
-  // const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const convertStringtoNum = Number(event.target.value);
-  //   setUserId(convertStringtoNum);
-  // };
 
   const handleTripNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
@@ -151,13 +143,9 @@ const AddTrip = () => {
     }
   };
 
-  // const dateTest = dayjs('2019-01-30').format('MM/YY')
-
   return (
     <>
       <form onSubmit={handleStartTrip} className=''>
-
-
         <div>
           {visibleDiv == 'trip' ? (
             <div onClick={() => changeVisibleDiv('')}>
