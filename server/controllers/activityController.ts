@@ -9,7 +9,7 @@ export const postActivity = async (req: Request, res: Response) => {
       data: {
         trip: {
           connect: {
-            trip_id: newActivity.trip_id,
+            trip_id: newActivity.tripId,
           },
         },
         activity_name: newActivity.activity_name,

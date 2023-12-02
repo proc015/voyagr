@@ -7,7 +7,6 @@ import { DynamicMap } from '../maps/dynamicMap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 
-
 const AddActivity = () => {
   const dispatch = useAppDispatch();
 
@@ -21,9 +20,8 @@ const AddActivity = () => {
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
   const [activity_id] = useState(0);
 
-  const tripId = useSelector((state: RootState) => state.tripid.currentTrip
-  );
-  
+  const tripId = useSelector((state: RootState) => state.tripid.currentTrip);
+
   const [newActivity, setNewActivity] = useState<Activity>({
     activity_id,
     tripId: tripId,
@@ -45,7 +43,7 @@ const AddActivity = () => {
     type,
     date,
     loc_lat_lon,
-    picture_src
+    picture_src,
   };
 
   // const handleTripIdChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -97,8 +95,9 @@ const AddActivity = () => {
       // Update the grouped state
       setNewActivity(newActivityObj);
       // Reset individual state variables
-      // setTripId(0);
+
       setActivityName('');
+      //TODO: check with sal - setLocation field does not seem to reset when you add activity
       setLocation('');
       setType('');
       setDate('');
@@ -217,7 +216,7 @@ const AddActivity = () => {
         </label>
 
         <div className='w-full text-zinc-800 text-xl font-normal flex font-noto '>
-          <input type='submit' value='Submit' className='mx-auto' />
+          <input type='submit' value='Save Activity' className='mx-auto' />
         </div>
       </div>
     </form>
