@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../app/store';
 import { useEffect } from 'react';
 import altPic from '../../assets/icons/button-active.svg';
 
@@ -57,10 +56,10 @@ const ProfileMe = () => {
         </p>
       </div>
       <div className='lineDiv border-b-[1px] border-voyagrBorders mt-4' />
-      <div>Here the Posting and and Updating the PP fill live</div>
-      <div>Here ther will be a List of Trips, Followers and Following</div>
-      <div>This is the List for all Trips</div>
-      This is the ProfileMe
+
+      <div className='text-center text-voyagrLightGrey mt-1 mb-2 font-didact mx-auto'>
+        This is the List for all Trips
+      </div>
     </>
   );
 };
