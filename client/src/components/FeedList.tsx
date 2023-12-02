@@ -19,8 +19,8 @@ const FeedList = () => {
     dispatch(fetchUserFeed());
   }, [dispatch]);
 
-  const filteredUserTrip = loggedInUserId ? userFeed.filter(trip => trip.userId === loggedInUserId) : [];
-
+  // const filteredUserTrip = loggedInUserId ? userFeed.filter(trip => trip.userId === loggedInUserId) : [];
+  const filteredUserTrip = userFeed;
   // Loading state
   if (status === 'loading') {
     return <div>Loading activities...</div>;
@@ -31,29 +31,13 @@ const FeedList = () => {
     return <div>Error loading activities.</div>;
   }
 
-  // MOCK PICTURES
-  const pictures = [
-    'bok6px8p8axqzfzffir4',
-    'pmwlwslbcuwqckupvzj5',
-    'bgl6sjrlnctacufsiahd',
-    'vove2dv8d9mqa37xbztt',
-    'siejyrv7mcux3pivk2k0',
-    'ntnewpztc8qjopvtqsj1',
-  ];
-
   console.log('filteredUserFeed', filteredUserTrip);
   // Display activities or a message if there are none
   return (
     <div className='activity-list'>
       {filteredUserTrip.length > 0 ? (
-        filteredUserTrip.map((feedTrip, i) => {
-          return (
-            <FeedComponent
-              key={feedTrip.trip_id}
-              feedTrip={feedTrip}
-              picture={pictures[i]}
-            />
-          );
+        filteredUserTrip.map((feedTrip) => {
+          return <FeedComponent key={feedTrip.trip_id} feedTrip={feedTrip} />;
         })
       ) : (
         <p>No activities to show</p>
