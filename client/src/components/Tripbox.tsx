@@ -24,12 +24,21 @@ export const Tripbox = ({
 }: Props) => {
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
   const pictures = activities.map((activity) => activity.picture_src);
+  const style = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '170px',
+    borderRadius: '6px',
+  };
 
   return (
     <>
       <div className='dev-styling mb-4 flex flex-col gap-2 align-middle justify-center'>
         <h3>{name}</h3>
         <DynamicMap
+          style={style}
           locationCoordinates={startLocation}
           type={'feed'}
           action={'view'}

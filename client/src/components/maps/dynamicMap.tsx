@@ -23,6 +23,7 @@ const DynamicMapComponent = ({
   type,
   action,
   activities,
+  style,
 }: DynamicMapProps) => {
   const [locLatLng, setLocLatLng] = useState<LatLngLiteral>();
 
@@ -106,7 +107,7 @@ const DynamicMapComponent = ({
             zoom={config.zoom[type]}
             center={config.center}
             options={config.mapOptions[type]}
-            mapContainerStyle={config.devStyling.mapContainerStyle}
+            mapContainerStyle={style}
           >
             {locations &&
               locations.map((activity: any) => {
