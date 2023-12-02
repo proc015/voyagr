@@ -9,18 +9,18 @@ export const Buttonbar = () => {
   const [liked, setLiked] = useState(false);
 
   return (
-    <div className='Buttonbar'>
-      <div className='Buttonbar h-8 flex justify-around'>
+    <div className='Buttonbar mt-2'>
+      <div className='Buttonbar h-5 flex justify-around'>
         <button onClick={() => setLiked(!liked)}>
           <HeartIcon
-            className={`w-7 h-7 stroke-${liked ? '0' : '1'} fill-${
-              liked ? '[#ff0000]' : 'none'
+            className={`w-6  ${
+              liked ? ' fill-[#ff0000] stroke-none' : 'stroke-1 fill-none'
             } `}
           />
         </button>
         <div className='line bg-voyagrBorders w-[1px] h-full'></div>
         <button>
-          <CommentIcon />
+          <CommentIcon className='w-6' />
         </button>
         <div className='line bg-voyagrBorders w-[1px] h-full'></div>
 
