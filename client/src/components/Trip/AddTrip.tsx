@@ -26,6 +26,9 @@ export interface NewTripType {
   picture_src: string;
 }
 
+// if getLastTrip.published (redux) is set to false, then inject the getlastTrip.trip_name in the AddTrip component as the initial value for trip_name. Do the same for the other fields. If getLastTrip.published is set to true, then the fields are empty. Write a function that does that.
+
+
 const AddTrip = () => {
   const dispatch = useAppDispatch();
 
@@ -43,6 +46,37 @@ const AddTrip = () => {
   const [visibleDiv, setVisibleDiv] = useState('trip');
 
   const userId = useSelector((state: RootState) => state.user.currentUser);
+  
+  // Access the getLastTrip state from Redux
+  const lastTrip = useSelector((state: RootState) => state.getLastTrip);
+  console.log('lastTrip', lastTrip);
+
+  useEffect(() => {
+    // Check if the last trip is not published
+    if (!lastTrip.trip.published) {
+      setTripName(lastTrip.trip.trip_name);
+      setStartLoc(lastTrip.trip.start_loc);
+      setDestination(lastTrip.trip.destination);
+      setStartDate(lastTrip.trip.start_date);
+      setEndDate(lastTrip.trip.end_date);
+      setPicture_src(lastTrip.trip.picture_src);
+      setStart_lat_lon(lastTrip.trip.start_lat_lon);
+      setDest_lat_lon(lastTrip.trip.dest_lat_lon);
+      // Set other fields if necessary
+    } else {
+      // Reset all fields to empty or default values
+      setTripName('');
+      setStartLoc('');
+      setDestination('');
+      setStartDate('');
+      setEndDate('');
+      setPicture_src('');
+      setStart_lat_lon([]);
+      setDest_lat_lon([]);
+      // Reset other fields if necessary
+    }
+  }, [lastTrip]); 
+
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
     userId: userId,
