@@ -42,7 +42,10 @@ export const createUser = async (req: Request, res: Response) => {
     });
     res.send(createdUser);
   } catch (error) {
-    res.send({error: '400', message: 'This email is already associated with an account!'})
+    res.send({
+      error: '400',
+      message: 'This email is already associated with an account!',
+    });
   }
 };
 
@@ -79,5 +82,21 @@ export const userLogin = async (req: Request, res: Response) => {
     res.send(user);
   } catch (error) {
     res.send({ error: '401', message: 'Email or password is wrong' });
+  }
+};
+
+export const searchUsers = async (req: Request, res: Response) => {
+  try {
+    const searchTerm = req.params.term;
+    const user = await prisma.user.findMany({
+      where: {
+        display_name: {
+          contains: searchTerm,
+        },
+      },
+    });
+    res.send(user);
+  } catch (error) {
+    console.log(error);
   }
 };

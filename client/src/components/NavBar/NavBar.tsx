@@ -41,6 +41,7 @@ const NavBar = () => {
           <NavLink
             to='/addtrip'
             className='nav-link'
+            //@ts-ignore
             activeClassName='nav-link-active'
           >
           <img src={travelIconnoBackground} alt='travelIcon'/>
