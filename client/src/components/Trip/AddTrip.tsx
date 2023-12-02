@@ -29,7 +29,6 @@ export interface NewTripType {
 const AddTrip = () => {
   const dispatch = useAppDispatch();
 
-
   // const [userId, setUserId] = useState<number>(0);
   const [trip_name, setTripName] = useState<string>('');
   const [tripNameError, setTripNameError] = useState('');
@@ -42,7 +41,6 @@ const AddTrip = () => {
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
   const [participants, setParticipants] = useState('');
   const [visibleDiv, setVisibleDiv] = useState('trip');
-
 
   const userId = useSelector((state: RootState) => state.user.currentUser);
 
@@ -115,37 +113,36 @@ const AddTrip = () => {
     const convertStringtoNum = Number(event.target.value); // nw: this is not right, but I keep it for now to change it tomorrow
     // setUserId(convertStringtoNum);
   };
-  
-  //START-REDUX-INFORMATION-HELPER: --> RP 
-  
-  // get trip information from redux store  
-    const entireState = useSelector((state: RootState) => state)
-    console.log('entire state', entireState)  
 
-  // get trip information from redux state 
-    // this is saved every time you start a trip 
-  const tripStartedInfo = useSelector((state: RootState) => state.trip)
+  //START-REDUX-INFORMATION-HELPER: --> RP
+
+  // get trip information from redux store
+  const entireState = useSelector((state: RootState) => state);
+  console.log('entire state', entireState);
+
+  // get trip information from redux state
+  // this is saved every time you start a trip
+  const tripStartedInfo = useSelector((state: RootState) => state.trip);
   // console.log('tripStartInfo', tripStartedInfo)
 
-  const tripName = tripStartedInfo[0]?.trip_name; 
+  const tripName = tripStartedInfo[0]?.trip_name;
   // console.log('trip name', tripName)
-  const tripDestination = tripStartedInfo[0]?.destination; 
+  const tripDestination = tripStartedInfo[0]?.destination;
   // console.log('trip name', tripDestination)
 
-  const tripStartDate = tripStartedInfo[0]?.start_date; 
-  const tripEndDate = tripStartedInfo[0]?.end_date; 
+  const tripStartDate = tripStartedInfo[0]?.start_date;
+  const tripEndDate = tripStartedInfo[0]?.end_date;
 
   // get activity information from redux store
 
-  const activityInfo = useSelector((state: RootState) => state.activity)
+  const activityInfo = useSelector((state: RootState) => state.activity);
   // console.log('activityInfo', activityInfo)
 
-  const activityName = activityInfo[0]?.activity_name; 
+  const activityName = activityInfo[0]?.activity_name;
   // console.log('trip name', activityName)
-  
-//END-REDUX-INFO-HELPER: --> RP 
-  
-  
+
+  //END-REDUX-INFO-HELPER: --> RP
+
   const handleStartTrip = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (tripNameError === '') {
@@ -171,7 +168,6 @@ const AddTrip = () => {
       setEndDate(latestTrip.end_date);
     }
   }, [tripStartedInfo]);
-
 
   return (
     <>
@@ -245,6 +241,12 @@ const AddTrip = () => {
                       setDestinationAddress={setDestination}
                       type={'trip'}
                       action={'create'}
+                      style={{
+                        height: '200px',
+                        width: '95%',
+                        borderRadius: '20px',
+                        margin: '10px',
+                      }}
                     />
                   </div>
                 </label>
@@ -351,7 +353,7 @@ const AddTrip = () => {
         </div>
       </form>
       <AddActivity />
-      < Publish />
+      <Publish />
       <div className='h-[100px]'></div> {/* spacer div */}
     </>
   );
