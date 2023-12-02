@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import landing1 from '../assets/images/landing1.jpg';
 import logo from '../assets/logo/Voyagr-white-big.png';
+import Login from '../components/Login/Login';
 
 function LandingPage() {
   return (
@@ -25,9 +26,13 @@ function LandingPage() {
         </div>
         <img src={logo} alt='logo' className='object-contain w-[90%] py-6' />
         <img src={logo} alt='logo' className='object-contain w-[90%] py-6' />
-        <Link to='/login'>
-          <div className='landing-btn'>Login</div>
-        </Link>
+
+        <div className='landing-btn'>Login
+          <div className='hidden'>
+            <Login />
+          </div>
+        </div>
+
         <Link to='/signup'>
           <div className='landing-btn'>Sign up</div>
         </Link>
