@@ -10,8 +10,10 @@ function SearchBar() {
 
   const handleSearch = async (searchTerm: string) => {
     if (searchTerm) {
-      const response = await searchUsers(searchTerm);
-      setSearchResult(response);
+      setTimeout(async () => {
+        const response = await searchUsers(searchTerm);
+        setSearchResult(response);
+      }, 500);
     } else {
       setSearchResult('');
     }
@@ -20,9 +22,7 @@ function SearchBar() {
   return (
     <main>
       <div className='m-auto h-10 mt-5 w-[90%] rounded-xl bg-voyagrLightGrey bg-opacity-20 flex'>
-        <img src={`${searchIcon}`}
-        className='h-5 m-auto px-4 opacity-40' 
-        />
+        <img src={`${searchIcon}`} className='h-5 m-auto px-4 opacity-40' />
         <input
           type='search'
           placeholder='Search'
