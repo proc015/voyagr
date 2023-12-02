@@ -5,6 +5,7 @@ import fetchTripReducer from '../redux/fetchTripSlice';
 import fetchActivityReducer from '../redux/fetchActivitySlice';
 import fetchTripFeedReducer from '../redux/fetchUserFeedSlice';
 import userReducer from '../redux/userSlice';
+import saveTripIdReducer from '../redux/saveTripIdSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ export const store = configureStore({
     getTrip: fetchTripReducer, 
     getActivity: fetchActivityReducer, 
     getAllTrips: fetchTripFeedReducer, 
-    user: userReducer
+    user: userReducer, 
+    tripid: saveTripIdReducer
   },
 });
 

@@ -49,7 +49,7 @@ export async function postActivity(newActivity: Activity) {
       body: JSON.stringify(newActivity),
     });
     const response = await data.json();
-    console.log('response from backend', response);
+    console.log('activityPost serv res', response);
     return response;
   } catch (err) {
     console.log(err);

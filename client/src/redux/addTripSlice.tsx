@@ -2,10 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 import { Trip } from '../types/Trip';
 
+
 const initialState: Trip[] = [];
 
 export const addTripSlice = createSlice({
-  name: 'trips',
+  name: 'trip',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {

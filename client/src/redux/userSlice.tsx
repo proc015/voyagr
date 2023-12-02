@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Trip } from '../types/Trip';
 
 interface UserState {
-  currentUser: null | number;
+  currentUser: number;
 }
 
 const initialState: UserState = {
-    currentUser: null, 
+    currentUser: 0, 
 }
 
 export const userSlice = createSlice({
@@ -18,7 +18,7 @@ export const userSlice = createSlice({
         state.currentUser = action.payload;
       },
       clearUser: (state) => {
-        state.currentUser = null;
+        state.currentUser = 0;
       }
     },
   });

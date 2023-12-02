@@ -2,10 +2,16 @@ import { useAppDispatch } from '../../app/hooks';
 import { Trip } from '../../types/Trip';
 import { postTrip, uploadPhoto } from '../../services/apiService';
 import { addTrip } from '../../redux/addTripSlice';
-import { ChangeEvent, FormEvent, useState, useRef } from 'react';
+import { setTrip } from '../../redux/saveTripIdSlice';
+
+import { ChangeEvent, FormEvent, useState, useRef, useEffect } from 'react';
 import { DynamicMap } from '../maps/dynamicMap';
 import AddActivity from '../Activity/AddActivity';
 import { set } from '@cloudinary/url-gen/actions/variable';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
+import Publish from '../Publish';
+
 // import * as dayjs from 'dayjs';
 
 export interface NewTripType {
@@ -23,7 +29,8 @@ export interface NewTripType {
 const AddTrip = () => {
   const dispatch = useAppDispatch();
 
-  const [userId, setUserId] = useState<number>(0);
+
+  // const [userId, setUserId] = useState<number>(0);
   const [trip_name, setTripName] = useState<string>('');
   const [tripNameError, setTripNameError] = useState('');
   const [start_loc, setStartLoc] = useState<string>('');
@@ -44,8 +51,10 @@ const AddTrip = () => {
   //   }
   // };
 
+  const userId = useSelector((state: RootState) => state.user.currentUser);
+
   const [newTrip, setNewTrip] = useState<NewTripType>({
-    userId,
+    userId: userId,
     trip_name,
     start_loc,
     destination,
@@ -74,11 +83,6 @@ const AddTrip = () => {
 
   const changeVisibleDiv = (div: any) => {
     setVisibleDiv(div);
-  };
-
-  const handleUserIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const convertStringtoNum = Number(event.target.value);
-    setUserId(convertStringtoNum);
   };
 
   const handleTripNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -123,48 +127,69 @@ const AddTrip = () => {
 
   const handleParticipantsChange = (event: ChangeEvent<HTMLInputElement>) => {
     const convertStringtoNum = Number(event.target.value); // nw: this is not right, but I keep it for now to change it tomorrow
-    setUserId(convertStringtoNum);
+    // setUserId(convertStringtoNum);
   };
+  
+  //START-REDUX-INFORMATION-HELPER: --> RP 
+  
+  // get trip information from redux store  
+    const entireState = useSelector((state: RootState) => state)
+    console.log('entire state', entireState)  
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  // get trip information from redux state 
+    // this is saved every time you start a trip 
+  const tripStartedInfo = useSelector((state: RootState) => state.trip)
+  // console.log('tripStartInfo', tripStartedInfo)
+
+  const tripName = tripStartedInfo[0]?.trip_name; 
+  // console.log('trip name', tripName)
+  const tripDestination = tripStartedInfo[0]?.destination; 
+  // console.log('trip name', tripDestination)
+
+  const tripStartDate = tripStartedInfo[0]?.start_date; 
+  const tripEndDate = tripStartedInfo[0]?.end_date; 
+
+  // get activity information from redux store
+
+  const activityInfo = useSelector((state: RootState) => state.activity)
+  // console.log('activityInfo', activityInfo)
+
+  const activityName = activityInfo[0]?.activity_name; 
+  // console.log('trip name', activityName)
+  
+//END-REDUX-INFO-HELPER: --> RP 
+  
+  
+  const handleStartTrip = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (tripNameError === '') {
-      postTrip(newTripObj).then((createdTrip) =>
-        dispatch(addTrip(createdTrip))
-      );
-      setNewTrip({
-        userId: 0,
-        trip_name: '',
-        start_loc: '',
-        destination: '',
-        start_date: '',
-        end_date: '',
-        start_lat_lon: [],
-        dest_lat_lon: [],
-        picture_src: '',
-        // published: false,
-        // activities: [],
-      });
+      try {
+        const createdTrip = await postTrip(newTripObj);
+        console.log('serv res', createdTrip);
+        dispatch(addTrip(createdTrip));
+        //sends the trip_id associated to this trip to the redux store
+        dispatch(setTrip(createdTrip.trip_id));
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   };
 
-  // const dateTest = dayjs('2019-01-30').format('MM/YY')
+  // updates the local state to match the redux state (i.e., when you click start a trip that info is saved to redux store and updates local state)
+  useEffect(() => {
+    if (tripStartedInfo.length > 0) {
+      const latestTrip = tripStartedInfo[0];
+      setTripName(latestTrip.trip_name);
+      setDestination(latestTrip.destination);
+      setStartDate(latestTrip.start_date);
+      setEndDate(latestTrip.end_date);
+    }
+  }, [tripStartedInfo]);
+
 
   return (
     <>
-      <form onSubmit={handleSubmit} className=''>
-        <label>
-          User ID:
-          <input
-            id='user_id'
-            type='value'
-            required={true}
-            placeholder='Insert number'
-            value={userId}
-            onChange={handleUserIdChange}
-          />
-        </label>
-
+      <form onSubmit={handleStartTrip} className=''>
         <div>
           {visibleDiv == 'trip' ? (
             <div onClick={() => changeVisibleDiv('')}>
@@ -340,6 +365,7 @@ const AddTrip = () => {
         </div>
       </form>
       <AddActivity />
+      < Publish />
       <div className='h-[100px]'></div> {/* spacer div */}
     </>
   );
