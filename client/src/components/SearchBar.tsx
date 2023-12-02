@@ -21,12 +21,12 @@ function SearchBar() {
     <main>
       <div className='m-auto h-10 mt-5 w-[90%] rounded-xl bg-voyagrLightGrey bg-opacity-20 flex'>
         <img src={`${searchIcon}`}
-        className='h-5 mt-2.5 pl-4 opacity-40' 
+        className='h-5 m-auto px-4 opacity-40' 
         />
         <input
           type='search'
           placeholder='Search'
-          className='w-full h-10 pl-3 font-didact rounded-xl text-voyagrBlack bg-voyagrLightGrey bg-opacity-0 text-lg focus:outline-none'
+          className='w-full h-10 font-didact rounded-xl text-voyagrBlack bg-voyagrLightGrey bg-opacity-0 text-lg focus:outline-none'
           onChange={(e) => handleSearch(e.target.value)}
         />
       </div>
