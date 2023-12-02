@@ -16,13 +16,17 @@ const FeedComponent = ({ feedTrip, picture }: FeedTripProp) => {
     return null;
   }
 
+  const location = feedTrip.start_lat_lon.map((loc) => {
+    return Number(loc);
+  });
+
   return (
     <div>
       {/* <Profilebar /> */}
       <Tripbox
         picture={picture}
         name={feedTrip.trip_name}
-        startLocation={feedTrip.start_lat_lon}
+        startLocation={location}
         destination={feedTrip.dest_lat_lon}
         startDate={feedTrip.start_date}
         endDate={feedTrip.end_date}
