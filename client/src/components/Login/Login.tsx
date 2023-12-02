@@ -69,7 +69,8 @@ const Login = () => {
           value={loginState.password}
           onChange={handleChange}
         />
-        <input type='submit' value='Login' disabled={validateForm()} />
+        <input type='submit' value='Login' disabled={validateForm()} className='landing-btn'/>
+        <input type='button' value='Sign up' disabled={validateForm()} className='landing-btn'/>
       </div>
     </form>
   );
