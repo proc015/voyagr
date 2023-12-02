@@ -19,8 +19,8 @@ const FeedList = () => {
     dispatch(fetchUserFeed());
   }, [dispatch]);
 
-  const filteredUserTrip = loggedInUserId ? userFeed.filter(trip => trip.userId === loggedInUserId) : [];
-
+  // const filteredUserTrip = loggedInUserId ? userFeed.filter(trip => trip.userId === loggedInUserId) : [];
+  const filteredUserTrip = userFeed;
   // Loading state
   if (status === 'loading') {
     return <div>Loading activities...</div>;
