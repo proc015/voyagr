@@ -47,7 +47,7 @@ const DynamicMapComponent = ({
     if (locationCoordinates && action == 'view') {
       centerMap(mapRef, convert.toLatLngObj(locationCoordinates));
     }
-  }, [locationCoordinates]);
+  }, [locationCoordinates, isLoaded]);
 
   useEffect(() => {
     // TRIP VIEW
@@ -77,8 +77,6 @@ const DynamicMapComponent = ({
       // make map fit the location & destination markers
       if (destLatLng) fitBounds([locLatLng, destLatLng], mapRef);
     }
-
-    console.log(locLatLng);
   }, [locLatLng, destLatLng]);
 
   return (

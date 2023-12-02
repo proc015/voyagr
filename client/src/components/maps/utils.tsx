@@ -9,6 +9,7 @@ const centerMap = (
   destinationCoordinates?: LatLngLiteral
 ) => {
   if (coordinates && !destinationCoordinates) {
+    // FIXME: check if the if for !destCoords is needed
     map.current?.panTo(coordinates);
   } else {
     map.current?.panTo(center);
