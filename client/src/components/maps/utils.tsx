@@ -6,12 +6,14 @@ import { Activity } from '../../types/Activity';
 const centerMap = (
   map: any,
   coordinates?: LatLngLiteral,
-  destinationCoordinates?: LatLngLiteral
+  destCoordinates?: LatLngLiteral
 ) => {
-  if (coordinates && !destinationCoordinates) {
-    // FIXME: check if the if for !destCoords is needed
+  if (coordinates) {
+    console.log('CENTERING TO', coordinates);
     map.current?.panTo(coordinates);
-  } else {
+  } else if (destCoordinates) map.current?.panTo(destCoordinates);
+  else {
+    console.log('CENTERING TO DEFAULT');
     map.current?.panTo(center);
   }
 };

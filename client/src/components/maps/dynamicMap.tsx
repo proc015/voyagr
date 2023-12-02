@@ -103,23 +103,9 @@ const DynamicMapComponent = ({
             onLoad={(map) => {
               mapRef.current = map;
             }}
-            zoom={
-              config.zoom[type]
-              // type == 'activity' && locLatLng
-              //   ? config.zoom.activity
-              //   : action == 'view'
-              //   ? config.zoom.feed
-              //   : config.zoom.trip
-            }
+            zoom={config.zoom[type]}
             center={config.center}
-            options={
-              config.mapOptions[type]
-              // type == 'activity'
-              //   ? config.mapOptions.activity
-              //   : action == 'view'
-              //   ? config.mapOptions.feed
-              //   : config.mapOptions.trip
-            }
+            options={config.mapOptions[type]}
             mapContainerStyle={config.devStyling.mapContainerStyle}
           >
             {locations &&
@@ -131,9 +117,7 @@ const DynamicMapComponent = ({
                   ></MarkerF>
                 );
               })}
-            <MarkerF
-              position={convert.toLatLngObj(locationCoordinates!) || locLatLng!}
-            />
+            <MarkerF position={locLatLng!} />
             <MarkerF position={destLatLng!} />
 
             {locLatLng && destLatLng && setPolyline(locLatLng, destLatLng)}
