@@ -5,6 +5,7 @@ export const Bio = () => {
   const domainUrl = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
   const fullUrl = `${domainUrl}${ppUrlEnding}`;
   const name = 'Ryan Procacci';
+  const myProfile = false;
 
   return (
     <>
@@ -15,7 +16,7 @@ export const Bio = () => {
           className='w-[150px] h-[150px] mt-7 object-cover rounded-full flex mx-auto '
         />
         <button className='flex text-black font-bold py-[3px] px-[40px] mt-[15px] rounded-full bg-voyagr border-[1px] mx-auto '>
-          ✎
+          {myProfile ? '✎' : 'Follow'}
         </button>
       </div>
       <div className='font-noto text-2xl flex'>
