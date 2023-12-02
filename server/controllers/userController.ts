@@ -56,10 +56,28 @@ export const getUserDetails = async (req: Request, res: Response) => {
       where: {
         user_id: userId,
       },
-      include: {
-        trips: true,
+      select: {
+        user_id: true,
+        first_name: true,
+        last_name: true,
+        display_name: true,
+        display_pic_src: true,
+        following: true,
+        followers: true,
+        trips: {
+          select: {
+            trip_id: true,
+            trip_name: true,
+            start_date: true,
+            destination: true,
+            dest_lat_lon: true,
+            picture_src: true,
+            published: true,
+          },
+        },
       },
     });
+    console.log(userDetails);
     res.send(userDetails);
   } catch (error) {
     console.log(error);

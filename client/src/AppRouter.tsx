@@ -18,12 +18,61 @@ const AppRouter: FC = () => {
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/profile' element={<><NavBar /><ProfilePage /></>} />
-        <Route path='/feed' element={<><NavBar /><FeedPage /></>} />
-        <Route path='/addtrip' element={<><NavBar /><AddTripPage /></>} />
-        <Route path='/trip' element={<><NavBar /><TripPage /></>} />
-        <Route path='/activity' element={<><NavBar /><ActivityPage /></>} />
-        <Route path='/search' element={<><NavBar /><SearchBar /></>} />
+        <Route
+          path='/profile'
+          element={
+            <>
+              <NavBar />
+              <ProfilePage />
+            </>
+          }
+        />
+        <Route path='/profile/:userId' element={<ProfilePage />} />
+        <Route
+          path='/feed'
+          element={
+            <>
+              <NavBar />
+              <FeedPage />
+            </>
+          }
+        />
+        <Route
+          path='/addtrip'
+          element={
+            <>
+              <NavBar />
+              <AddTripPage />
+            </>
+          }
+        />
+        <Route
+          path='/trip'
+          element={
+            <>
+              <NavBar />
+              <TripPage />
+            </>
+          }
+        />
+        <Route
+          path='/activity'
+          element={
+            <>
+              <NavBar />
+              <ActivityPage />
+            </>
+          }
+        />
+        <Route
+          path='/search'
+          element={
+            <>
+              <NavBar />
+              <SearchBar />
+            </>
+          }
+        />
       </Routes>
     </Router>
   );
