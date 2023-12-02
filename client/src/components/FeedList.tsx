@@ -1,12 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../app/store';
 import { AppDispatch } from '../app/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchUserFeed } from '../services/fetchUserFeed';
 import FeedComponent from './FeedComponent';
+import { Trip } from '../types/Trip';
+import DetailedTrip from './DetailedTrip';
 
 const FeedList = () => {
   const dispatch = useDispatch<AppDispatch>();
+  
+  const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
+
+  const closeDetailedTrip = () => setSelectedTrip(null);
+  
   const userFeed = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
   );
@@ -37,11 +44,12 @@ const FeedList = () => {
     <div className='activity-list'>
       {filteredUserTrip.length > 0 ? (
         filteredUserTrip.map((feedTrip) => {
-          return <FeedComponent key={feedTrip.trip_id} feedTrip={feedTrip} />;
+          return <FeedComponent key={feedTrip.trip_id} feedTrip={feedTrip} onSelect={()=> setSelectedTrip(feedTrip)} />;
         })
       ) : (
         <p>No activities to show</p>
       )}
+      {selectedTrip && <DetailedTrip trip={selectedTrip} onClose={closeDetailedTrip}/>}
     </div>
   );
 };

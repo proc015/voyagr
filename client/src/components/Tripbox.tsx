@@ -5,6 +5,7 @@ import { StaticMap } from './maps/staticMap';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
+
 type Props = {
   name: string;
   startLocation: number[];
