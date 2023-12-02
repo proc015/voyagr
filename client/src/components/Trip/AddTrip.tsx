@@ -43,13 +43,6 @@ const AddTrip = () => {
   const [participants, setParticipants] = useState('');
   const [visibleDiv, setVisibleDiv] = useState('trip');
 
-  // const toggleDivVisibility = (event) => {
-  //   // Check if the click target is not an input element
-  //   if (event.target.tagName.toLowerCase() !== 'input' && 'button') {
-  //     setDiv1Visible(!isDiv1Visible);
-  //     setDiv2Visible(!isDiv2Visible);
-  //   }
-  // };
 
   const userId = useSelector((state: RootState) => state.user.currentUser);
 
@@ -117,13 +110,6 @@ const AddTrip = () => {
     event.stopPropagation();
     hiddenFileInput.current?.click();
   };
-
-  // const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const filename = event.target.files![0].name;
-  //   setPicture_src(filename);
-  //   console.log(filename);
-  //   uploadPhoto(event.target.files);
-  // };
 
   const handleParticipantsChange = (event: ChangeEvent<HTMLInputElement>) => {
     const convertStringtoNum = Number(event.target.value); // nw: this is not right, but I keep it for now to change it tomorrow
@@ -193,7 +179,7 @@ const AddTrip = () => {
         <div>
           {visibleDiv == 'trip' ? (
             <div onClick={() => changeVisibleDiv('')}>
-              <div className='ToggleDiv w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+              <div className='ToggleDiv w-[95%] h-[150px] mt-4 bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
                 <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
                   <p className='p-3 pb-3 pt-3'>Trip name?</p>
                   <div className='flex w-[95%] mx-auto'>
@@ -229,7 +215,7 @@ const AddTrip = () => {
             </div>
           ) : (
             <div onClick={() => changeVisibleDiv('trip')}>
-              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
+              <div className='ToggleDiv mt-4 w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
                 <label className='w-full font-normal flex font-didact items-center justify-between'>
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     Trip name
