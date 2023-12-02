@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { searchUsers } from '../services/searchService';
 import noprofilepic from '../assets/images/noprofilepic.jpg';
 import searchIcon from '../assets/icons/search-icon.svg';
+import { Link } from 'react-router-dom';
 
 function SearchBar() {
   const [searchResult, setSearchResult] = useState<any>([]);
@@ -36,23 +37,28 @@ function SearchBar() {
           searchResult.map((result: any) => {
             return (
               <div className='h-20 my-7 flex'>
-                {/* RENDER DEFAULT PIC IF NONE SET */}
-                {result.display_pic_src ? (
-                  <img
-                    src={`${cloudinaryUrl}${result.display_pic_src}`}
-                    className='rounded-full w-20 h-auto'
-                  />
-                ) : (
-                  <img
-                    src={`${noprofilepic}`}
-                    className='rounded-full w-20 h-auto'
-                  />
-                )}
-                <div className='w-full flex'>
-                  <p className='pl-5 flex items-center font-didact text-lg'>
-                    {result.display_name}
-                  </p>
-                </div>
+                <Link
+                  to={`../profile/${result.user_id}`}
+                  state={result.user_id}
+                >
+                  {/* RENDER DEFAULT PIC IF NONE SET */}
+                  {result.display_pic_src ? (
+                    <img
+                      src={`${cloudinaryUrl}${result.display_pic_src}`}
+                      className='rounded-full w-20 h-auto'
+                    />
+                  ) : (
+                    <img
+                      src={`${noprofilepic}`}
+                      className='rounded-full w-20 h-auto'
+                    />
+                  )}
+                  <div className='w-full flex'>
+                    <p className='pl-5 flex items-center font-didact text-lg'>
+                      {result.display_name}
+                    </p>
+                  </div>
+                </Link>
               </div>
             );
           })}
