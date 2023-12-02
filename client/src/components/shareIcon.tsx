@@ -1,4 +1,8 @@
-export const ShareIcon = () => {
+type Props = {
+  className: string;
+};
+
+export const ShareIcon = ({ className }) => {
   return (
     <>
       <svg
@@ -7,7 +11,7 @@ export const ShareIcon = () => {
         viewBox='0 0 24 24'
         strokeWidth={1}
         stroke='black'
-        className='w-6 h-6'
+        className={className}
       >
         <path
           strokeLinecap='round'

@@ -46,14 +46,8 @@ const FeedList = () => {
   return (
     <div className='activity-list'>
       {filteredUserTrip.length > 0 ? (
-        filteredUserTrip.map((feedTrip, i) => {
-          return (
-            <FeedComponent
-              key={feedTrip.trip_id}
-              feedTrip={feedTrip}
-              picture={pictures[i]}
-            />
-          );
+        filteredUserTrip.map((feedTrip) => {
+          return <FeedComponent key={feedTrip.trip_id} feedTrip={feedTrip} />;
         })
       ) : (
         <p>No activities to show</p>
