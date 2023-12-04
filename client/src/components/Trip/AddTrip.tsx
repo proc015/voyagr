@@ -28,21 +28,45 @@ export interface NewTripType {
 
 const AddTrip = () => {
   const dispatch = useAppDispatch();
+  const userId = useSelector((state: RootState) => state.user.currentUser);
+  const lastTrip = useSelector((state: RootState) => state.lastTrip);
+  console.log('lastTrip in Add Trip', lastTrip);
 
   // const [userId, setUserId] = useState<number>(0);
-  const [trip_name, setTripName] = useState<string>('');
+  const [trip_name, setTripName] = useState<string>(
+    lastTrip.lastTrip.trip_name || ''
+  );
   const [tripNameError, setTripNameError] = useState('');
-  const [start_loc, setStartLoc] = useState<string>('');
-  const [destination, setDestination] = useState<string>('');
-  const [start_date, setStartDate] = useState<string>('');
-  const [end_date, setEndDate] = useState<string>('');
-  const [picture_src, setPicture_src] = useState('');
+  const [start_loc, setStartLoc] = useState<string>(
+    lastTrip.lastTrip.start_loc || ''
+  );
+  const [destination, setDestination] = useState<string>(
+    lastTrip.lastTrip.destination || ''
+  );
+  const [start_date, setStartDate] = useState<string>(
+    lastTrip.lastTrip.start_date || ''
+  );
+  const [end_date, setEndDate] = useState<string>(
+    lastTrip.lastTrip.end_date || ''
+  );
+  const [picture_src, setPicture_src] = useState(
+    lastTrip.lastTrip.picture_src || ''
+  );
+  
+  const tripExists = () => {
+    if (lastTrip.lastTrip.trip_name) {
+      return '';
+    }
+    return 'trip'; 
+  };
+  
   const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
   const [participants, setParticipants] = useState('');
-  const [visibleDiv, setVisibleDiv] = useState('trip');
+  const [visibleDiv, setVisibleDiv] = useState(tripExists());
 
-  const userId = useSelector((state: RootState) => state.user.currentUser);
+
+  
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
     userId: userId,
@@ -148,9 +172,6 @@ const AddTrip = () => {
   // if getLastTrip.published (redux) is set to false, then inject the getlastTrip.trip_name in the
   // AddTrip component as the initial value for trip_name.
   // If getLastTrip.published is set to true, then the fields are empty.
-
-  const lastTrip = useSelector((state: RootState) => state.lastTrip);
-  console.log('lastTrip in Add Trip', lastTrip);
 
   // useEffect(() => {
   //   // Check if the last trip !published
@@ -296,7 +317,7 @@ const AddTrip = () => {
                     Where to?
                   </p>
                   <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
-                    {setStartLoc} ↔ {setDestination}
+                    {start_loc} ↔ {destination}
                   </div>
                 </label>
               </div>
