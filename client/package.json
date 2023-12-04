@@ -16,6 +16,7 @@
   "dependencies": {
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.13.0",
+    "@headlessui/react": "^1.7.17",
     "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.14.19",
     "@react-google-maps/api": "^2.19.2",
