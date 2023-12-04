@@ -1,12 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import tripReducer from '../redux/addTripSlice';
 import activityReducer from '../redux/addActivitySlice';
+import activityReducer from '../redux/addActivitySlice';
 import fetchTripReducer from '../redux/fetchTripSlice';
 import fetchActivityReducer from '../redux/fetchActivitySlice';
 import fetchTripFeedReducer from '../redux/fetchUserFeedSlice';
 import userReducer from '../redux/userSlice';
 import saveTripIdReducer from '../redux/saveTripIdSlice';
-import fetchLastTrip from '../redux/fetchLastTripSlice';
+import lastTripReducer from '../redux/fetchLastTripSlice';
 import fetchUserInfoSlice from '../redux/fetchUserInfoSlice';
 
 export const store = configureStore({
@@ -18,7 +19,7 @@ export const store = configureStore({
     getAllTrips: fetchTripFeedReducer,
     user: userReducer,
     tripid: saveTripIdReducer,
-    getLastTrip: fetchTripReducer,
+    lastTrip: lastTripReducer,
     getUserInfo: fetchUserInfoSlice,
   },
 });

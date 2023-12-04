@@ -4,13 +4,13 @@ import { fetchUserTrips } from '../services/fetchTrip';
 // import { TripFeed } from './fetchUserFeedSlice';
 
 export interface LastTripState {
-  trip: Trip;
+  lastTrip: Trip;
   status: 'idle' | 'loading' | 'failed';
   error: string;
 }
 
 const initialState = {
-  trip: {
+  lastTrip: {
     trip_id: 0,
     userId: 0,
     trip_name: '',
@@ -39,11 +39,22 @@ const initialState = {
   error: '',
 };
 
-export const fetchTripSlice = createSlice({
-  name: 'getTrip',
+export const lastTripSlice = createSlice({
+  name: 'lastTrip',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
-  reducers: {},
+  reducers: {
+    // setLastTrip: (state, user) => {
+    //   console.log('userId in setLastTrip', user);
+    //   // fetchUserTrips(user.payload as number);
+    //   console.log('state in setLastTrip', state);
+    //   fetchUserTrips.fulfilled,
+    //     (state, action) => {
+    //       state.status = 'succeeded';
+    //       state.lastTrip = action.payload;
+    //     };
+    // },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -52,7 +63,7 @@ export const fetchTripSlice = createSlice({
       })
       .addCase(fetchUserTrips.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.trip = action.payload;
+        state.lastTrip = action.payload;
       })
       .addCase(fetchUserTrips.rejected, (state, action) => {
         state.status = 'failed';
@@ -61,4 +72,6 @@ export const fetchTripSlice = createSlice({
   },
 });
 
-export default fetchTripSlice.reducer;
+// export const { setLastTrip } = lastTripSlice.actions;
+
+export default lastTripSlice.reducer;
