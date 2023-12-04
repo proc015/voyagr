@@ -7,14 +7,19 @@ import FeedComponent from './FeedComponent';
 import { Trip } from '../types/Trip';
 import DetailedTrip from './DetailedTrip/DetailedTrip';
 import { useNavigate } from 'react-router-dom';
+import { fetchUserInfo } from '../services/fetchUserInfo';
 
 const FeedList = () => {
   const dispatch = useDispatch<AppDispatch>();
   let navigate = useNavigate();
 
-  const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
+  
+  const userInfo = useSelector(
+    (state: RootState) => state.getUserInfo.userInfo
+  );
 
-  const closeDetailedTrip = () => setSelectedTrip(null);
+  const followingList = userInfo.following
+  console.log('following', userInfo)
 
   const userFeed = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
@@ -25,11 +30,18 @@ const FeedList = () => {
   );
 
   useEffect(() => {
+    dispatch(fetchUserInfo(loggedInUserId));
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(fetchUserFeed());
   }, [dispatch]);
 
-  // const filteredUserTrip = loggedInUserId ? userFeed.filter(trip => trip.userId === loggedInUserId) : [];
-  const filteredUserTrip = userFeed;
+  const filteredTripsFeed = followingList.length > 0 
+  ? userFeed.filter(trip => followingList.includes(trip.userId)) : [];
+  
+  
+  const tripsDisplayFeed = filteredTripsFeed;
   // Loading state
   if (status === 'loading') {
     return <div>Loading activities...</div>;
@@ -40,12 +52,10 @@ const FeedList = () => {
     return <div>Error loading activities.</div>;
   }
 
-  // console.log('filteredUserFeed', filteredUserTrip);
-  // Display activities or a message if there are none
   return (
     <div className='activity-list'>
-      {filteredUserTrip.length > 0 ? (
-        filteredUserTrip.map((feedTrip) => {
+      {tripsDisplayFeed.length > 0 ? (
+        tripsDisplayFeed.map((feedTrip) => {
           return (
             <FeedComponent
               key={feedTrip.trip_id}
@@ -53,7 +63,6 @@ const FeedList = () => {
               onSelect={() => {
                 console.log('Selecting trip:', feedTrip);
                 navigate(`/trip/${feedTrip.trip_id}`);
-                setSelectedTrip(feedTrip);
               }}
             />
           );
@@ -61,7 +70,6 @@ const FeedList = () => {
       ) : (
         <p>No activities to show</p>
       )}
-      {/* {selectedTrip && <DetailedTrip detailedTrip={selectedTrip} onClose={closeDetailedTrip}/>} */}
     </div>
   );
 };
