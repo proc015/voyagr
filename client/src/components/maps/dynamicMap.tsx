@@ -38,24 +38,33 @@ const DynamicMapComponent = ({
     libraries: config.libraries,
   });
 
-  const locations =
-    action == 'view' && activities ? getActivityLocations(activities) : null;
-
   useEffect(() => {
     // FEED VIEW
     // center map on trip
     // console.log('LOCATION', locationCoordinates);
     if (locationCoordinates && action == 'view') {
-      centerMap(mapRef, convert.toLatLngObj(locationCoordinates));
+      const latlng = convert.toLatLngObj(locationCoordinates);
+
+      if (!isNaN(latlng?.lat as unknown as number)) {
+        setTimeout(() => {
+          centerMap(mapRef, latlng);
+        }, 500); //uglyfix to have centerMap not run until map is loaded
+      }
     }
   }, [locationCoordinates, isLoaded]);
+
+  const locations =
+    action == 'view' && activities ? getActivityLocations(activities) : null;
 
   useEffect(() => {
     // TRIP VIEW
     // make map fit the activity location markers
-    if (locations) {
-      fitBounds(locations, mapRef);
-    }
+
+    setTimeout(() => {
+      if (locations) {
+        fitBounds(locations, mapRef);
+      }
+    }, 500); //uglyfix to have fitbounds not run until map is loaded
   }, [activities]);
 
   useEffect(() => {
@@ -102,6 +111,7 @@ const DynamicMapComponent = ({
 
           <GoogleMap
             onLoad={(map) => {
+              console.log('loading');
               mapRef.current = map;
             }}
             zoom={config.zoom[type]}
