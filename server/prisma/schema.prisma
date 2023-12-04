@@ -19,8 +19,8 @@ model User {
   email           String      @unique
   pass_hash       String?
   trips           Trip[]      @relation("owner")
-  following       String[]
-  followers       String[]
+  following       Int[]
+  followers       Int[]
   comments        Comment[]
   // For being participants //
   trip            Trip?       @relation(fields: [tripId], references: [trip_id])

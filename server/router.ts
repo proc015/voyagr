@@ -39,6 +39,9 @@ router.post('/login', c.userLogin);
 // USER SEARCH
 router.get('/search/:term', c.searchUsers);
 
+// FOLLOW A USER
+router.put('/profile/follow', c.followUser);
+
 // TESTING ENDPOINT FOR QUERIES \\
 router.get('/testing/test', async (req, res) => {
   const test = await prisma.user.findMany({

@@ -118,3 +118,34 @@ export const searchUsers = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const followUser = async (req: Request, res: Response) => {
+  console.log(req.body);
+  try {
+    const { loggedInUser, userToFollow } = req.body;
+    const addedToFollowing = await prisma.user.update({
+      where: {
+        user_id: loggedInUser,
+      },
+      data: {
+        following: {
+          push: userToFollow,
+        },
+      },
+    });
+
+    const addedToFollowers = await prisma.user.update({
+      where: {
+        user_id: userToFollow,
+      },
+      data: {
+        followers: {
+          push: loggedInUser,
+        },
+      },
+    });
+    res.send({ addedToFollowing, addedToFollowers });
+  } catch (error) {
+    console.log(error);
+  }
+};
