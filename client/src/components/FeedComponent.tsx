@@ -22,7 +22,7 @@ const FeedComponent = ({ feedTrip, onSelect }: FeedTripProp) => {
 
   return (
     <div className='h-fit m-5' onClick={onSelect}>
-      <Profilebar />
+      <Profilebar userIdentifier={feedTrip.userId} />
       <Tripbox
         name={feedTrip.trip_name}
         startLocation={location}
