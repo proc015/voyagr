@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Trip } from '../types/Trip';
-import { fetchUserTrips } from '../services/fetchTrip';
+import { fetchLastTrip } from '../services/fetchLastTrip';
 // import { TripFeed } from './fetchUserFeedSlice';
 
 export interface LastTripState {
@@ -43,29 +43,18 @@ export const lastTripSlice = createSlice({
   name: 'lastTrip',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
-  reducers: {
-    // setLastTrip: (state, user) => {
-    //   console.log('userId in setLastTrip', user);
-    //   // fetchUserTrips(user.payload as number);
-    //   console.log('state in setLastTrip', state);
-    //   fetchUserTrips.fulfilled,
-    //     (state, action) => {
-    //       state.status = 'succeeded';
-    //       state.lastTrip = action.payload;
-    //     };
-    // },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserTrips.pending, (state) => {
+      .addCase(fetchLastTrip.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchUserTrips.fulfilled, (state, action) => {
+      .addCase(fetchLastTrip.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.lastTrip = action.payload;
       })
-      .addCase(fetchUserTrips.rejected, (state, action) => {
+      .addCase(fetchLastTrip.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
       });

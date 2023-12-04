@@ -6,7 +6,7 @@ import travelIconnoBackground from '../../assets/icons/traveller.svg';
 import { useMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../app/store';
-import { fetchUserTrips } from '../../services/fetchTrip';
+import { fetchLastTrip } from '../../services/fetchLastTrip';
 import searchIcon from '../../assets/icons/search-icon.svg';
 
 const NavBar = () => {
@@ -44,7 +44,7 @@ const NavBar = () => {
         </NavLink>
         <div
           className='nav-link-container'
-          onClick={() => dispatch(fetchUserTrips(userId))}
+          onClick={() => dispatch(fetchLastTrip(userId))}
         >
           {addTripMatch ? (
             <img src={travelIcon} alt='travelIcon' className='active-icon' />

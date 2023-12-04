@@ -150,34 +150,34 @@ const AddTrip = () => {
   // If getLastTrip.published is set to true, then the fields are empty.
 
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
-  console.log('lastTrip', lastTrip);
+  console.log('lastTrip in Add Trip', lastTrip);
 
-  useEffect(() => {
-    // Check if the last trip !published
-    if (!lastTrip.lastTrip.published) {
-      setTripName(lastTrip.lastTrip.trip_name);
-      setStartLoc(lastTrip.lastTrip.start_loc);
-      setDestination(lastTrip.lastTrip.destination);
-      setStartDate(lastTrip.lastTrip.start_date);
-      setEndDate(lastTrip.lastTrip.end_date);
-      setPicture_src(lastTrip.lastTrip.picture_src);
-      setStart_lat_lon(lastTrip.lastTrip.start_lat_lon);
-      setDest_lat_lon(lastTrip.lastTrip.dest_lat_lon);
-      // Set other fields if necessary
-    } else {
-      // Reset all fields to empty or default values
-      setTripName('');
-      setStartLoc('');
-      setDestination('');
-      setStartDate('');
-      setEndDate('');
-      setPicture_src('');
-      setStart_lat_lon([]);
-      setDest_lat_lon([]);
-      // Reset other fields if necessary
-    }
-  }, [lastTrip]);
-  //END-REDUX-Published-HELPER: --> NW
+  // useEffect(() => {
+  //   // Check if the last trip !published
+  //   if (!lastTrip.lastTrip.published) {
+  //     setTripName(lastTrip.lastTrip.trip_name);
+  //     setStartLoc(lastTrip.lastTrip.start_loc);
+  //     setDestination(lastTrip.lastTrip.destination);
+  //     setStartDate(lastTrip.lastTrip.start_date);
+  //     setEndDate(lastTrip.lastTrip.end_date);
+  //     setPicture_src(lastTrip.lastTrip.picture_src);
+  //     setStart_lat_lon(lastTrip.lastTrip.start_lat_lon);
+  //     setDest_lat_lon(lastTrip.lastTrip.dest_lat_lon);
+  //     // Set other fields if necessary
+  //   } else {
+  //     // Reset all fields to empty or default values
+  //     setTripName('');
+  //     setStartLoc('');
+  //     setDestination('');
+  //     setStartDate('');
+  //     setEndDate('');
+  //     setPicture_src('');
+  //     setStart_lat_lon([]);
+  //     setDest_lat_lon([]);
+  //     // Reset other fields if necessary
+  //   }
+  // }, [lastTrip]);
+  // //END-REDUX-Published-HELPER: --> NW
 
   const handleStartTrip = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
