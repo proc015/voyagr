@@ -120,27 +120,26 @@ export const searchUsers = async (req: Request, res: Response) => {
 };
 
 export const followUser = async (req: Request, res: Response) => {
-  console.log(req.body);
   try {
-    const { loggedInUser, userToFollow } = req.body;
+    const { loggedInUserId, userIdToFollow } = req.body;
     const addedToFollowing = await prisma.user.update({
       where: {
-        user_id: loggedInUser,
+        user_id: loggedInUserId,
       },
       data: {
         following: {
-          push: userToFollow,
+          push: userIdToFollow,
         },
       },
     });
 
     const addedToFollowers = await prisma.user.update({
       where: {
-        user_id: userToFollow,
+        user_id: userIdToFollow,
       },
       data: {
         followers: {
-          push: loggedInUser,
+          push: loggedInUserId,
         },
       },
     });
