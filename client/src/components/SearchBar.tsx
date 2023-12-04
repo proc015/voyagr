@@ -36,11 +36,11 @@ function SearchBar() {
         {searchResult.length > 0 &&
           searchResult.map((result: any) => {
             return (
-              <div className='h-20 my-7 flex'>
                 <Link
                   to={`../profile/${result.user_id}`}
                   state={result.user_id}
                 >
+                  <div className='h-20 my-7 flex'>
                   {/* RENDER DEFAULT PIC IF NONE SET */}
                   {result.display_pic_src ? (
                     <img
@@ -58,8 +58,8 @@ function SearchBar() {
                       {result.display_name}
                     </p>
                   </div>
+                  </div>
                 </Link>
-              </div>
             );
           })}
       </div>
