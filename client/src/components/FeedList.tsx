@@ -46,6 +46,7 @@ const FeedList = () => {
         filteredUserTrip.map((feedTrip) => {
           return <FeedComponent key={feedTrip.trip_id} feedTrip={feedTrip} onSelect={()=> {
             console.log("Selecting trip:", feedTrip)
+            //navigate to /trip/:${trip_id}
             setSelectedTrip(feedTrip)} } />;
         })
       ) : (
