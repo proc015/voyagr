@@ -412,7 +412,7 @@ const AddTrip = () => {
             </div>
           )}
           {lastTrip.status == 'succeeded' && (
-            <div className='flex text-voyagrRed py-[3px] px-[40px] rounded-full bg-voyagr border-voyagrRed border-[1px] mx-auto '>
+            <div className='flex text-voyagrRed py-[3px] px-[40px] rounded-full bg-voyagr border-voyagrRed border-[1px] mb-2 mx-auto '>
               <p>🛰️ recording</p>
             </div>
           )}

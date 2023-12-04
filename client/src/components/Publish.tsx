@@ -15,8 +15,10 @@ const Publish = () => {
   };
 
   return (
-    <div>
-      <button onClick={handlePublish}>Publish</button>
+    <div className='flex text-black py-[3px] px-[40px] rounded-full bg-voyagr mx-auto text-xl '>
+      <div className='flex text-voyagrBlue py-[3px] px-[40px] rounded-full bg-voyagr border-voyagrBlue border-[1px] font-noto mx-auto '>
+        <button onClick={handlePublish}>End & Publish!</button>
+      </div>
     </div>
   );
 };
