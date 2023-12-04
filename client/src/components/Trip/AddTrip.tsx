@@ -406,12 +406,16 @@ const AddTrip = () => {
           className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'
           onClick={() => changeVisibleDiv('')}
         >
-          <div className='flex text-black py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
-            <input type='submit' value='Start Trip' className='mx-auto' />
-          </div>
-          <div className='flex text-voyagrRed py-[3px] px-[40px] rounded-full bg-voyagr border-voyagrRed border-[1px] mx-auto '>
-            <p>🛰️ recording</p>
-          </div>
+          {lastTrip.status == 'idle' && (
+            <div className='flex text-black py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
+              <input type='submit' value='Start Trip' className='mx-auto' />
+            </div>
+          )}
+          {lastTrip.status == 'succeeded' && (
+            <div className='flex text-voyagrRed py-[3px] px-[40px] rounded-full bg-voyagr border-voyagrRed border-[1px] mx-auto '>
+              <p>🛰️ recording</p>
+            </div>
+          )}
         </div>
       </form>
       <AddActivity />
