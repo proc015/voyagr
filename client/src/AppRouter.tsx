@@ -12,8 +12,6 @@ import TripPage from './pages/TripPage';
 import SearchBar from './components/SearchBar';
 import DetailedTripPage from './pages/DetailedTripPage';
 
-
-
 const AppRouter: FC = () => {
   return (
     <Router>
@@ -76,7 +74,15 @@ const AppRouter: FC = () => {
             </>
           }
         />
-        <Route path='/trip/:trip_id' element={<><NavBar /><DetailedTripPage /></>} />
+        <Route
+          path='/trip/:trip_id'
+          element={
+            <>
+              <NavBar />
+              <DetailedTripPage />
+            </>
+          }
+        />
       </Routes>
     </Router>
   );

@@ -5,7 +5,6 @@ import { StaticMap } from './maps/staticMap';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
-
 type Props = {
   name: string;
   startLocation: number[];
@@ -40,7 +39,7 @@ export const Tripbox = ({
         <h3>{name}</h3>
         <DynamicMap
           style={style}
-          locationCoordinates={startLocation}
+          locationCoordinates={destination}
           type={'feed'}
           action={'view'}
         />

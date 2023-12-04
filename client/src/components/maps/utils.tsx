@@ -9,17 +9,15 @@ const centerMap = (
   destCoordinates?: LatLngLiteral
 ) => {
   if (coordinates) {
-    // console.log('CENTERING TO', coordinates);
     map.current?.panTo(coordinates);
   } else if (destCoordinates) map.current?.panTo(destCoordinates);
   else {
-    // console.log('CENTERING TO DEFAULT');
     map.current?.panTo(center);
   }
 };
 
 const fitBounds = (locations: any, map: any) => {
-  if (locations.length < 2 || !map.current) return;
+  if (!map.current) return;
 
   const bounds = new window.google.maps.LatLngBounds();
 
@@ -28,7 +26,7 @@ const fitBounds = (locations: any, map: any) => {
     locations.forEach((location: any) => {
       if (location != undefined) bounds.extend(location);
     });
-  } else if (locations[0]['loc']) {
+  } else {
     locations.forEach((location: any) => {
       bounds.extend(location.loc);
     });
