@@ -22,14 +22,13 @@ const DetailedTrip = () => {
     (trip) => trip.trip_id === tripNumberID
   );
 
-  console.log('FT', filteredDetailedTrip);
+  // console.log('FT', filteredDetailedTrip);
 
-  // filteredDetailTrip return an array of 1 trip so this function changes back to an object
-  // before passing as a prop
+  // filteredDetailTrip return an array of 1 trip so this function changes back to an object before passing as a prop
   const tripDetails = filteredDetailedTrip[0];
 
   return (
-    <div className='dev-styling absolute mt-24 mb-4 inset-0 flex flex-col h-fit m-5 overflow-auto bg-white'>
+    <div className='dev-styling flex flex-col h-fit m-5 overflow-auto'>
       <div className='flex-grow overflow-auto'>
         <Profilebar />
         <DetailedTripbox detailedTrip={tripDetails} />
