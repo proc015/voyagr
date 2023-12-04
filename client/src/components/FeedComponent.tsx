@@ -5,11 +5,12 @@ import { Tripbox } from './Tripbox';
 
 interface FeedTripProp {
   feedTrip: Trip;
+  onSelect: () => void;
 }
 
-const FeedComponent = ({ feedTrip }: FeedTripProp) => {
-  console.log('feedTrip', feedTrip);
-  console.log('feedTrip activity', feedTrip.activities);
+const FeedComponent = ({ feedTrip, onSelect }: FeedTripProp) => {
+  // console.log('feedTrip', feedTrip);
+  // console.log('feedTrip activity', feedTrip.activities);
 
   if (!feedTrip) {
     return null;
@@ -20,7 +21,7 @@ const FeedComponent = ({ feedTrip }: FeedTripProp) => {
   });
 
   return (
-    <div className='h-fit m-5'>
+    <div className='h-fit m-5' onClick={onSelect}>
       <Profilebar />
       <Tripbox
         name={feedTrip.trip_name}
