@@ -4,16 +4,9 @@ import logo from '../../assets/logo/Voyagr-white-big.png';
 import travelIcon from '../../assets/icons/button-active.svg';
 import travelIconnoBackground from '../../assets/icons/traveller.svg';
 import { useMatch } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../app/store';
-import { fetchLastTrip } from '../../services/fetchLastTrip';
 import searchIcon from '../../assets/icons/search-icon.svg';
 
 const NavBar = () => {
-  const userId = useSelector((state: RootState) => state.user.currentUser);
-
-  const dispatch = useDispatch<AppDispatch>();
-
   const addTripMatch = useMatch('/addtrip');
 
   return (
@@ -42,10 +35,7 @@ const NavBar = () => {
         >
           <img className='h-6' src={searchIcon} />
         </NavLink>
-        <div
-          className='nav-link-container'
-          onClick={() => dispatch(fetchLastTrip(userId))}
-        >
+        <div className='nav-link-container'>
           {addTripMatch ? (
             <img src={travelIcon} alt='travelIcon' className='active-icon' />
           ) : null}

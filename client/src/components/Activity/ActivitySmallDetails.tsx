@@ -8,6 +8,7 @@ import { root } from 'postcss';
 const ActivitySmallDetails = () => {
   const userId = useSelector((state: RootState) => state.user.currentUser);
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
+  console.log('lastTrip in Activity small component', lastTrip);
 
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
   //   const pictures = activities.map((activity) => activity.picture_src);

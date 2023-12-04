@@ -133,35 +133,6 @@ const AddTrip = () => {
     // setUserId(convertStringtoNum);
   };
 
-  //START-REDUX-INFORMATION-HELPER: --> RP
-
-  // get trip information from redux store
-  const entireState = useSelector((state: RootState) => state);
-  console.log('entire state', entireState);
-
-  // get trip information from redux state
-  // this is saved every time you start a trip
-  const tripStartedInfo = useSelector((state: RootState) => state.trip);
-  // console.log('tripStartInfo', tripStartedInfo)
-
-  const tripName = tripStartedInfo[0]?.trip_name;
-  // console.log('trip name', tripName)
-  const tripDestination = tripStartedInfo[0]?.destination;
-  // console.log('trip name', tripDestination)
-
-  const tripStartDate = tripStartedInfo[0]?.start_date;
-  const tripEndDate = tripStartedInfo[0]?.end_date;
-
-  // get activity information from redux store
-
-  const activityInfo = useSelector((state: RootState) => state.activity);
-  // console.log('activityInfo', activityInfo)
-
-  const activityName = activityInfo[0]?.activity_name;
-  // console.log('trip name', activityName)
-
-  //END-REDUX-INFO-HELPER: --> RP
-
   const handleStartTrip = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (tripNameError === '') {
@@ -177,16 +148,6 @@ const AddTrip = () => {
     }
   };
 
-  // updates the local state to match the redux state (i.e., when you click start a trip that info is saved to redux store and updates local state)
-  useEffect(() => {
-    if (tripStartedInfo.length > 0) {
-      const latestTrip = tripStartedInfo[0];
-      setTripName(latestTrip.trip_name);
-      setDestination(latestTrip.destination);
-      setStartDate(latestTrip.start_date);
-      setEndDate(latestTrip.end_date);
-    }
-  }, [tripStartedInfo]);
 
   return (
     <>
