@@ -25,20 +25,20 @@ const ProfileMe = () => {
   const { state } = useLocation();
 
   useEffect(() => {
-    dispatch(fetchUserInfo(state));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (loggedInUserId == userInfo.user_id) {
+    if (state == null) {
+      dispatch(fetchUserInfo(loggedInUserId));
       setMyProfile(true);
     } else {
+      dispatch(fetchUserInfo(state));
+      console.log(userInfo);
       setMyProfile(false);
     }
-  }, [dispatch, userInfo]);
+  }, [dispatch, state]);
 
   if (status === 'loading') {
     return <div>Loading Profile...</div>;
   }
+  console.log('LOGGED IN', loggedInUserId);
 
   return (
     <>
@@ -46,8 +46,14 @@ const ProfileMe = () => {
         name={userInfo.display_name}
         picture={userInfo.display_pic_src}
         myProfile={myProfile}
+        userId={userInfo.user_id}
+        loggedInUserId={loggedInUserId}
       />
-      <Stats />
+      <Stats
+        tripCount={userInfo.trips.length}
+        followerCount={userInfo.followers.length}
+        followingCount={userInfo.following.length}
+      />
 
       <div className='text-center text-voyagrLightGrey mt-1 mb-2 font-didact mx-auto'>
         This is the List for all Trips

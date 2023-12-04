@@ -1,7 +1,9 @@
-export const Stats = () => {
-  const tripCount = 12;
-  const followerCount = 104;
-  const followingCount = 78;
+type Props = {
+  tripCount: number;
+  followingCount: number;
+  followerCount: number;
+};
+export const Stats = ({ tripCount, followingCount, followerCount }: Props) => {
   return (
     <>
       <div className='lineDiv border-b-[1px] border-voyagrBorders mt-4' />
