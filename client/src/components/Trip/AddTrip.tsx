@@ -12,8 +12,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import Publish from '../Publish';
 
-// import * as dayjs from 'dayjs';
-
 export interface NewTripType {
   userId: number;
   trip_name: string;
@@ -163,39 +161,6 @@ const AddTrip = () => {
   // console.log('trip name', activityName)
 
   //END-REDUX-INFO-HELPER: --> RP
-
-  //START-REDUX-Published-HELPER: --> NW
-  // Access the getLastTrip state from Redux
-  // if getLastTrip.published (redux) is set to false, then inject the getlastTrip.trip_name in the
-  // AddTrip component as the initial value for trip_name.
-  // If getLastTrip.published is set to true, then the fields are empty.
-
-  // useEffect(() => {
-  //   // Check if the last trip !published
-  //   if (!lastTrip.lastTrip.published) {
-  //     setTripName(lastTrip.lastTrip.trip_name);
-  //     setStartLoc(lastTrip.lastTrip.start_loc);
-  //     setDestination(lastTrip.lastTrip.destination);
-  //     setStartDate(lastTrip.lastTrip.start_date);
-  //     setEndDate(lastTrip.lastTrip.end_date);
-  //     setPicture_src(lastTrip.lastTrip.picture_src);
-  //     setStart_lat_lon(lastTrip.lastTrip.start_lat_lon);
-  //     setDest_lat_lon(lastTrip.lastTrip.dest_lat_lon);
-  //     // Set other fields if necessary
-  //   } else {
-  //     // Reset all fields to empty or default values
-  //     setTripName('');
-  //     setStartLoc('');
-  //     setDestination('');
-  //     setStartDate('');
-  //     setEndDate('');
-  //     setPicture_src('');
-  //     setStart_lat_lon([]);
-  //     setDest_lat_lon([]);
-  //     // Reset other fields if necessary
-  //   }
-  // }, [lastTrip]);
-  // //END-REDUX-Published-HELPER: --> NW
 
   const handleStartTrip = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -1,7 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import tripReducer from '../redux/addTripSlice';
 import activityReducer from '../redux/addActivitySlice';
-import activityReducer from '../redux/addActivitySlice';
 import fetchTripReducer from '../redux/fetchTripSlice';
 import fetchActivityReducer from '../redux/fetchActivitySlice';
 import fetchTripFeedReducer from '../redux/fetchUserFeedSlice';

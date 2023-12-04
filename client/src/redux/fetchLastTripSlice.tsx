@@ -42,17 +42,19 @@ const initialState = {
 export const lastTripSlice = createSlice({
   name: 'lastTrip',
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {},
-
   extraReducers: (builder) => {
     builder
       .addCase(fetchLastTrip.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchLastTrip.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.lastTrip = action.payload;
+        if (action.payload.published === false) {
+          state.status = 'succeeded';
+          state.lastTrip = action.payload;
+        } else {
+          state.status = 'idle'; // or keep it as 'succeeded' based on your needs
+        }
       })
       .addCase(fetchLastTrip.rejected, (state, action) => {
         state.status = 'failed';

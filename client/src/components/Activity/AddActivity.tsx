@@ -105,8 +105,9 @@ const AddActivity = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='add-trip-form-container'>
-      {/* <label>
+    <>
+      <form onSubmit={handleSubmit} className='add-trip-form-container mt-5'>
+        {/* <label>
         Trip ID:
         <input
           id='trip_id'
@@ -118,108 +119,117 @@ const AddActivity = () => {
         />
       </label> */}
 
-      <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
-        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-          <p className='p-3 pb-3 pt-3'>Activities?</p>
-          <div className='flex w-[95%] mx-auto'>
-            <div>
+        <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
+          <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+            <p className='p-3 pb-3 pt-3'>Activities?</p>
+            {/* <ActivitySmallDetails /> */}
+
+            <div className='flex w-[95%] mx-auto'>
+              <div>
+                <input
+                  type='file'
+                  ref={hiddenFileInput}
+                  className='hidden'
+                  accept='image/png, image/jpeg'
+                  onChange={handlePhotoUpload}
+                />
+                <button
+                  onClick={handleClick}
+                  className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] shadow-sm text-voyagrLightGrey font-didact text-base mx-auto overflow-hidden'
+                >
+                  +
+                </button>
+              </div>
               <input
-                type='file'
-                ref={hiddenFileInput}
-                className='hidden'
-                accept='image/png, image/jpeg'
-                onChange={handlePhotoUpload}
+                id='activity_name'
+                className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+                type='text'
+                required={true}
+                placeholder='add activity name'
+                value={activity_name}
+                onChange={handleActivityNameChange}
               />
-              <button
-                onClick={handleClick}
-                className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
-              >
-                +
-              </button>
             </div>
-            <input
-              id='activity_name'
-              className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-              type='text'
-              required={true}
-              placeholder='add activity name'
-              value={activity_name}
-              onChange={handleActivityNameChange}
-            />
-          </div>
-        </label>
+          </label>
 
-        <label>
-          <DynamicMap
-            locationCoordinates={loc_lat_lon}
-            setLocationCoordinates={setLoc_lat_lon}
-            setLocationAddress={setLocation}
-            type={'activity'}
-            action={'create'}
-          />
-        </label>
-
-        <div className='flex w-[95%] mx-auto space-x-5'>
           <label>
-            <p className='ml-0 mr-0 pt-3 w-full h-[60px] text-zinc-800 text-3xl font-normal font-noto'>
-              When?
-            </p>{' '}
-            <input
-              id='date'
-              type='date'
-              className='mt-1 w-full block px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto mr-6'
-              required={true}
-              value={date}
-              onChange={handleDateChange}
+            <DynamicMap
+              locationCoordinates={loc_lat_lon}
+              setLocationCoordinates={setLoc_lat_lon}
+              setLocationAddress={setLocation}
+              type={'activity'}
+              action={'create'}
+              style={{
+                height: '175px',
+                width: '95%',
+                borderRadius: '20px',
+                margin: '10px',
+              }}
             />
           </label>
 
-          <label className='w-[100%] text-zinc-800 text-3xl font-normal font-noto'>
-            <p className='pb-3 pt-3'>Type</p>
-            <select
-              id='type'
-              required={true}
-              value={type}
-              onChange={handleTypeChange}
-              className='mt-1 block w-full h-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
-            >
-              <option value='nightlife'>Nightlife</option>
-              <option value='restaurant'>Restaurant</option>
-              <option value='sightseeing'>Sightseeing</option>
-              <option value='leisure'>Leisure</option>
-              <option value='other'>Other</option>
-            </select>
+          <div className='flex w-[95%] mx-auto space-x-5'>
+            <label>
+              <p className='ml-0 mr-0 pt-3 w-full h-[60px] text-zinc-800 text-3xl font-normal font-noto'>
+                When?
+              </p>{' '}
+              <input
+                id='date'
+                type='date'
+                className='mt-1 w-full block px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto mr-6'
+                required={true}
+                value={date}
+                onChange={handleDateChange}
+              />
+            </label>
+
+            <label className='w-[100%] text-zinc-800 text-3xl font-normal font-noto'>
+              <p className='pb-3 pt-3'>Type</p>
+              <select
+                id='type'
+                required={true}
+                value={type}
+                onChange={handleTypeChange}
+                className='mt-1 block w-full h-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+              >
+                <option value='nightlife'>Nightlife</option>
+                <option value='restaurant'>Restaurant</option>
+                <option value='sightseeing'>Sightseeing</option>
+                <option value='leisure'>Leisure</option>
+                <option value='other'>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+            <p className='p-3 pb-3 pt-3 mt-3'>Who?</p>
+            <input
+              id='participants'
+              type='text'
+              placeholder='add buddies'
+              className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+            />
           </label>
+
+          <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+            <p className='p-3 pb-3 pt-3'>Tags!</p>
+            <input
+              id='tags'
+              className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+              type='text'
+              required={false}
+              placeholder='add tags'
+              // value={tag} //missing state variable
+              onChange={handleTagChange}
+            />
+          </label>
+
+          <div className='w-full text-zinc-800 text-xl font-normal flex font-noto '>
+            <input type='submit' value='Save Activity' className='mx-auto' />
+          </div>
         </div>
-
-        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-          <p className='p-3 pb-3 pt-3'>Who?</p>
-          <input
-            id='participants'
-            type='text'
-            placeholder='add buddies'
-            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-          />
-        </label>
-
-        <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
-          <p className='p-3 pb-3 pt-3'>Tags!</p>
-          <input
-            id='tags'
-            className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
-            type='text'
-            required={false}
-            placeholder='add tags'
-            // value={tag} //missing state variable
-            onChange={handleTagChange}
-          />
-        </label>
-
-        <div className='w-full text-zinc-800 text-xl font-normal flex font-noto '>
-          <input type='submit' value='Save Activity' className='mx-auto' />
-        </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 };
 
