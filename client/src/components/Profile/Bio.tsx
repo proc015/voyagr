@@ -27,10 +27,10 @@ export const Bio = ({
   const handleEditProfile = () => {};
   const handleFollow = async () => {
     following
-      ? await unFollowUser(userId, 5).then((res) =>
+      ? await unFollowUser(userId, loggedInUserId).then((res) =>
           console.log('RESPONSE FROM UNFOLLOW: ', res)
         )
-      : await followUser(userId, 5).then((res) =>
+      : await followUser(userId, loggedInUserId).then((res) =>
           console.log('RESPONSE FROM FOLLOW: ', res)
         );
     setFollowing(!following);
