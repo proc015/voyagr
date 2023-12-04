@@ -10,6 +10,9 @@ import ProfilePage from './pages/ProfilePage';
 import SignUpPage from './pages/SignupPage';
 import TripPage from './pages/TripPage';
 import SearchBar from './components/SearchBar';
+import DetailedTripPage from './pages/DetailedTripPage';
+
+
 
 const AppRouter: FC = () => {
   return (
@@ -24,6 +27,7 @@ const AppRouter: FC = () => {
         <Route path='/trip' element={<><NavBar /><TripPage /></>} />
         <Route path='/activity' element={<><NavBar /><ActivityPage /></>} />
         <Route path='/search' element={<><NavBar /><SearchBar /></>} />
+        <Route path='/trip/:trip_id' element={<><NavBar /><DetailedTripPage /></>} />
       </Routes>
     </Router>
   );
