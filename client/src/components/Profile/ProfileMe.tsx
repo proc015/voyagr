@@ -23,24 +23,22 @@ const ProfileMe = () => {
   );
 
   const { state } = useLocation();
-  useEffect(() => {
-    console.log(state);
-    dispatch(fetchUserInfo(state));
 
+  useEffect(() => {
+    dispatch(fetchUserInfo(state));
+  }, [dispatch]);
+
+  useEffect(() => {
     if (loggedInUserId == userInfo.user_id) {
       setMyProfile(true);
     } else {
       setMyProfile(false);
     }
-
-    console.log('LOGGED IN: ', loggedInUserId);
-  }, [dispatch]);
+  }, [dispatch, userInfo]);
 
   if (status === 'loading') {
     return <div>Loading Profile...</div>;
   }
-
-  console.log(userInfo);
 
   return (
     <>
