@@ -21,8 +21,8 @@ type DynamicMapProps = {
 };
 
 type StaticMapProps = {
-  setAddress: (address: string) => void;
-  location: string;
+  setAddress?: (address: string) => void;
+  location: number[];
 };
 
 export type {

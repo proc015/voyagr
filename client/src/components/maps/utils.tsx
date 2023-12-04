@@ -9,9 +9,11 @@ const centerMap = (
   destCoordinates?: LatLngLiteral
 ) => {
   if (coordinates) {
+    console.log('cords', coordinates);
     map.current?.panTo(coordinates);
   } else if (destCoordinates) map.current?.panTo(destCoordinates);
   else {
+    console.log('default center');
     map.current?.panTo(center);
   }
 };
