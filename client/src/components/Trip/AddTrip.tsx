@@ -52,21 +52,18 @@ const AddTrip = () => {
   const [picture_src, setPicture_src] = useState(
     lastTrip.lastTrip.picture_src || ''
   );
-  
+
   const tripExists = () => {
     if (lastTrip.lastTrip.trip_name) {
       return '';
     }
-    return 'trip'; 
+    return 'trip';
   };
-  
+
   const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
   const [participants, setParticipants] = useState('');
   const [visibleDiv, setVisibleDiv] = useState(tripExists());
-
-
-  
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
     userId: userId,
@@ -405,8 +402,16 @@ const AddTrip = () => {
           )}
         </div>
 
-        <div className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'>
-          <input type='submit' value='Start Trip' className='mx-auto' />
+        <div
+          className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'
+          onClick={() => changeVisibleDiv('')}
+        >
+          <div className='flex text-black py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
+            <input type='submit' value='Start Trip' className='mx-auto' />
+          </div>
+          <div className='flex text-voyagrRed py-[3px] px-[40px] rounded-full bg-voyagr border-voyagrRed border-[1px] mx-auto '>
+            <p>🛰️ recording</p>
+          </div>
         </div>
       </form>
       <AddActivity />
