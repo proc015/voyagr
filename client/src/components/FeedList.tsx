@@ -6,9 +6,11 @@ import { fetchUserFeed } from '../services/fetchUserFeed';
 import FeedComponent from './FeedComponent';
 import { Trip } from '../types/Trip';
 import DetailedTrip from './DetailedTrip/DetailedTrip';
+import { useNavigate } from 'react-router-dom';
 
 const FeedList = () => {
   const dispatch = useDispatch<AppDispatch>();
+  let navigate = useNavigate();
   
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
 
@@ -22,6 +24,8 @@ const FeedList = () => {
     (state: RootState) => state.user.currentUser
   );
 
+  
+  
   useEffect(() => {
     dispatch(fetchUserFeed());
   }, [dispatch]);
@@ -46,13 +50,13 @@ const FeedList = () => {
         filteredUserTrip.map((feedTrip) => {
           return <FeedComponent key={feedTrip.trip_id} feedTrip={feedTrip} onSelect={()=> {
             console.log("Selecting trip:", feedTrip)
-            //navigate to /trip/:${trip_id}
+            navigate(`/trip/${feedTrip.trip_id}`)
             setSelectedTrip(feedTrip)} } />;
         })
       ) : (
         <p>No activities to show</p>
       )}
-      {selectedTrip && <DetailedTrip detailedTrip={selectedTrip} onClose={closeDetailedTrip}/>}
+      {/* {selectedTrip && <DetailedTrip detailedTrip={selectedTrip} onClose={closeDetailedTrip}/>} */}
     </div>
   );
 };
