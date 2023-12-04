@@ -11,8 +11,6 @@ const DetailedActivitybox = ({ detailedActivity }: Props) => {
   //TODO: add picture + map to the div below
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
 
-  
-
   return (
     <div className='dev-styling mb-4 flex flex-col gap-2 align-middle justify-center'>
       {detailedActivity.activities.length > 0 ? (
@@ -21,15 +19,17 @@ const DetailedActivitybox = ({ detailedActivity }: Props) => {
             key={allActivities.activity_id}
             className='dev stlying flex flex-row'
           >
-            <div className='flex-1'> 
-            <img 
-              className='rounded-md max-h-[250px] '
-              src={`${IMG_BASE_URL}/${allActivities.picture_src}`} 
-            />
-            < div> ADD MAP </div>
+            <div className='flex-1'>
+              <img
+                className='rounded-md max-h-[250px] '
+                src={`${IMG_BASE_URL}/${allActivities.picture_src}`}
+              />
+              <div> ADD MAP </div>
             </div>
             <div className='flex-1 flex flex-col ml-4'>
-              <div> <h3> {allActivities.activity_name} </h3> </div>
+              <div>
+                <h3> {allActivities.activity_name} </h3>{' '}
+              </div>
               <div> {allActivities.location} </div>
             </div>
           </div>
