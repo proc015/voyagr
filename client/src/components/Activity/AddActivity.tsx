@@ -6,6 +6,7 @@ import { addActivity } from '../../redux/addActivitySlice';
 import { DynamicMap } from '../maps/dynamicMap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import ActivitySmallDetails from './ActivitySmallDetails';
 
 const AddActivity = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,9 @@ const AddActivity = () => {
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
   const [activity_id] = useState(0);
 
-  const tripId = useSelector((state: RootState) => state.tripid.currentTrip);
+  const tripId = useSelector(
+    (state: RootState) => state.lastTrip.lastTrip.trip_id
+  );
 
   const [newActivity, setNewActivity] = useState<Activity>({
     activity_id,
@@ -45,12 +48,6 @@ const AddActivity = () => {
     loc_lat_lon,
     picture_src,
   };
-
-  // const handleTripIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   // convert event.target.value to a number from a string
-  //   const convertStringtoNum = Number(event.target.value);
-  //   setTripId(convertStringtoNum);
-  // };
 
   const handleActivityNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setActivityName(event.target.value);
@@ -101,28 +98,17 @@ const AddActivity = () => {
       setLocation('');
       setType('');
       setDate('');
+      setLocation('');
     });
   };
 
   return (
     <>
       <form onSubmit={handleSubmit} className='add-trip-form-container mt-5'>
-        {/* <label>
-        Trip ID:
-        <input
-          id='trip_id'
-          type='value'
-          required={true}
-          placeholder='Insert number'
-          value={tripId}
-          onChange={handleTripIdChange}
-        />
-      </label> */}
-
         <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
           <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
             <p className='p-3 pb-3 pt-3'>Activities?</p>
-            {/* <ActivitySmallDetails /> */}
+            <ActivitySmallDetails />
 
             <div className='flex w-[95%] mx-auto'>
               <div>
@@ -190,7 +176,7 @@ const AddActivity = () => {
                 required={true}
                 value={type}
                 onChange={handleTypeChange}
-                className='mt-1 block w-full h-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto'
+                className='mt-1 block w-full h-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base font-didact mx-auto'
               >
                 <option value='nightlife'>Nightlife</option>
                 <option value='restaurant'>Restaurant</option>
