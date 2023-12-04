@@ -30,9 +30,6 @@ const DetailedTrip = () => {
 
   return (
     <div className='dev-styling absolute mt-24 mb-4 inset-0 flex flex-col h-fit m-5 overflow-auto bg-white'>
-      <button className='relative top-2 right-2 z-10'> 
-        CLOSE BUTTON X
-      </button>
       <div className='flex-grow overflow-auto'>
         <Profilebar />
         <DetailedTripbox detailedTrip={tripDetails} />

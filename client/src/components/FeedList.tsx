@@ -11,11 +11,11 @@ import { useNavigate } from 'react-router-dom';
 const FeedList = () => {
   const dispatch = useDispatch<AppDispatch>();
   let navigate = useNavigate();
-  
+
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
 
   const closeDetailedTrip = () => setSelectedTrip(null);
-  
+
   const userFeed = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
   );
@@ -24,8 +24,6 @@ const FeedList = () => {
     (state: RootState) => state.user.currentUser
   );
 
-  
-  
   useEffect(() => {
     dispatch(fetchUserFeed());
   }, [dispatch]);
@@ -48,10 +46,17 @@ const FeedList = () => {
     <div className='activity-list'>
       {filteredUserTrip.length > 0 ? (
         filteredUserTrip.map((feedTrip) => {
-          return <FeedComponent key={feedTrip.trip_id} feedTrip={feedTrip} onSelect={()=> {
-            console.log("Selecting trip:", feedTrip)
-            navigate(`/trip/${feedTrip.trip_id}`)
-            setSelectedTrip(feedTrip)} } />;
+          return (
+            <FeedComponent
+              key={feedTrip.trip_id}
+              feedTrip={feedTrip}
+              onSelect={() => {
+                console.log('Selecting trip:', feedTrip);
+                navigate(`/trip/${feedTrip.trip_id}`);
+                setSelectedTrip(feedTrip);
+              }}
+            />
+          );
         })
       ) : (
         <p>No activities to show</p>
