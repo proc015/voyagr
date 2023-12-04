@@ -4,6 +4,7 @@ import logo from '../../assets/logo/Voyagr-white-big.png';
 import travelIcon from '../../assets/icons/button-active.svg';
 import travelIconnoBackground from '../../assets/icons/traveller.svg';
 import { useMatch } from 'react-router-dom';
+import searchIcon from '../../assets/icons/search-icon.svg';
 
 const NavBar = () => {
   const addTripMatch = useMatch('/addtrip');
@@ -27,12 +28,12 @@ const NavBar = () => {
           Feed
         </NavLink>
         <NavLink
-          to='/abc'
+          to='/search'
           className={({ isActive }) =>
             isActive ? 'nav-link nav-link-active' : 'nav-link'
           }
         >
-          ...
+          <img className='h-6' src={searchIcon} />
         </NavLink>
         <div className='nav-link-container'>
           {addTripMatch ? (
@@ -44,7 +45,7 @@ const NavBar = () => {
             //@ts-ignore
             activeClassName='nav-link-active'
           >
-          <img src={travelIconnoBackground} alt='travelIcon'/>
+            <img src={travelIconnoBackground} alt='travelIcon' />
           </NavLink>
         </div>
         <NavLink
