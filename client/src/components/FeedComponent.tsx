@@ -9,7 +9,7 @@ interface FeedTripProp {
 }
 
 const FeedComponent = ({ feedTrip, onSelect }: FeedTripProp) => {
-  console.log('feedTrip', feedTrip);
+  // console.log('feedTrip', feedTrip);
   // console.log('feedTrip activity', feedTrip.activities);
 
   if (!feedTrip) {

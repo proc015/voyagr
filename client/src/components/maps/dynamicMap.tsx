@@ -44,7 +44,7 @@ const DynamicMapComponent = ({
   useEffect(() => {
     // FEED VIEW
     // center map on trip
-    console.log('LOCATION', locationCoordinates);
+    // console.log('LOCATION', locationCoordinates);
     if (locationCoordinates && action == 'view') {
       centerMap(mapRef, convert.toLatLngObj(locationCoordinates));
     }

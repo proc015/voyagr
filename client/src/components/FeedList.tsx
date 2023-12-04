@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { fetchUserFeed } from '../services/fetchUserFeed';
 import FeedComponent from './FeedComponent';
 import { Trip } from '../types/Trip';
-import DetailedTrip from './DetailedTrip';
+import DetailedTrip from './DetailedTrip/DetailedTrip';
 
 const FeedList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -38,18 +38,20 @@ const FeedList = () => {
     return <div>Error loading activities.</div>;
   }
 
-  console.log('filteredUserFeed', filteredUserTrip);
+  // console.log('filteredUserFeed', filteredUserTrip);
   // Display activities or a message if there are none
   return (
     <div className='activity-list'>
       {filteredUserTrip.length > 0 ? (
         filteredUserTrip.map((feedTrip) => {
-          return <FeedComponent key={feedTrip.trip_id} feedTrip={feedTrip} onSelect={()=> setSelectedTrip(feedTrip)} />;
+          return <FeedComponent key={feedTrip.trip_id} feedTrip={feedTrip} onSelect={()=> {
+            console.log("Selecting trip:", feedTrip)
+            setSelectedTrip(feedTrip)} } />;
         })
       ) : (
         <p>No activities to show</p>
       )}
-      {selectedTrip && <DetailedTrip trip={selectedTrip} onClose={closeDetailedTrip}/>}
+      {selectedTrip && <DetailedTrip detailedTrip={selectedTrip} onClose={closeDetailedTrip}/>}
     </div>
   );
 };
