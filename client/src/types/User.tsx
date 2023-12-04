@@ -6,8 +6,8 @@ export interface User {
   last_name: string;
   display_name: string;
   display_pic_src: string;
-  following: string[];
-  followers: string[];
+  following: number[];
+  followers: number[];
   trips: ProfileTrip[];
 }
 

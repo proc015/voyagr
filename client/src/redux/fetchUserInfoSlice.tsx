@@ -15,8 +15,8 @@ const initialState = {
     last_name: '',
     display_name: '',
     display_pic_src: '',
-    following: [''],
-    followers: [''],
+    following: [0],
+    followers: [0],
     trips: [
       {
         trip_id: 0,
