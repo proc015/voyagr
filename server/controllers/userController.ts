@@ -148,3 +148,57 @@ export const followUser = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const unFollowUser = async (req: Request, res: Response) => {
+  try {
+    const { loggedInUserId, userIdToUnfollow } = req.body;
+
+    const loggedInFollowLists = await getFollowersAndFollowing(loggedInUserId);
+    const userFollowLists = await getFollowersAndFollowing(userIdToUnfollow);
+
+    const updatedLoggedIn = await prisma.user.update({
+      where: {
+        user_id: loggedInUserId,
+      },
+      data: {
+        following: loggedInFollowLists?.following.filter(
+          (id) => id !== userIdToUnfollow
+        ),
+      },
+    });
+    console.log(updatedLoggedIn);
+
+    const updatedUser = await prisma.user.update({
+      where: {
+        user_id: userIdToUnfollow,
+      },
+      data: {
+        followers: userFollowLists?.followers.filter(
+          (id) => id !== loggedInUserId
+        ),
+      },
+    });
+    console.log(updatedUser);
+
+    res.send({ updatedLoggedIn, updatedUser });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getFollowersAndFollowing = async (userId: number) => {
+  try {
+    const result = await prisma.user.findUnique({
+      where: {
+        user_id: userId,
+      },
+      select: {
+        followers: true,
+        following: true,
+      },
+    });
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};

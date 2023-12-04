@@ -15,6 +15,7 @@ const ProfileMe = () => {
   const userInfo = useSelector(
     (state: RootState) => state.getUserInfo.userInfo
   );
+  const [following, setFollowing] = useState(false);
 
   const [myProfile, setMyProfile] = useState<boolean>(false);
 
@@ -32,6 +33,12 @@ const ProfileMe = () => {
       dispatch(fetchUserInfo(state));
       console.log(userInfo);
       setMyProfile(false);
+      if (userInfo.followers.includes(loggedInUserId)) {
+        console.log('incldues', loggedInUserId);
+        setFollowing(true);
+      } else {
+        setFollowing(false);
+      }
     }
   }, [dispatch, state]);
 
@@ -48,6 +55,8 @@ const ProfileMe = () => {
         myProfile={myProfile}
         userId={userInfo.user_id}
         loggedInUserId={loggedInUserId}
+        following={following}
+        setFollowing={setFollowing}
       />
       <Stats
         tripCount={userInfo.trips.length}
