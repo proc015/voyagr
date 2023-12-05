@@ -73,7 +73,7 @@ function LandingPage() {
 
         <div
           id='bottom-gradient'
-          className='h-[150px] w-full bg-gradient-to-t from-voyagrWhite z-10 flex justify-end'
+          className='h-[150px] w-full bg-gradient-to-t from-voyagrWhite z-10 translate-y-5'
         ></div>
       </div>
     </main>

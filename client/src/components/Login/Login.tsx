@@ -51,7 +51,7 @@ const Login = ({setOpenLogin}: LoginProps) => {
   };
 
   return (
-    <main className='bg-voyagrWhite h-[600px] relative z-10 rounded-2xl'>
+    <main className='bg-voyagrWhite h-[650px] relative z-10 rounded-2xl'>
       <div id='top-bar' className='flex h-14 border-b border-voyagrBlack'>
         <img src={`${backButton}`} className='h-4 my-auto pl-4' onClick={() => setOpenLogin(false)}/>
         <p className='font-noto my-auto w-full text-center mr-8'>login</p>

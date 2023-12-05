@@ -70,7 +70,7 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
   };
 
   return (
-    <main className='bg-voyagrWhite h-[600px] relative z-10 rounded-2xl'>
+    <main className='bg-voyagrWhite h-[650px] relative z-10 rounded-2xl'>
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <div id='top-bar' className='flex h-14 border-b border-voyagrBlack'>
           <img
@@ -156,12 +156,13 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
 
           <Tab.Panel>
             <main className='bg-voyagrWhite h-[600px] relative z-10 rounded-2xl'>
-              <img src={`${traveller}`} className='h-24 w-auto m-auto my-8' />
+              <img src={`${traveller}`} className='h-24 w-auto m-auto mt-8 mb-6' />
               <form className='flex justify-center'>
                 <div
                   id='parent-container'
                   className='flex flex-col w-[90%] items-center'
                 >
+                  <p id='upload-help' className='text-base text-voyagrBlack font-didact mr-auto'>Upload a profile photo!</p>
                   <input
                     type='file'
                     accept='image/png, image/jpeg'
@@ -169,7 +170,9 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
                     required={true}
                     onChange={(e) => handlePhotoUpload(e)}
                     className='image-upload'
+                    aria-aria-describedby='upload-help'
                   />
+
                   <input
                     type='text'
                     name='displayName'
@@ -177,7 +180,7 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
                     required={true}
                     placeholder='Display name'
                     onChange={handleChange}
-                    className='login-box'
+                    className='w-full h-12 my-4 rounded-xl border border-voyagrLightGrey pl-4 font-didact text-voyagrBlack text-lg'
                   />
                   <button className='landing-btn' onClick={(e) => handleCreateUser(e)}>Finish</button>
                 </div>
