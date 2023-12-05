@@ -1,16 +1,14 @@
 import { Autocompletion } from './autocompletion';
 import { StaticMapProps } from './types';
 
-export const StaticMap = ({ location }: StaticMapProps) => {
+export const StaticMap = ({ location, className }: StaticMapProps) => {
   // Markers will take either an address with correct format (e.g. '+' instead of whitespace) OR lat-lang nums
-
-  console.log('activitylocation', location[0]);
   return (
     <>
-      <div className='overflow-hidden h-44 w-28'>
+      <div className={`overflow-hidden ${className} `}>
         <img
           style={{
-            borderRadius: '15px',
+            borderRadius: '10px',
             height: '120%',
             width: '100%',
             objectFit: 'cover',
