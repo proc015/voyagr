@@ -23,7 +23,7 @@ const AppRouter: FC = () => {
           path='/profile'
           element={
             <>
-              <NavBar />
+              <NavBar page={'profile'} />
               <ProfilePage />
             </>
           }
@@ -33,7 +33,7 @@ const AppRouter: FC = () => {
           path='/feed'
           element={
             <>
-              <NavBar />
+              <NavBar page={'feed'} />
               <FeedPage />
             </>
           }
@@ -42,7 +42,7 @@ const AppRouter: FC = () => {
           path='/addtrip'
           element={
             <>
-              <NavBar />
+              <NavBar page={'addTrip'} />
               <AddTripPage />
             </>
           }
@@ -51,7 +51,7 @@ const AppRouter: FC = () => {
           path='/trip'
           element={
             <>
-              <NavBar />
+              <NavBar page={'trip'} />
               <TripPage />
             </>
           }
@@ -60,7 +60,7 @@ const AppRouter: FC = () => {
           path='/activity'
           element={
             <>
-              <NavBar />
+              <NavBar page={'activity'} />
               <ActivityPage />
             </>
           }
@@ -69,7 +69,7 @@ const AppRouter: FC = () => {
           path='/search'
           element={
             <>
-              <NavBar />
+              <NavBar page={'search'} />
               <SearchBar />
             </>
           }
@@ -78,7 +78,7 @@ const AppRouter: FC = () => {
           path='/trip/:trip_id'
           element={
             <>
-              <NavBar />
+              <NavBar page={'detailedTrip'} />
               <DetailedTripPage />
             </>
           }
