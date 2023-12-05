@@ -7,6 +7,7 @@ import { DynamicMap } from '../maps/dynamicMap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import ActivitySmallDetails from './ActivitySmallDetails';
+import { lastTripSlice } from '../../redux/fetchTripSlice';
 
 const AddActivity = () => {
   const dispatch = useAppDispatch();

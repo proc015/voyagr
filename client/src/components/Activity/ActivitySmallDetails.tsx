@@ -1,14 +1,14 @@
 import { Activity } from '../../types/Activity';
 import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { useAppDispatch } from '../../app/hooks';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../app/store';
 import { root } from 'postcss';
+import { AppDispatch } from '../../app/store';
 
 const ActivitySmallDetails = () => {
-  const userId = useSelector((state: RootState) => state.user.currentUser);
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
-  console.log('lastTrip in Activity small component', lastTrip);
+  const addedActivity = useSelector((state: RootState) => state.addActivity);
 
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
   //   const pictures = activities.map((activity) => activity.picture_src);
@@ -20,13 +20,13 @@ const ActivitySmallDetails = () => {
         lastTrip.lastTrip.activities &&
         lastTrip.lastTrip.activities.length > 0 ? (
           lastTrip.lastTrip.activities.map((activity, index) => (
-            <div key={index} className='activity-details'>
+            <div key={index} className='activity-details flex-row'>
               <div className='m-2 mb-3 w-[95%] h-[60px] rounded-[15px] border text-base border-voyagrBorders mx-auto'>
-                <p>{activity.activity_name}</p>
+                <p className=''>{activity.activity_name}</p>
                 <img
                   src={`${IMG_BASE_URL}${activity.picture_src}`}
-                  alt={activity.activity_name}
-                  className=''
+                  alt={activity.date}
+                  className='w-[60px] h-[60px] object-cover rounded-full flex'
                 />
               </div>
             </div>

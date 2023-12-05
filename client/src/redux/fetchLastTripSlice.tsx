@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Trip } from '../types/Trip';
 import { fetchLastTrip } from '../services/fetchLastTrip';
-// import { TripFeed } from './fetchUserFeedSlice';
 
 export interface LastTripState {
   lastTrip: Trip;
@@ -52,8 +51,9 @@ export const lastTripSlice = createSlice({
         if (action.payload.published === false) {
           state.status = 'succeeded';
           state.lastTrip = action.payload;
+          console.log('lastTrip in fetchLastTripSlice', state.lastTrip);
         } else {
-          state.status = 'idle'; // or keep it as 'succeeded' based on your needs
+          state.status = 'idle';
         }
       })
       .addCase(fetchLastTrip.rejected, (state, action) => {
@@ -62,7 +62,5 @@ export const lastTripSlice = createSlice({
       });
   },
 });
-
-// export const { setLastTrip } = lastTripSlice.actions;
 
 export default lastTripSlice.reducer;
