@@ -1,5 +1,6 @@
 import { Activity } from '../../types/Activity';
 import { Trip } from '../../types/Trip';
+import { StaticMap } from '../maps/staticMap';
 
 interface Props {
   detailedActivity: Trip;
@@ -24,7 +25,12 @@ const DetailedActivitybox = ({ detailedActivity }: Props) => {
                 className='rounded-md max-h-[250px] '
                 src={`${IMG_BASE_URL}/${allActivities.picture_src}`}
               />
-              <div> ADD MAP </div>
+              <div>
+                {' '}
+                <StaticMap
+                  location={allActivities.loc_lat_lon}
+                ></StaticMap>{' '}
+              </div>
             </div>
             <div className='flex-1 flex flex-col ml-4'>
               <div>

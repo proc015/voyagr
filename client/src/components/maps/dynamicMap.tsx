@@ -59,10 +59,13 @@ const DynamicMapComponent = ({
   useEffect(() => {
     // TRIP VIEW
     // make map fit the activity location markers
-
     setTimeout(() => {
       if (locations) {
-        fitBounds(locations, mapRef);
+        if (locations.length > 1) {
+          fitBounds(locations, mapRef);
+        } else {
+          centerMap(mapRef, locations[0].loc);
+        }
       }
     }, 500); //uglyfix to have fitbounds not run until map is loaded
   }, [activities]);
