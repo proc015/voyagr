@@ -1,22 +1,21 @@
 import { NavLink } from 'react-router-dom';
 import './NavBar.css';
-import logo from '../../assets/logo/Voyagr-white-big.png';
 import travelIcon from '../../assets/icons/button-active.svg';
 import travelIconnoBackground from '../../assets/icons/traveller.svg';
 import { useMatch } from 'react-router-dom';
 import searchIcon from '../../assets/icons/search-icon.svg';
+import { Header } from './header';
 
-const NavBar = () => {
+type Props = {
+  page: string;
+};
+
+const NavBar = ({ page }: Props) => {
   const addTripMatch = useMatch('/addtrip');
 
   return (
     <>
-      <div className='headerVoyagr'>
-        <div className='logo'>
-          <img src={logo} alt='logo' />
-        </div>
-      </div>
-      <div className='headerVoyagrPosition'></div>
+      <Header page={page} />
 
       <div className='navbar'>
         <NavLink
