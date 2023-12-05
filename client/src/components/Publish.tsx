@@ -2,6 +2,7 @@ import { MouseEventHandler } from 'react';
 import { publishTrip } from '../services/apiService';
 import { useSelector } from 'react-redux';
 import { RootState } from '../app/store';
+import { Link } from 'react-router-dom';
 
 const Publish = () => {
   const trip_id: number = useSelector(
@@ -16,9 +17,12 @@ const Publish = () => {
 
   return (
     <div className='flex text-black py-[3px] px-[40px] rounded-full bg-voyagr mx-auto text-xl '>
-      <div className='flex text-voyagrBlue py-[3px] px-[40px] rounded-full bg-voyagr border-voyagrBlue border-[1px] font-noto mx-auto '>
-        <button onClick={handlePublish}>End & Publish!</button>
-      </div>
+      <button
+        onClick={handlePublish}
+        className='flex text-voyagrBlue py-[3px] px-[40px] rounded-full bg-voyagr border-voyagrBlue border-[1px] font-noto mx-auto '
+      >
+        <Link to='/feed'>End & Publish!</Link>
+      </button>
     </div>
   );
 };

@@ -21,6 +21,7 @@ const AddActivity = () => {
   const [picture_src, setPicture_src] = useState<string>(''); // Updated to store the image URL
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
   const [activity_id] = useState(0);
+  const [activityAdded, setActivityAdded] = useState(false);
 
   const tripId = useSelector(
     (state: RootState) => state.lastTrip.lastTrip.trip_id
@@ -100,6 +101,7 @@ const AddActivity = () => {
       setType('');
       setDate('');
       setLocation('');
+      setActivityAdded(prev => !prev);
     });
   };
 
@@ -109,7 +111,7 @@ const AddActivity = () => {
         <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
           <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
             <p className='p-3 pb-3 pt-3'>Activities?</p>
-            <ActivitySmallDetails />
+            <ActivitySmallDetails activityAdded={activityAdded} />
 
             <div className='flex w-[95%] mx-auto'>
               <div>
@@ -206,7 +208,6 @@ const AddActivity = () => {
               type='text'
               required={false}
               placeholder='add tags'
-              // value={tag} //missing state variable
               onChange={handleTagChange}
             />
           </label>

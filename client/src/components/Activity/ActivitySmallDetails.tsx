@@ -1,34 +1,45 @@
 import { Activity } from '../../types/Activity';
-import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { useAppDispatch } from '../../app/hooks';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { root } from 'postcss';
 import { AppDispatch } from '../../app/store';
+import { fetchLastTrip } from '../../services/fetchLastTrip';
+import { useEffect } from 'react';
 
-const ActivitySmallDetails = () => {
+const ActivitySmallDetails = ({ activityAdded<boolean> }) => {
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
-  const addedActivity = useSelector((state: RootState) => state.addActivity);
+  const userId = useSelector((state: RootState) => state.user.currentUser);
+  const dispatch = useDispatch<AppDispatch>();
 
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
   //   const pictures = activities.map((activity) => activity.picture_src);
+
+  useEffect(() => {
+    if (activityAdded) {
+      dispatch(fetchLastTrip(userId));
+    }
+  }, [activityAdded]);
 
   return (
     <>
       <div>
         {lastTrip &&
         lastTrip.lastTrip.activities &&
-        lastTrip.lastTrip.activities.length > 0 ? (
+        lastTrip.lastTrip.activities.length > 1 ? (
           lastTrip.lastTrip.activities.map((activity, index) => (
-            <div key={index} className='activity-details flex-row'>
-              <div className='m-2 mb-3 w-[95%] h-[60px] rounded-[15px] border text-base border-voyagrBorders mx-auto'>
-                <p className=''>{activity.activity_name}</p>
-                <img
-                  src={`${IMG_BASE_URL}${activity.picture_src}`}
-                  alt={activity.date}
-                  className='w-[60px] h-[60px] object-cover rounded-full flex'
-                />
-              </div>
+            <div
+              key={index}
+              className='activity-details m-2 mb-3 w-[95%] h-[60px] rounded-[15px] border text-base border-voyagrBorders mx-auto flex content-beween-center'
+            >
+              <img
+                src={`${IMG_BASE_URL}${activity.picture_src}`}
+                alt={activity.date}
+                className='w-[60px] h-[58px] object-cover rounded-[15px]'
+              />
+              <p className=' text-right w-[80%] mt-1'>
+                {activity.activity_name}
+              </p>
             </div>
           ))
         ) : (
