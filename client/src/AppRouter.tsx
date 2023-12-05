@@ -32,8 +32,8 @@ const AppRouter: FC = () => {
           path='/profile/:userId'
           element={
             <>
-              <ProfilePage />
               <NavBar />
+              <ProfilePage />
             </>
           }
         />
