@@ -64,7 +64,7 @@ const ProfileMe = () => {
         followerCount={userInfo.followers.length}
         followingCount={userInfo.following.length}
       />
-      <Triplist loggedInUserId={loggedInUserId} />
+      <Triplist userId={myProfile ? loggedInUserId : state} />
       <div className='text-center text-voyagrLightGrey mt-1 mb-2 font-didact mx-auto'>
         This is the List for all Trips
       </div>

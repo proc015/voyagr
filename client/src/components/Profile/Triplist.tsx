@@ -5,10 +5,10 @@ import { fetchUserFeed } from '../../services/fetchUserFeed';
 import { StaticMap } from '../maps/staticMap';
 
 type Props = {
-  loggedInUserId: number;
+  userId: number;
 };
 
-export const Triplist = ({ loggedInUserId }: Props) => {
+export const Triplist = ({ userId }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
   const allTrips = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
@@ -19,9 +19,9 @@ export const Triplist = ({ loggedInUserId }: Props) => {
   }, [dispatch]);
 
   console.log(allTrips);
-  //   const userTrips = allTrips.filter((trip) => trip.userId == loggedInUserId);
+  //   const userTrips = allTrips.filter((trip) => trip.userId == userId);
   const userTrips = allTrips.filter((trip) => trip.userId == 2);
-  //   console.log(loggedInUserId, userTrips);
+  //   console.log(userId, userTrips);
 
   return (
     <>
@@ -36,7 +36,7 @@ export const Triplist = ({ loggedInUserId }: Props) => {
                   location={trip.destination}
                 />
               </div>
-              <div className='count'></div>
+              <div className='count'>{trip.activities.length}</div>
               <div className='pic'></div>
             </div>
           </div>
