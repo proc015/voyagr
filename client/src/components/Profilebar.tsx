@@ -35,14 +35,16 @@ export const Profilebar = ({ userIdentifier }: Prop) => {
 
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
 
+  
+
   return (
     <div className='flex gap-3 my-2 align-middle'>
       {filteredUserInfo.map((userProfileInfo) => (
         <div key={userProfileInfo.user_id} className='flex gap-3'>
           <div className='picture h-12 w-12 rounded-full overflow-hidden bg-voyagrBlue'>
             <img
-              className='object-cover'
-              src={`${IMG_BASE_URL}/${userProfileInfo.display_pic_src}`}
+              className='object-cover w-full h-full'
+              src={userProfileInfo.display_pic_src ? `${IMG_BASE_URL}/${userProfileInfo.display_pic_src}`: travelIcon}
               alt='no image'
             />
           </div>
