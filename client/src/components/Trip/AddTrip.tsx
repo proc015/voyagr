@@ -161,8 +161,9 @@ const AddTrip = () => {
                   <div className='flex w-[95%] mx-auto'>
                     <div className=''>
                       <button
-{/*                         FIX THIS */}
-{/*                         onClick={handleClick} */}
+                        // FIX
+                        // THIS
+                        // onClick={handleClick}
                         // onClick={(e) => e.stopPropagation()}
                         className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 font-didact mx-auto'
                       >
