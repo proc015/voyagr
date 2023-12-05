@@ -332,7 +332,7 @@ const AddTrip = () => {
           className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'
           onClick={() => changeVisibleDiv('')}
         >
-          {lastTrip.status == 'idle' && (
+          {lastTrip.status == 'idle' || 'failed' && (
             <div className='flex text-black py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
               <input type='submit' value='Start Trip' className='mx-auto' />
             </div>
