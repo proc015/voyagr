@@ -13,7 +13,7 @@
 
 .headerVoyagrPosition {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0;
@@ -34,7 +34,7 @@
 
 .navbar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: #f9f9f7;
   border-top: 1px solid #bababa;
