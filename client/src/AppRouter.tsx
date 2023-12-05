@@ -29,6 +29,15 @@ const AppRouter: FC = () => {
           }
         />
         <Route
+          path='/profile/:id'
+          element={
+            <>
+              <NavBar page={'profile'} />
+              <ProfilePage />
+            </>
+          }
+        />
+        <Route
           path='/feed'
           element={
             <>
