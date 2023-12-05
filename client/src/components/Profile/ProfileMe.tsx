@@ -8,6 +8,7 @@ import { fetchUserInfo } from '../../services/fetchUserInfo';
 import { AsyncThunkAction } from '@reduxjs/toolkit';
 import { Dispatch, AnyAction } from 'redux';
 import { User } from '../../types/User';
+import { Triplist } from './Triplist';
 
 const ProfileMe = () => {
   const status = useSelector((state: RootState) => state.getUserInfo.status); // TODO: create getProfile
@@ -63,10 +64,7 @@ const ProfileMe = () => {
         followerCount={userInfo.followers.length}
         followingCount={userInfo.following.length}
       />
-
-      <div className='text-center text-voyagrLightGrey mt-1 mb-2 font-didact mx-auto'>
-        This is the List for all Trips
-      </div>
+      <Triplist userId={myProfile ? loggedInUserId : state} />
     </>
   );
 };

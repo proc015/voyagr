@@ -28,7 +28,15 @@ const AppRouter: FC = () => {
             </>
           }
         />
-        <Route path='/profile/:userId' element={<ProfilePage />} />
+        <Route
+          path='/profile/:userId'
+          element={
+            <>
+              <NavBar />
+              <ProfilePage />
+            </>
+          }
+        />
         <Route
           path='/feed'
           element={
