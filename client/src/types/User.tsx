@@ -20,3 +20,13 @@ interface ProfileTrip {
   picture_src: string;
   published: boolean;
 }
+
+export interface UserNoTrips {
+  user_id: number;
+  first_name: string;
+  last_name: string;
+  display_name: string;
+  display_pic_src: string;
+  following: number[];
+  followers: number[];
+}
