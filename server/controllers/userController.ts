@@ -38,6 +38,8 @@ export const createUser = async (req: Request, res: Response) => {
         last_name: newUser.lastName,
         email: newUser.email,
         pass_hash: hashedPassword,
+        display_name: newUser.displayName,
+        display_pic_src: newUser.displayPicSrc,
       },
     });
     res.send(createdUser);

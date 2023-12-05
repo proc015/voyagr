@@ -5,20 +5,18 @@ import ActivityPage from './pages/ActivityPage';
 import AddTripPage from './pages/AddTripPage';
 import FeedPage from './pages/FeedPage';
 import LandingPage from './pages/LandingPage';
-import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
-import SignUpPage from './pages/SignupPage';
 import TripPage from './pages/TripPage';
 import SearchBar from './components/SearchBar';
 import DetailedTripPage from './pages/DetailedTripPage';
+
+
 
 const AppRouter: FC = () => {
   return (
     <Router>
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/signup' element={<SignUpPage />} />
         <Route
           path='/profile'
           element={

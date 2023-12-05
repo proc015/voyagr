@@ -19,7 +19,8 @@ const config: Config = {
       didact: ['Didact Gothic', 'sans-serif'],
     },
   },
-  plugins: [],
+  // @ts-ignore get fucked
+  plugins: [require('@headlessui/tailwindcss')],
 };
 
 export default config;
