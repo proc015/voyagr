@@ -9,14 +9,14 @@ import ProfilePage from './pages/ProfilePage';
 import TripPage from './pages/TripPage';
 import SearchBar from './components/SearchBar';
 import DetailedTripPage from './pages/DetailedTripPage';
-import SignupDetails from './components/SignupDetails';
+
+
 
 const AppRouter: FC = () => {
   return (
     <Router>
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/signup' element={<SignupDetails />} />
         <Route
           path='/profile'
           element={
