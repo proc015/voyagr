@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo/Voyagr-white-big.png';
+import backButton from '../../assets/icons/back-button.svg';
+
 type Props = {
   page: string;
 };
@@ -14,22 +16,16 @@ export const Header = ({ page }: Props) => {
   };
 
   const navigate = useNavigate();
-  const goBack = () => {
-    const back = () => {
-      navigate(-1);
-    };
-    back();
-  };
 
   return (
     <>
-      <div className='headerVoyagr text-voyagrWhite font-noto text-3xl'>
-        <button className='pb-5 pl-5' onClick={goBack}>
-          {'<'}
+      <div className='headerVoyagr pb-5 px-5 text-voyagrWhite font-noto text-3xl'>
+        <button className='pb-2' onClick={() => navigate(-1)}>
+          <img className='' src={backButton} />
         </button>
 
         {header[`${page}`] ? (
-          <h1 className='pb-5'>{header[`${page}`]}</h1>
+          <h1 className=''>{header[`${page}`]}</h1>
         ) : (
           <div className='logo'>
             <img src={logo} alt='logo' />
