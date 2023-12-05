@@ -18,22 +18,25 @@ const DetailedActivitybox = ({ detailedActivity }: Props) => {
         detailedActivity.activities.map((allActivities) => (
           <div
             key={allActivities.activity_id}
-            className='dev stlying flex flex-row'
+            className='dev stlying flex flex-row items-center gap-1 border-2 border-voyagrBorders rounded-[10px]'
           >
-            <div className='flex-1'>
+            <div className='flex flex-row rounded-[10px] w-4/10 '> 
+            <div className='w-1/2 relative z-40'> 
               <img
-                className='rounded-md max-h-[250px] '
+                className='rounded-md w-full object-cover h-[100px]'
                 src={`${IMG_BASE_URL}/${allActivities.picture_src}`}
+                style={{maxHeight: '250px'}}
               />
-              <div>
-                {' '}
+              </div>
+              <div className='w-1/2 relative z-10'>
                 <StaticMap
                   location={allActivities.loc_lat_lon}
+                  className='h-[100px] -ml-5'
                 ></StaticMap>{' '}
-              </div>
+            </div>
             </div>
             <div className='flex-1 flex flex-col ml-4'>
-              <div>
+              <div className='text-2xl font-semibold font-noto mb-1'>
                 <h3> {allActivities.activity_name} </h3>{' '}
               </div>
               <div> {allActivities.location} </div>

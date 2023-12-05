@@ -6,20 +6,22 @@ interface Props {
 }
 
 const DetailedTripbox = ({ detailedTrip }: Props) => {
-  // console.log('TripDetailBox:', detailedTrip);
+  console.log('TripDetailBox:', detailedTrip);
   // console.log('TripDetailBox:', detailedTrip.activities);
 
   return (
     <div className='dev-styling mb-4 flex flex-col gap-2 align-middle justify-center'>
       <h3> {detailedTrip.trip_name}</h3>
+      <div className='items-center flex justify-center'>
       <DynamicMap
         activities={detailedTrip.activities}
         type={'activity'}
         action={'view'}
-        style={{ height: '200px', width: '200px' }}
+        style={{ height: '270px', width: '270px' }}
       />
+    </div>
     </div>
   );
 };
-
+ 
 export default DetailedTripbox;
