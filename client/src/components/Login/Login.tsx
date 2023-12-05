@@ -36,7 +36,7 @@ const Login = () => {
     } else {
       console.log("login response", response.user_id)
       dispatch(setUser(response.user_id))
-      navigate('/profile');
+      navigate('/feed');
     }
   };
 

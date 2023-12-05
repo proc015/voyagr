@@ -6,6 +6,7 @@ import fetchActivityReducer from '../redux/fetchActivitySlice';
 import fetchTripFeedReducer from '../redux/fetchUserFeedSlice';
 import userReducer from '../redux/userSlice';
 import saveTripIdReducer from '../redux/saveTripIdSlice';
+import lastTripReducer from '../redux/fetchLastTripSlice';
 import fetchUserInfoSlice from '../redux/fetchUserInfoSlice';
 
 export const store = configureStore({
@@ -17,6 +18,7 @@ export const store = configureStore({
     getAllTrips: fetchTripFeedReducer,
     user: userReducer,
     tripid: saveTripIdReducer,
+    lastTrip: lastTripReducer,
     getUserInfo: fetchUserInfoSlice,
   },
 });

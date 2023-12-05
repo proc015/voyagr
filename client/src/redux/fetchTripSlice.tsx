@@ -1,64 +1,57 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Trip } from '../types/Trip';
 import { fetchUserTrips } from '../services/fetchTrip';
-// import { TripFeed } from './fetchUserFeedSlice';
 
-export interface TripState {
-  trip: Trip;
-  status: 'idle' | 'loading' | 'failed';
-  error: string;
+export interface LastTripState {
+  lastTrip: Trip | null;  // Changed to null for initial state
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  error: string | null;   // Error can be null initially
 }
 
-const initialState = {
-  trip: {
-    trip_id: 0,
-    userId: 0,
-    trip_name: '',
-    start_loc: '',
-    destination: '',
-    start_date: '',
-    end_date: '',
-    start_lat_lon: [0, 0],
-    dest_lat_lon: [0, 0],
-    picture_src: '',
-    published: false,
-    activities: [
-      {
-        activity_id: 0,
-        activity_name: '',
-        date: '',
-        description: '',
-        location: '',
-        tripId: 0,
-        type: '',
-        loc_lat_lon: [0],
-      },
-    ],
-  },
+const initialState: LastTripState = {
+  lastTrip: null,  // Initially, there's no last trip
   status: 'idle',
-  error: '',
+  error: null,
 };
 
-export const fetchTripSlice = createSlice({
-  name: 'getTrip',
-  initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
-  reducers: {},
+// Async thunk to fetch the last trip
+export const fetchLastTrip = createAsyncThunk(
+  'lastTrip/fetchLastTrip',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetchUserTrips(); // Assume fetchUserTrips returns the last trip
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
+export const lastTripSlice = createSlice({
+  name: 'lastTrip',
+  initialState,
+  reducers: {
+    // Reducers can be added here if needed
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserTrips.pending, (state) => {
+      .addCase(fetchLastTrip.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchUserTrips.fulfilled, (state, action) => {
+      .addCase(fetchLastTrip.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.trip = action.payload;
+        // Check if the last trip is not published and update the state accordingly
+        if (!action.payload.published) {
+          state.lastTrip = action.payload;
+        } else {
+          state.lastTrip = null; // Reset the state if the last trip is published
+        }
       })
-      .addCase(fetchUserTrips.rejected, (state, action) => {
+      .addCase(fetchLastTrip.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload as string;
       });
   },
 });
 
-export default fetchTripSlice.reducer;
+export default lastTripSlice.reducer;

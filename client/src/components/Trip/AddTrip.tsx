@@ -12,8 +12,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import Publish from '../Publish';
 
-// import * as dayjs from 'dayjs';
-
 export interface NewTripType {
   userId: number;
   trip_name: string;
@@ -28,30 +26,42 @@ export interface NewTripType {
 
 const AddTrip = () => {
   const dispatch = useAppDispatch();
-
+  const userId = useSelector((state: RootState) => state.user.currentUser);
+  const lastTrip = useSelector((state: RootState) => state.lastTrip);
+  console.log('lastTrip in Add Trip', lastTrip);
 
   // const [userId, setUserId] = useState<number>(0);
-  const [trip_name, setTripName] = useState<string>('');
+  const [trip_name, setTripName] = useState<string>(
+    lastTrip.lastTrip.trip_name || ''
+  );
   const [tripNameError, setTripNameError] = useState('');
-  const [start_loc, setStartLoc] = useState<string>('');
-  const [destination, setDestination] = useState<string>('');
-  const [start_date, setStartDate] = useState<string>('');
-  const [end_date, setEndDate] = useState<string>('');
-  const [picture_src, setPicture_src] = useState('');
+  const [start_loc, setStartLoc] = useState<string>(
+    lastTrip.lastTrip.start_loc || ''
+  );
+  const [destination, setDestination] = useState<string>(
+    lastTrip.lastTrip.destination || ''
+  );
+  const [start_date, setStartDate] = useState<string>(
+    lastTrip.lastTrip.start_date || ''
+  );
+  const [end_date, setEndDate] = useState<string>(
+    lastTrip.lastTrip.end_date || ''
+  );
+  const [picture_src, setPicture_src] = useState(
+    lastTrip.lastTrip.picture_src || ''
+  );
+
+  const tripExists = () => {
+    if (lastTrip.lastTrip.trip_name) {
+      return '';
+    }
+    return 'trip';
+  };
+
   const [start_lat_lon, setStart_lat_lon] = useState<number[]>([]);
   const [dest_lat_lon, setDest_lat_lon] = useState<number[]>([]);
   const [participants, setParticipants] = useState('');
-  const [visibleDiv, setVisibleDiv] = useState('trip');
-
-  // const toggleDivVisibility = (event) => {
-  //   // Check if the click target is not an input element
-  //   if (event.target.tagName.toLowerCase() !== 'input' && 'button') {
-  //     setDiv1Visible(!isDiv1Visible);
-  //     setDiv2Visible(!isDiv2Visible);
-  //   }
-  // };
-
-  const userId = useSelector((state: RootState) => state.user.currentUser);
+  const [visibleDiv, setVisibleDiv] = useState(tripExists());
 
   const [newTrip, setNewTrip] = useState<NewTripType>({
     userId: userId,
@@ -118,48 +128,11 @@ const AddTrip = () => {
     hiddenFileInput.current?.click();
   };
 
-  // const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const filename = event.target.files![0].name;
-  //   setPicture_src(filename);
-  //   console.log(filename);
-  //   uploadPhoto(event.target.files);
-  // };
-
   const handleParticipantsChange = (event: ChangeEvent<HTMLInputElement>) => {
     const convertStringtoNum = Number(event.target.value); // nw: this is not right, but I keep it for now to change it tomorrow
     // setUserId(convertStringtoNum);
   };
-  
-  //START-REDUX-INFORMATION-HELPER: --> RP 
-  
-  // get trip information from redux store  
-    const entireState = useSelector((state: RootState) => state)
-    console.log('entire state', entireState)  
 
-  // get trip information from redux state 
-    // this is saved every time you start a trip 
-  const tripStartedInfo = useSelector((state: RootState) => state.trip)
-  // console.log('tripStartInfo', tripStartedInfo)
-
-  const tripName = tripStartedInfo[0]?.trip_name; 
-  // console.log('trip name', tripName)
-  const tripDestination = tripStartedInfo[0]?.destination; 
-  // console.log('trip name', tripDestination)
-
-  const tripStartDate = tripStartedInfo[0]?.start_date; 
-  const tripEndDate = tripStartedInfo[0]?.end_date; 
-
-  // get activity information from redux store
-
-  const activityInfo = useSelector((state: RootState) => state.activity)
-  // console.log('activityInfo', activityInfo)
-
-  const activityName = activityInfo[0]?.activity_name; 
-  // console.log('trip name', activityName)
-  
-//END-REDUX-INFO-HELPER: --> RP 
-  
-  
   const handleStartTrip = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (tripNameError === '') {
@@ -175,17 +148,6 @@ const AddTrip = () => {
     }
   };
 
-  // updates the local state to match the redux state (i.e., when you click start a trip that info is saved to redux store and updates local state)
-  useEffect(() => {
-    if (tripStartedInfo.length > 0) {
-      const latestTrip = tripStartedInfo[0];
-      setTripName(latestTrip.trip_name);
-      setDestination(latestTrip.destination);
-      setStartDate(latestTrip.start_date);
-      setEndDate(latestTrip.end_date);
-    }
-  }, [tripStartedInfo]);
-
 
   return (
     <>
@@ -193,7 +155,7 @@ const AddTrip = () => {
         <div>
           {visibleDiv == 'trip' ? (
             <div onClick={() => changeVisibleDiv('')}>
-              <div className='ToggleDiv w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+              <div className='ToggleDiv w-[95%] h-[150px] mt-4 bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
                 <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
                   <p className='p-3 pb-3 pt-3'>Trip name?</p>
                   <div className='flex w-[95%] mx-auto'>
@@ -229,7 +191,7 @@ const AddTrip = () => {
             </div>
           ) : (
             <div onClick={() => changeVisibleDiv('trip')}>
-              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
+              <div className='ToggleDiv mt-4 w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
                 <label className='w-full font-normal flex font-didact items-center justify-between'>
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     Trip name
@@ -259,6 +221,12 @@ const AddTrip = () => {
                       setDestinationAddress={setDestination}
                       type={'trip'}
                       action={'create'}
+                      style={{
+                        height: '200px',
+                        width: '95%',
+                        borderRadius: '20px',
+                        margin: '10px',
+                      }}
                     />
                   </div>
                 </label>
@@ -272,7 +240,7 @@ const AddTrip = () => {
                     Where to?
                   </p>
                   <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
-                    {setStartLoc} ↔ {setDestination}
+                    {start_loc} ↔ {destination}
                   </div>
                 </label>
               </div>
@@ -360,12 +328,24 @@ const AddTrip = () => {
           )}
         </div>
 
-        <div className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'>
-          <input type='submit' value='Start Trip' className='mx-auto' />
+        <div
+          className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'
+          onClick={() => changeVisibleDiv('')}
+        >
+          {lastTrip.status == 'idle' && (
+            <div className='flex text-black py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
+              <input type='submit' value='Start Trip' className='mx-auto' />
+            </div>
+          )}
+          {lastTrip.status == 'succeeded' && (
+            <div className='flex text-voyagrRed py-[3px] px-[40px] rounded-full bg-voyagr border-voyagrRed border-[1px] mb-1 mx-auto '>
+              <p>🛰️ recording</p>
+            </div>
+          )}
         </div>
       </form>
       <AddActivity />
-      < Publish />
+      <Publish />
       <div className='h-[100px]'></div> {/* spacer div */}
     </>
   );
