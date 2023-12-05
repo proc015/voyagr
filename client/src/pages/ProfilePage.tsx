@@ -7,7 +7,6 @@ function ProfilePage() {
     <>
       <ProfileMe />
       <TripProfile />
-      This is the ProfilePage
     </>
   );
 }
