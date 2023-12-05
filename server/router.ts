@@ -30,6 +30,9 @@ router.get('/activity/:tripId/all', c.getAllTripActivities);
 // CREATE NEW USER
 router.post('/user', c.createUser);
 
+// GET ALL USER INFORMATION (DOES NOT INCLUDE TRIPS)
+router.get('/user/all', c.getAllUserInfo);
+
 // GET USER DETAILS
 router.get('/user/:id', c.getUserDetails);
 
@@ -47,6 +50,9 @@ router.put('/profile/unfollow', c.unFollowUser);
 
 // USER LAST TRIP
 router.get('/lastTrip/:id', c.getLastTrip);
+
+
+
 
 // TESTING ENDPOINT FOR QUERIES \\
 router.get('/testing/test', async (req, res) => {

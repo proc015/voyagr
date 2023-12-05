@@ -202,3 +202,29 @@ const getFollowersAndFollowing = async (userId: number) => {
     console.log(error);
   }
 };
+
+export const getAllUserInfo = async (req: Request, res: Response) => {
+  try {
+    const allUserInfo = await prisma.user.findMany({
+      where: {
+        trips: {
+          some: {
+            published: true,
+          },
+        },
+      },
+      select: {
+        user_id: true,
+        first_name: true,
+        last_name: true,
+        display_name: true,
+        display_pic_src: true,
+        following: true,
+        followers: true,
+      },
+    });
+    res.send(allUserInfo);
+  } catch (error) {
+    console.log(error);
+  }
+};

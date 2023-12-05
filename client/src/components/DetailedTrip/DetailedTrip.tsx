@@ -30,7 +30,7 @@ const DetailedTrip = () => {
   return (
     <div className='dev-styling flex flex-col h-fit m-5 overflow-auto'>
       <div className='flex-grow overflow-auto'>
-        <Profilebar />
+        <Profilebar userIdentifier={tripDetails}/>
         <DetailedTripbox detailedTrip={tripDetails} />
         <Buttonbar />
         <DetailedActivitybox detailedActivity={tripDetails} />
