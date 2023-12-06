@@ -117,9 +117,9 @@ const AddTrip = () => {
 
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
+
     const filename = event.target.files![0].name;
     setPicture_src(filename);
-    console.log(filename);
     uploadPhoto(event.target.files);
   };
 
@@ -154,41 +154,42 @@ const AddTrip = () => {
       <form onSubmit={handleStartTrip} className=''>
         <div>
           {visibleDiv == 'trip' ? (
-            <div onClick={() => changeVisibleDiv('')}>
-              <div className='ToggleDiv w-[95%] h-[150px] mt-4 bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
-                <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+            <div 
+            // onClick={() => changeVisibleDiv('')} //wtf?
+            >
+              <div className='ToggleDiv w-[95%] h-[150px] mt-4 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+                <div className='w-full text-zinc-800 text-3xl font-normal font-noto'>
                   <p className='p-3 pb-3 pt-3'>Trip name?</p>
+
                   <div className='flex w-[95%] mx-auto'>
-                    <div className=''>
+                    <div>
+                      <input
+                        type='file'
+                        accept='image/png, image/jpeg'
+                        name='picture_src'
+                        ref={hiddenFileInput}
+                        onChange={handlePhotoUpload}
+                        className='hidden'
+                      />
                       <button
-                        // FIX
-                        // THIS
-                        // onClick={handleClick}
-                        // onClick={(e) => e.stopPropagation()}
-                        className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 font-didact mx-auto'
+                        onClick={handleClick}
+                        className='mt-1 mb-3 block w-[60px] py-4 border border-voyagrBorders rounded-[15px] shadow-sm text-voyagrLightGrey font-didact text-base mx-auto'
                       >
-                        <input
-                          type='file'
-                          ref={hiddenFileInput}
-                          className='hidden'
-                          accept='image/png, image/jpeg'
-                          onChange={handlePhotoUpload}
-                        />
-                        +
+                        Photo
                       </button>
                     </div>
                     <input
                       id='trip_name'
-                      className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 font-didact mx-auto '
+                      className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 font-didact mx-auto'
                       type='text'
                       required={true}
                       placeholder='add trip name'
                       value={trip_name}
                       onChange={handleTripNameChange}
-                      onClick={(e) => e.stopPropagation()}
+                      // onClick={(e) => e.stopPropagation()}
                     />
                   </div>
-                </label>
+                </div>
               </div>
             </div>
           ) : (

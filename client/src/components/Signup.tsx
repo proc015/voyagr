@@ -180,7 +180,7 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
                     required={true}
                     onChange={(e) => handlePhotoUpload(e)}
                     className='image-upload'
-                    aria-aria-describedby='upload-help'
+                    aria-describedby='upload-help'
                   />
 
                   <input
