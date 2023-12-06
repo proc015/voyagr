@@ -11,6 +11,8 @@ type Props = {
   loggedInUserId: number;
   following: boolean;
   setFollowing: (following: boolean) => void;
+  followerCount: number;
+  setFollowerCount: (count: number) => void;
 };
 export const Bio = ({
   name,
@@ -20,20 +22,21 @@ export const Bio = ({
   loggedInUserId,
   following,
   setFollowing,
+  followerCount,
+  setFollowerCount,
 }: Props) => {
-  const ppUrlEnding = 'IMG_0873_2_pepnrb';
   const domainUrl = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
 
   const handleEditProfile = () => {};
   const handleFollow = async () => {
-    following
-      ? await unFollowUser(userId, loggedInUserId).then((res) =>
-          console.log('RESPONSE FROM UNFOLLOW: ', res)
-        )
-      : await followUser(userId, loggedInUserId).then((res) =>
-          console.log('RESPONSE FROM FOLLOW: ', res)
-        );
     setFollowing(!following);
+    if (following) {
+      setFollowerCount(followerCount - 1);
+      await unFollowUser(userId, loggedInUserId);
+    } else {
+      setFollowerCount(followerCount + 1);
+      await followUser(userId, loggedInUserId);
+    }
   };
 
   return (

@@ -13,7 +13,6 @@ export const fetchUserInfo = createAsyncThunk<
   try {
     const response = await fetch(`${url}/user/${user_id}`);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (err) {
     return rejectWithValue('this is an error');

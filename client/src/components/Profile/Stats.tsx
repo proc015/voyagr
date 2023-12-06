@@ -1,7 +1,9 @@
+import { useState } from 'react';
+
 type Props = {
   tripCount: number;
   followingCount: number;
-  followerCount: number;
+  followerCount?: number;
 };
 export const Stats = ({ tripCount, followingCount, followerCount }: Props) => {
   return (
