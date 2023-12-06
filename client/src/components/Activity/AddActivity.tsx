@@ -70,11 +70,20 @@ const AddActivity = () => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const filename = event.target.files[0].name;
-      setPicture_src(filename);
-      console.log(filename);
-      uploadPhoto(event.target.files);
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      // If you want to display the image before uploading
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setPicture_src(e.target.result as string);
+      };
+      reader.readAsDataURL(file);
+
+      // If you're uploading the file
+      uploadPhoto(file).then((uploadedImageUrl) => {
+        setPicture_src(uploadedImageUrl);
+      });
     }
   };
 
@@ -91,9 +100,7 @@ const AddActivity = () => {
 
     postActivity(newActivityObj).then((createdActivity) => {
       dispatch(addActivity(createdActivity));
-      // Update the grouped state
       setNewActivity(newActivityObj);
-      // Reset individual state variables
 
       setActivityName('');
       //TODO: check with sal - setLocation field does not seem to reset when you add activity
@@ -101,7 +108,7 @@ const AddActivity = () => {
       setType('');
       setDate('');
       setLocation('');
-      setActivityAdded(prev => !prev);
+      setActivityAdded((prev) => !prev);
     });
   };
 
@@ -118,9 +125,11 @@ const AddActivity = () => {
                 <input
                   type='file'
                   ref={hiddenFileInput}
+                  // className='w-[60px] h-[60px]'
                   className='hidden'
                   accept='image/png, image/jpeg'
-                  onChange={handlePhotoUpload}
+                  onChange={(e) => handlePhotoUpload(e)}
+                  value={picture_src}
                 />
                 <button
                   onClick={handleClick}
@@ -135,8 +144,8 @@ const AddActivity = () => {
                 type='text'
                 required={true}
                 placeholder='add activity name'
-                value={activity_name}
                 onChange={handleActivityNameChange}
+                value={activity_name}
               />
             </div>
           </label>
