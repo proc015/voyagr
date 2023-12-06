@@ -3,7 +3,7 @@ import { postTrip, uploadPhoto } from '../../services/apiService';
 import { addTrip } from '../../redux/addTripSlice';
 import { setTrip } from '../../redux/saveTripIdSlice';
 import dayjs from 'dayjs';
-import { ChangeEvent, FormEvent, useState, useRef } from 'react';
+import { ChangeEvent, FormEvent, useState, useRef, useEffect } from 'react';
 import { DynamicMap } from '../maps/dynamicMap';
 import AddActivity from '../Activity/AddActivity';
 import { useSelector } from 'react-redux';
@@ -26,27 +26,25 @@ const AddTrip = () => {
   const dispatch = useAppDispatch();
   const userId = useSelector((state: RootState) => state.user.currentUser);
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
-  console.log('lastTrip in Add Trip', lastTrip);
+  // console.log('lastTrip in Add Trip', lastTrip);
 
-  // const [userId, setUserId] = useState<number>(0);
-  const [trip_name, setTripName] = useState<string>(
-    lastTrip.lastTrip.trip_name || ''
-  );
-  const [start_loc, setStartLoc] = useState<string>(
-    lastTrip.lastTrip.start_loc || ''
-  );
-  const [destination, setDestination] = useState<string>(
-    lastTrip.lastTrip.destination || ''
-  );
-  const [start_date, setStartDate] = useState<string>(
-    lastTrip.lastTrip.start_date || ''
-  );
-  const [end_date, setEndDate] = useState<string>(
-    lastTrip.lastTrip.end_date || ''
-  );
-  const [picture_src, setPicture_src] = useState(
-    lastTrip.lastTrip.picture_src || ''
-  );
+  const [trip_name, setTripName] = useState('');
+  const [start_loc, setStartLoc] = useState('');
+  const [destination, setDestination] = useState('');
+  const [start_date, setStartDate] = useState('');
+  const [end_date, setEndDate] = useState('');
+  const [picture_src, setPicture_src] = useState('');
+
+  useEffect(() => {
+    if (lastTrip.lastTrip.trip_name) {
+      setTripName(lastTrip.lastTrip.trip_name);
+      setStartLoc(lastTrip.lastTrip.start_loc);
+      setDestination(lastTrip.lastTrip.destination);
+      setStartDate(lastTrip.lastTrip.start_date);
+      setEndDate(lastTrip.lastTrip.end_date);
+      setPicture_src(lastTrip.lastTrip.picture_src);
+    };
+  }, []);
 
   const tripExists = () => {
     if (lastTrip.lastTrip.trip_name) {
@@ -91,16 +89,16 @@ const AddTrip = () => {
     setEndDate(event.target.value);
   };
 
-  const hiddenFileInput = useRef<HTMLInputElement>(null);
-
+  
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
-
     const filename = event.target.files![0].name;
     setPicture_src(filename);
     uploadPhoto(event.target.files);
   };
 
+  const hiddenFileInput = useRef<HTMLInputElement>(null);
+  
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     hiddenFileInput.current?.click();
@@ -319,6 +317,15 @@ const AddTrip = () => {
           className='w-full  text-xl font-normal flex font-noto mx-auto mb-4'
           onClick={() => changeVisibleDiv('')}
         >
+          {/* {trip_name ?
+            <div className='flex text-voyagrRed py-[3px] px-[40px] rounded-full border-voyagrRed border mx-auto'>
+              <p>🛰️ Recording</p>
+            </div>
+            :
+            <div className='flex text-voyagrBlack py-[3px] px-[40px] rounded-full border-voyagrBlack border mx-auto'>
+              <input type='submit' value='Start Trip' className='mx-auto' />
+            </div>
+          } */}
           {lastTrip.status === 'failed' && (
             <div className='flex text-voyagrBlack py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
               <input type='submit' value='Start Trip' className='mx-auto' />
