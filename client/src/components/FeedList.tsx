@@ -14,12 +14,11 @@ const FeedList = () => {
   const dispatch = useDispatch<AppDispatch>();
   let navigate = useNavigate();
 
-  
   const userInfo = useSelector(
     (state: RootState) => state.getUserInfo.userInfo
   );
 
-  const followingList = userInfo.following
+  const followingList = userInfo.following;
   // console.log('following', userInfo)
 
   const userFeed = useSelector(
@@ -38,13 +37,14 @@ const FeedList = () => {
     dispatch(fetchUserFeed());
   }, [dispatch]);
 
-  const filteredTripsFeed = followingList.length > 0 
-  ? userFeed.filter(trip => followingList.includes(trip.userId)) : [];
-  
-  
+  const filteredTripsFeed =
+    followingList.length > 0
+      ? userFeed.filter((trip) => followingList.includes(trip.userId))
+      : [];
+
   const tripsDisplayFeed = sortFeedPosts(filteredTripsFeed);
 
-  console.log('SORT', tripsDisplayFeed)
+  // console.log('SORT', tripsDisplayFeed)
 
   // Loading state
   if (status === 'loading') {

@@ -12,7 +12,7 @@ const DetailedTrip = () => {
 
   const tripNumberID = Number(trip_id);
 
-  console.log('tripID', trip_id);
+  // console.log('tripID', trip_id);
 
   const detailedTrip = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
