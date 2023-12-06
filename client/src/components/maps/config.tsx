@@ -6,9 +6,17 @@ const libraries: Libraries = ['places'];
 
 // zoom config
 const zoom = {
-  activity: 15,
-  trip: 3,
-  feed: 10,
+  activity: {
+    create: 1,
+    view: 15,
+  },
+  trip: {
+    create: 2,
+    view: 3,
+  },
+  feed: {
+    view: 8,
+  },
 };
 
 //DEV styling to have during dev phase
@@ -62,7 +70,7 @@ const mapOptions = {
 const lineSymbol = {
   path: 'M 0,-1 0,1',
   strokeOpacity: 1,
-  strokeColor: '#EA4335',
+  strokeColor: '#FE3155',
   scale: 2,
 };
 

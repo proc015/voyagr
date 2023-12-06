@@ -2,12 +2,14 @@ import { memo, useCallback } from 'react';
 import { useLoadScript, GoogleMap, MarkerF } from '@react-google-maps/api';
 import * as config from './config';
 import { Autocompletion } from './autocompletion';
+import pin from '../../assets/icons/pin4.png';
 import {
   fitBounds,
   centerMap,
   setPolyline,
   convert,
   getActivityLocations,
+  zoomIn,
 } from './utils';
 
 import { useState, useRef, useEffect } from 'react';
@@ -84,8 +86,9 @@ const DynamicMapComponent = ({
         setDestinationCoordinates(destArr);
       }
 
-      // center the map to location, destination or default center
+      // center & zoom the map to location, destination or default center
       centerMap(mapRef, locLatLng, destLatLng!);
+      type == 'activity' && zoomIn(config.zoom.activity.create, mapRef);
 
       // make map fit the location & destination markers
       if (destLatLng) fitBounds([locLatLng, destLatLng], mapRef);
@@ -117,7 +120,7 @@ const DynamicMapComponent = ({
               console.log('loading');
               mapRef.current = map;
             }}
-            zoom={config.zoom[type]}
+            zoom={config.zoom[type][action]}
             center={config.center}
             options={config.mapOptions[type]}
             mapContainerStyle={style}
@@ -128,11 +131,12 @@ const DynamicMapComponent = ({
                   <MarkerF
                     position={activity.loc}
                     key={activity.activity_id}
+                    icon={pin}
                   ></MarkerF>
                 );
               })}
-            <MarkerF position={locLatLng!} />
-            <MarkerF position={destLatLng!} />
+            <MarkerF position={locLatLng!} icon={pin} />
+            <MarkerF position={destLatLng!} icon={pin} />
 
             {locLatLng && destLatLng && setPolyline(locLatLng, destLatLng)}
           </GoogleMap>

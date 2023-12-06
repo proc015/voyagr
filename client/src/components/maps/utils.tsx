@@ -9,11 +9,9 @@ const centerMap = (
   destCoordinates?: LatLngLiteral
 ) => {
   if (coordinates) {
-    console.log('cords', coordinates);
     map.current?.panTo(coordinates);
   } else if (destCoordinates) map.current?.panTo(destCoordinates);
   else {
-    console.log('default center');
     map.current?.panTo(center);
   }
 };
@@ -35,6 +33,17 @@ const fitBounds = (locations: any, map: any) => {
   }
 
   map.current.fitBounds(bounds);
+};
+
+const zoomIn = (count: number, map: any) => {
+  if (count > 12) {
+    return;
+  } else {
+    return setTimeout(() => {
+      map.current?.setZoom(count);
+      zoomIn(count + 1, map);
+    }, 80);
+  }
 };
 
 const setPolyline = (
@@ -71,4 +80,11 @@ const getActivityLocations = (activities: Activity[]) => {
   return res;
 };
 
-export { centerMap, fitBounds, setPolyline, convert, getActivityLocations };
+export {
+  centerMap,
+  fitBounds,
+  setPolyline,
+  convert,
+  getActivityLocations,
+  zoomIn,
+};
