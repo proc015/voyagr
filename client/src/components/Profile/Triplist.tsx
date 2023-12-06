@@ -3,6 +3,7 @@ import { AppDispatch, RootState } from '../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserFeed } from '../../services/fetchUserFeed';
 import { StaticMap } from '../maps/staticMap';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   userId: number;
@@ -10,6 +11,8 @@ type Props = {
 
 export const Triplist = ({ userId }: Props) => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
   const allTrips = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
   );
@@ -21,12 +24,22 @@ export const Triplist = ({ userId }: Props) => {
 
   const userTrips = allTrips.filter((trip) => trip.userId == userId);
 
+  const handleTripClick = (tripIdentifier: number) => {
+    return (event: React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+      navigate(`/trip/${tripIdentifier}`);
+    };
+  };
+
   return (
     <>
       {userTrips.map((trip) => {
         console.log(trip.picture_src);
         return (
-          <div className=' border-2 border-voyagrBorders pt-2 pb-2 mx-2 px-2 rounded-[10px] my-5'>
+          <div
+            className=' border-2 border-voyagrBorders pt-2 pb-2 mx-2 px-2 rounded-[10px] my-5'
+            onClick={handleTripClick(trip.trip_id)}
+          >
             <div className='name font-medium mb-2'>
               <h2 className='font-didact text-lg'>{trip.trip_name}</h2>
             </div>

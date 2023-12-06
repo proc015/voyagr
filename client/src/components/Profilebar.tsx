@@ -5,6 +5,8 @@ import { fetchAllUserInfo } from '../services/fetchAllUserInfo';
 import { Trip } from '../types/Trip';
 import travelIcon from '../assets/icons/button-active.svg';
 import * as dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
+
 
 interface Prop {
   feedTrip: Trip;
@@ -13,9 +15,17 @@ interface Prop {
 export const Profilebar = ({ feedTrip }: Prop) => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const navigate = useNavigate();
+
   const userInfo = useSelector(
     (state: RootState) => state.getAllUserInfo.userInformation
   );
+
+  const handleProfileClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+    navigate(`/profile/${feedTrip.userId}`)
+  }
+ 
 
   //pass specific userID from the trip that is being mapped -> userIdentifier
   // console.log('TI', userIdentifier);
@@ -37,7 +47,7 @@ export const Profilebar = ({ feedTrip }: Prop) => {
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
 
   return (
-    <div className='flex gap-3 my-2 align-middle'>
+    <div className='flex gap-3 my-2 align-middle' onClick={handleProfileClick}>
       {filteredUserInfo.map((userProfileInfo) => (
         <div key={userProfileInfo.user_id} className='flex gap-3'>
           <div className='picture h-12 w-12 rounded-full overflow-hidden bg-voyagrBlue'>

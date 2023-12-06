@@ -20,7 +20,7 @@ const FeedList = () => {
   );
 
   const followingList = userInfo.following
-  console.log('following', userInfo)
+  // console.log('following', userInfo)
 
   const userFeed = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
@@ -65,7 +65,7 @@ const FeedList = () => {
               key={feedTrip.trip_id}
               feedTrip={feedTrip}
               onSelect={() => {
-                console.log('Selecting trip:', feedTrip);
+                // console.log('Selecting trip:', feedTrip);
                 navigate(`/trip/${feedTrip.trip_id}`);
               }}
             />
