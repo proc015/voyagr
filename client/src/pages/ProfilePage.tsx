@@ -4,10 +4,10 @@ import TripProfile from '../components/Trip/TripProfile';
 
 function ProfilePage() {
   return (
-    <>
+    <div className='pb-[80px]'>
       <ProfileMe />
       <TripProfile />
-    </>
+    </div>
   );
 }
 

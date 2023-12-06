@@ -117,7 +117,6 @@ const DynamicMapComponent = ({
 
           <GoogleMap
             onLoad={(map) => {
-              console.log('loading');
               mapRef.current = map;
             }}
             zoom={config.zoom[type][action]}

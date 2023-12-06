@@ -1,7 +1,8 @@
 import { useLocation } from 'react-router';
 import altPic from '../../assets/icons/button-active.svg';
 import { followUser, unFollowUser } from '../../services/followService';
-import { useState } from 'react';
+import { MutableRefObject, useRef, useState } from 'react';
+import { editDisplayName } from '../../services/editUser';
 
 type Props = {
   name: string;
@@ -26,8 +27,17 @@ export const Bio = ({
   setFollowerCount,
 }: Props) => {
   const domainUrl = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
+  const inputName = useRef<HTMLInputElement | null>(null);
+  const [displayName, setDisplayName] = useState(name);
 
-  const handleEditProfile = () => {};
+  const handleEditProfile = () => {
+    if (inputName.current) inputName.current.focus();
+  };
+
+  const saveDisplayName = async () => {
+    await editDisplayName(userId, displayName);
+  };
+
   const handleFollow = async () => {
     setFollowing(!following);
     if (following) {
@@ -54,8 +64,15 @@ export const Bio = ({
           {myProfile ? '✎' : following ? 'Unfollow' : 'Follow'}
         </button>
       </div>
-      <div className='font-noto text-2xl flex'>
-        <p className='mx-auto mt-4'>{name} 🤙</p>
+      <div className='font-noto text-2xl flex justify-center'>
+        <input
+          onBlur={saveDisplayName}
+          onChange={(e) => setDisplayName(e.target.value)}
+          ref={inputName}
+          value={displayName}
+          type='text'
+          className='text-center mt-3 outline-none'
+        />
       </div>
     </>
   );

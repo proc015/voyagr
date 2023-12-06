@@ -6,7 +6,7 @@ import { StaticMap } from '../maps/staticMap';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
-  userId: number;
+  userId?: string | number;
 };
 
 export const Triplist = ({ userId }: Props) => {
@@ -22,7 +22,7 @@ export const Triplist = ({ userId }: Props) => {
     dispatch(fetchUserFeed());
   }, [dispatch]);
 
-  const userTrips = allTrips.filter((trip) => trip.userId == userId);
+  const userTrips = allTrips.filter((trip) => trip.userId == Number(userId));
 
   const handleTripClick = (tripIdentifier: number) => {
     return (event: React.MouseEvent<HTMLDivElement>) => {
@@ -32,11 +32,11 @@ export const Triplist = ({ userId }: Props) => {
   };
 
   return (
-    <>
+    <div>
       {userTrips.map((trip) => {
-        console.log(trip.picture_src);
         return (
           <div
+            key={trip.trip_id}
             className=' border-2 border-voyagrBorders pt-2 pb-2 mx-2 px-2 rounded-[10px] my-5'
             onClick={handleTripClick(trip.trip_id)}
           >
@@ -66,6 +66,6 @@ export const Triplist = ({ userId }: Props) => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };

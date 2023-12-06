@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Bio } from './Bio';
 import { Stats } from './Stats';
-import { useLocation } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { AppDispatch, RootState } from '../../app/store';
 import { fetchUserInfo } from '../../services/fetchUserInfo';
 import { AsyncThunkAction } from '@reduxjs/toolkit';
@@ -25,16 +25,16 @@ const ProfileMe = () => {
     (state: RootState) => state.user.currentUser
   );
 
-  const { state } = useLocation();
+  const { id } = useParams();
 
   // Get user info
   useEffect(() => {
     // if endpoint is /profile, go to logged in user's profile
-    if (state == null) {
+    if (id == null) {
       dispatch(fetchUserInfo(loggedInUserId));
       setMyProfile(true);
     } else {
-      dispatch(fetchUserInfo(state));
+      dispatch(fetchUserInfo(Number(id)));
       setMyProfile(false);
 
       if (userInfo.followers.includes(loggedInUserId)) {
@@ -45,7 +45,7 @@ const ProfileMe = () => {
     }
 
     setFollowerCount(userInfo.followers.length);
-  }, [dispatch, state]);
+  }, [dispatch]);
 
   if (status === 'loading') {
     return <div>Loading Profile...</div>;
@@ -69,7 +69,7 @@ const ProfileMe = () => {
         followerCount={followerCount}
         followingCount={userInfo.following.length}
       />
-      <Triplist userId={myProfile ? loggedInUserId : state} />
+      <Triplist userId={myProfile ? loggedInUserId : id} />
     </>
   );
 };
