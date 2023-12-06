@@ -8,6 +8,7 @@ import { Trip } from '../types/Trip';
 import DetailedTrip from './DetailedTrip/DetailedTrip';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserInfo } from '../services/fetchUserInfo';
+import sortFeedPosts from '../utils/sortByDate';
 
 const FeedList = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -41,7 +42,10 @@ const FeedList = () => {
   ? userFeed.filter(trip => followingList.includes(trip.userId)) : [];
   
   
-  const tripsDisplayFeed = filteredTripsFeed;
+  const tripsDisplayFeed = sortFeedPosts(filteredTripsFeed);
+
+  console.log('SORT', tripsDisplayFeed)
+
   // Loading state
   if (status === 'loading') {
     return <div>Loading activities...</div>;

@@ -4,12 +4,13 @@ import { AppDispatch, RootState } from '../app/store';
 import { fetchAllUserInfo } from '../services/fetchAllUserInfo';
 import { Trip } from '../types/Trip';
 import travelIcon from '../assets/icons/button-active.svg';
+import * as dayjs from 'dayjs';
 
 interface Prop {
-  userIdentifier: Trip;
+  feedTrip: Trip;
 }
 
-export const Profilebar = ({ userIdentifier }: Prop) => {
+export const Profilebar = ({ feedTrip }: Prop) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const userInfo = useSelector(
@@ -22,7 +23,7 @@ export const Profilebar = ({ userIdentifier }: Prop) => {
 
   const filteredUserInfo =
     userInfo.length > 0
-      ? userInfo.filter((user) => user.user_id === userIdentifier.userId)
+      ? userInfo.filter((user) => user.user_id === feedTrip.userId)
       : [];
 
   // console.log('filt', filteredUserInfo);
@@ -35,8 +36,6 @@ export const Profilebar = ({ userIdentifier }: Prop) => {
 
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
 
-  
-
   return (
     <div className='flex gap-3 my-2 align-middle'>
       {filteredUserInfo.map((userProfileInfo) => (
@@ -44,7 +43,11 @@ export const Profilebar = ({ userIdentifier }: Prop) => {
           <div className='picture h-12 w-12 rounded-full overflow-hidden bg-voyagrBlue'>
             <img
               className='object-cover w-full h-full'
-              src={userProfileInfo.display_pic_src ? `${IMG_BASE_URL}/${userProfileInfo.display_pic_src}`: travelIcon}
+              src={
+                userProfileInfo.display_pic_src
+                  ? `${IMG_BASE_URL}/${userProfileInfo.display_pic_src}`
+                  : travelIcon
+              }
               alt='no image'
             />
           </div>
@@ -52,9 +55,7 @@ export const Profilebar = ({ userIdentifier }: Prop) => {
             <h3 className='text-md font-semibold font-noto text-voyagrBlack'>
               {userProfileInfo.display_name}
             </h3>
-            <p className='text-sm text-voyagrLightGrey'>
-              November 24th, 4:40pm
-            </p>
+            <p className='text-sm text-voyagrLightGrey'>{dayjs(feedTrip.end_date).format('MMMM DD, YYYY')}</p>
           </div>
         </div>
       ))}
