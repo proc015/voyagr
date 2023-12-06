@@ -70,12 +70,11 @@ const AddActivity = () => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const filename = event.target.files[0].name;
-      setPicture_src(filename);
-      console.log(filename);
-      uploadPhoto(event.target.files);
-    }
+    event.stopPropagation();
+
+    const filename = event.target.files![0].name;
+    setPicture_src(filename);
+    uploadPhoto(event.target.files);
   };
 
   const handleClick = () => {
@@ -117,16 +116,17 @@ const AddActivity = () => {
               <div>
                 <input
                   type='file'
-                  ref={hiddenFileInput}
-                  className='hidden'
                   accept='image/png, image/jpeg'
-                  onChange={handlePhotoUpload}
+                  name='picture_src'
+                  ref={hiddenFileInput}
+                  onChange={(e) => handlePhotoUpload(e)}
+                  className='hidden'
                 />
                 <button
                   onClick={handleClick}
-                  className='mt-1 mb-3 block w-[60px] px-5 py-4 border border-voyagrBorders rounded-[15px] shadow-sm text-voyagrLightGrey font-didact text-base mx-auto overflow-hidden'
+                  className='mt-1 mb-3 block w-[60px] py-4 border border-voyagrBorders rounded-[15px] shadow-sm text-voyagrLightGrey font-didact text-base mx-auto'
                 >
-                  +
+                  Photo
                 </button>
               </div>
               <input
