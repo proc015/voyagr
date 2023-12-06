@@ -1,13 +1,11 @@
 import { useAppDispatch } from '../../app/hooks';
-import { Trip } from '../../types/Trip';
 import { postTrip, uploadPhoto } from '../../services/apiService';
 import { addTrip } from '../../redux/addTripSlice';
 import { setTrip } from '../../redux/saveTripIdSlice';
-
-import { ChangeEvent, FormEvent, useState, useRef, useEffect } from 'react';
+import dayjs from 'dayjs';
+import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { DynamicMap } from '../maps/dynamicMap';
 import AddActivity from '../Activity/AddActivity';
-import { set } from '@cloudinary/url-gen/actions/variable';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import Publish from '../Publish';
@@ -34,7 +32,6 @@ const AddTrip = () => {
   const [trip_name, setTripName] = useState<string>(
     lastTrip.lastTrip.trip_name || ''
   );
-  const [tripNameError, setTripNameError] = useState('');
   const [start_loc, setStartLoc] = useState<string>(
     lastTrip.lastTrip.start_loc || ''
   );
@@ -63,20 +60,6 @@ const AddTrip = () => {
   const [participants, setParticipants] = useState('');
   const [visibleDiv, setVisibleDiv] = useState(tripExists());
 
-  const [newTrip, setNewTrip] = useState<NewTripType>({
-    userId: userId,
-    trip_name,
-    start_loc,
-    destination,
-    start_date,
-    end_date,
-    start_lat_lon,
-    dest_lat_lon,
-    picture_src,
-    // published,
-    // activities,
-  });
-
   const newTripObj: NewTripType = {
     userId,
     trip_name,
@@ -97,12 +80,7 @@ const AddTrip = () => {
 
   const handleTripNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
-    if (newName.length <= 100) {
-      setTripName(newName);
-      setTripNameError('');
-    } else {
-      setTripNameError('Sorry, but the trip name is too long!');
-    }
+    setTripName(newName);
   };
 
   const handleStartDateChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -135,16 +113,14 @@ const AddTrip = () => {
 
   const handleStartTrip = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (tripNameError === '') {
-      try {
-        const createdTrip = await postTrip(newTripObj);
-        console.log('serv res', createdTrip);
-        dispatch(addTrip(createdTrip));
-        //sends the trip_id associated to this trip to the redux store
-        dispatch(setTrip(createdTrip.trip_id));
-      } catch (error) {
-        console.error('Error:', error);
-      }
+    try {
+      const createdTrip = await postTrip(newTripObj);
+      console.log('serv res', createdTrip);
+      dispatch(addTrip(createdTrip));
+      //sends the trip_id associated to this trip to the redux store
+      dispatch(setTrip(createdTrip.trip_id));
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
@@ -154,14 +130,12 @@ const AddTrip = () => {
       <form onSubmit={handleStartTrip} className=''>
         <div>
           {visibleDiv == 'trip' ? (
-            <div 
-            // onClick={() => changeVisibleDiv('')} //wtf?
-            >
+            <div  onClick={() => changeVisibleDiv('')}>
               <div className='ToggleDiv w-[95%] h-[150px] mt-4 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
                 <div className='w-full text-zinc-800 text-3xl font-normal font-noto'>
                   <p className='p-3 pb-3 pt-3'>Trip name?</p>
 
-                  <div className='flex w-[95%] mx-auto'>
+                  <div className='flex w-[95%] mx-auto' onClick={(e) => e.stopPropagation()}>
                     <div>
                       <input
                         type='file'
@@ -182,11 +156,11 @@ const AddTrip = () => {
                       id='trip_name'
                       className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 font-didact mx-auto'
                       type='text'
+                      maxLength={100}
                       required={true}
                       placeholder='add trip name'
                       value={trip_name}
                       onChange={handleTripNameChange}
-                      // onClick={(e) => e.stopPropagation()}
                     />
                   </div>
                 </div>
@@ -194,12 +168,12 @@ const AddTrip = () => {
             </div>
           ) : (
             <div onClick={() => changeVisibleDiv('trip')}>
-              <div className='ToggleDiv mt-4 w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
+              <div className='ToggleDiv mt-4 w-[95%] h-auto  rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
                 <label className='w-full font-normal flex font-didact items-center justify-between'>
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     Trip name
                   </p>
-                  <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
+                  <div className='p-1 w-[60%] font-didact text-xl text-right text-voyagrBlack mr-5'>
                     {trip_name}
                   </div>
                 </label>
@@ -211,8 +185,8 @@ const AddTrip = () => {
         <div>
           {visibleDiv == 'whereTo' ? (
             <div onClick={() => changeVisibleDiv('')}>
-              <div className='w-[95%] h-full bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
-                <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+              <div className='w-[95%] h-full  rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+                <label className='w-full  text-3xl font-normal font-noto'>
                   <p className='p-3 pb-3 pt-3'>Where to?</p>
                   <div className='95%' onClick={(e) => e.stopPropagation()}>
                     <DynamicMap
@@ -237,14 +211,19 @@ const AddTrip = () => {
             </div>
           ) : (
             <div onClick={() => changeVisibleDiv('whereTo')}>
-              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
+              <div className='ToggleDiv w-[95%] h-auto  rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
                 <label className='w-full font-normal flex font-didact items-center justify-between'>
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     Where to?
                   </p>
-                  <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
-                    {start_loc} ↔ {destination}
-                  </div>
+                  {(start_loc) &&
+                    <div className='p-1 w-[60%] font-didact text-xl text-right text-voyagrBlack mr-5'>
+                      {start_loc} 
+                      {(destination) &&
+                      <span> ↔ {destination} </span>
+                      } 
+                    </div>
+                  }
                 </label>
               </div>
             </div>
@@ -254,8 +233,8 @@ const AddTrip = () => {
         <div>
           {visibleDiv == 'when' ? (
             <div onClick={() => changeVisibleDiv('')}>
-              <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
-                <p className='p-3 pt-3 w-full text-zinc-800 text-3xl font-normal font-noto'>
+              <div className='w-[95%] h-auto  rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
+                <p className='p-3 pt-3 w-full  text-3xl font-normal font-noto'>
                   When?
                 </p>
                 <label>
@@ -283,14 +262,19 @@ const AddTrip = () => {
             </div>
           ) : (
             <div onClick={() => changeVisibleDiv('when')}>
-              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
+              <div className='ToggleDiv w-[95%] h-auto  rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
                 <label className='w-full font-normal flex font-didact items-center justify-between'>
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     When?
                   </p>
-                  <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
-                    {start_date} ↔ {end_date}
-                  </div>
+                  {(start_date) && 
+                    <div className='p-1 w-[60%] font-didact text-xl text-right text-voyagrBlack mr-5'>
+                      {dayjs(start_date).format('DD/MM/YY')} 
+                      {(end_date) &&
+                      <span> ↔ {dayjs(end_date).format('DD/MM/YY')}</span>
+                      }    
+                    </div>
+                  }
                 </label>
               </div>
             </div>
@@ -300,14 +284,14 @@ const AddTrip = () => {
         <div>
           {visibleDiv == 'who' ? (
             <div onClick={() => changeVisibleDiv('')}>
-              <div className='w-[95%] h-[150px] bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
-                <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+              <div className='w-[95%] h-[150px]  rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
+                <label className='w-full  text-3xl font-normal font-noto'>
                   <p className='p-3 pb-3 pt-3'>Who?</p>
                   <input
                     id='participants'
                     type='text'
                     placeholder='add buddies'
-                    className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+                    className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm  focus:outline-none   font-didact mx-auto '
                     value={participants}
                     onChange={handleParticipantsChange}
                     onClick={(e) => e.stopPropagation()}
@@ -317,12 +301,12 @@ const AddTrip = () => {
             </div>
           ) : (
             <div onClick={() => changeVisibleDiv('who')}>
-              <div className='ToggleDiv w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
+              <div className='ToggleDiv w-[95%] h-auto  rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5 transition-all duration-1000 hover:grow'>
                 <label className='w-full font-normal flex font-didact items-center justify-between'>
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     Who?
                   </p>
-                  <div className='p-1 w-[60%] font-didact text-xl text-right text-black mr-5'>
+                  <div className='p-1 w-[60%] font-didact text-xl text-right text-voyagrBlack mr-5'>
                     {participants}
                   </div>
                 </label>
@@ -332,16 +316,16 @@ const AddTrip = () => {
         </div>
 
         <div
-          className='w-full text-zinc-800 text-xl font-normal flex font-noto mx-auto mb-4'
+          className='w-full  text-xl font-normal flex font-noto mx-auto mb-4'
           onClick={() => changeVisibleDiv('')}
         >
           {lastTrip.status === 'failed' && (
-            <div className='flex text-black py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
+            <div className='flex text-voyagrBlack py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
               <input type='submit' value='Start Trip' className='mx-auto' />
             </div>
           )}
           {lastTrip.status === 'idle' && (
-            <div className='flex text-black py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
+            <div className='flex text-voyagrBlack py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
               <input type='submit' value='Start Trip' className='mx-auto' />
             </div>
           )}
