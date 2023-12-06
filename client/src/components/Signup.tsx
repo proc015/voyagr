@@ -23,10 +23,11 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
   const [signupState, setSignupState] = useState(initialSignupState);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const cloudinaryUrl = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
+
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
     const filename = event.target.files![0].name;
-    console.log('FILENAME ', filename);
 
     setSignupState((prevState) => ({
       ...prevState,
@@ -55,7 +56,6 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
       displayName,
       displayPicSrc,
     };
-    console.log('USER', user);
 
     const response = await createUser(user);
 
@@ -63,7 +63,6 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
       alert(`${response.message}`);
       setSignupState(initialSignupState);
     } else {
-      console.log('LOGIN RESPONSE', response);
       dispatch(setUser(response.user_id));
       navigate('/profile');
     }
@@ -96,9 +95,14 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
 
         <Tab.Panels>
           <Tab.Panel>
+            {/* SHOW SELECTED PHOTO AFTTER UPLOAD */}
+            {(signupState.displayPicSrc) ? 
+            <img src={`${cloudinaryUrl}${signupState.displayPicSrc}`} className='h-24 w-24 m-auto my-8 rounded-full' />
+            :
             <img src={`${traveller}`} className='h-24 w-auto m-auto my-8' />
+            }
+            {/*  */}
             <form className='flex justify-center' 
-            // onSubmit={handleCreateUser}
             >
               <div
                 id='parent-container'
@@ -156,7 +160,13 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
 
           <Tab.Panel>
             <main className='bg-voyagrWhite h-[600px] relative z-10 rounded-2xl'>
+              {/* SHOW SELECTED PHOTO AFTTER UPLOAD */}
+              {(signupState.displayPicSrc) ? 
+              <img src={`${cloudinaryUrl}${signupState.displayPicSrc}`} className='h-24 w-24 m-auto mt-8 mb-6 rounded-full' />
+              :
               <img src={`${traveller}`} className='h-24 w-auto m-auto mt-8 mb-6' />
+              }
+              {/*  */}
               <form className='flex justify-center'>
                 <div
                   id='parent-container'
@@ -180,7 +190,7 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
                     required={true}
                     placeholder='Display name'
                     onChange={handleChange}
-                    className='w-full h-12 my-4 rounded-xl border border-voyagrLightGrey pl-4 font-didact text-voyagrBlack text-lg'
+                    className='w-full h-12 my-4 rounded-xl border border-voyagrLightGrey pl-4 font-didact text-voyagrBlack text-lg focus:outline-none focus:border-voyagrRed'
                   />
                   <button className='landing-btn' onClick={(e) => handleCreateUser(e)}>Finish</button>
                 </div>
