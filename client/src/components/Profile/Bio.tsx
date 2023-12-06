@@ -1,7 +1,8 @@
 import { useLocation } from 'react-router';
 import altPic from '../../assets/icons/button-active.svg';
 import { followUser, unFollowUser } from '../../services/followService';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { editDisplayName } from '../../services/editUser';
 
 type Props = {
   name: string;
@@ -26,8 +27,18 @@ export const Bio = ({
   setFollowerCount,
 }: Props) => {
   const domainUrl = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
+  const inputName = useRef(null);
+  const [displayName, setDisplayName] = useState(name);
 
-  const handleEditProfile = () => {};
+  const handleEditProfile = () => {
+    if (inputName.current) inputName.current.focus();
+  };
+
+  const saveDisplayName = async () => {
+    const edited = await editDisplayName(userId, displayName);
+    console.log(edited);
+  };
+
   const handleFollow = async () => {
     setFollowing(!following);
     if (following) {
@@ -54,8 +65,20 @@ export const Bio = ({
           {myProfile ? '✎' : following ? 'Unfollow' : 'Follow'}
         </button>
       </div>
-      <div className='font-noto text-2xl flex'>
-        <p className='mx-auto mt-4'>{name} 🤙</p>
+      <div className='font-noto text-2xl flex justify-center'>
+        {/* <p className='mx-auto mt-4'>
+          <span className='border-none' contentEditable={'true'}>
+            {name} 🤙
+          </span>
+        </p> */}
+        <input
+          onBlur={saveDisplayName}
+          onChange={(e) => setDisplayName(e.target.value)}
+          ref={inputName}
+          value={displayName}
+          type='text'
+          className='text-center mt-3 outline-none'
+        />
       </div>
     </>
   );

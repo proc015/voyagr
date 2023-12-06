@@ -231,3 +231,21 @@ export const getAllUserInfo = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
+
+export const editDisplayName = async (req: Request, res: Response) => {
+  const { id, name } = req.body;
+  try {
+    const editedUser = await prisma.user.update({
+      where: {
+        user_id: id,
+      },
+      data: {
+        display_name: name,
+      },
+    });
+
+    console.log(editedUser);
+  } catch (error) {
+    console.log(error);
+  }
+};

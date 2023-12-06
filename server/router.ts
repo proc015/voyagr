@@ -51,8 +51,7 @@ router.put('/profile/unfollow', c.unFollowUser);
 // USER LAST TRIP
 router.get('/lastTrip/:id', c.getLastTrip);
 
-
-
+router.put('/user/edit', c.editDisplayName);
 
 // TESTING ENDPOINT FOR QUERIES \\
 router.get('/testing/test', async (req, res) => {
