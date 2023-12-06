@@ -112,6 +112,7 @@ export const searchUsers = async (req: Request, res: Response) => {
       where: {
         display_name: {
           contains: searchTerm,
+          mode: 'insensitive',
         },
       },
     });

@@ -9,11 +9,11 @@
 }
 
 .login-box {
-  @apply w-full h-12 my-4 rounded-xl border border-voyagrLightGrey pl-4 font-didact text-voyagrBlack text-lg
+  @apply w-full h-12 my-4 rounded-xl border border-voyagrLightGrey pl-4 font-didact text-voyagrBlack text-lg focus:outline-none focus:border-voyagrRed
 }
 
 .image-upload {
-  @apply file:h-full file:font-didact file:text-lg file:rounded-l-xl file:border-b-0 file:border-r w-full h-12 my-4 rounded-xl border border-voyagrLightGrey font-didact text-voyagrBlack text-lg cursor-pointer
+  @apply file:h-full file:font-didact file:text-lg file:rounded-l-xl file:border-b-0 file:border-r w-full h-12 mb-4 rounded-xl border border-voyagrLightGrey font-didact text-voyagrBlack text-lg cursor-pointer
 }
 
 body {

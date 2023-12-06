@@ -14,7 +14,7 @@ function SearchBar() {
       setTimeout(async () => {
         const response = await searchUsers(searchTerm);
         setSearchResult(response);
-      }, 500);
+      }, 300);
     } else {
       setSearchResult('');
     }
@@ -39,6 +39,7 @@ function SearchBar() {
                 <Link
                   to={`../profile/${result.user_id}`}
                   state={result.user_id}
+                  key={result.user_id}
                 >
                   <div className='h-20 my-7 flex'>
                   {/* RENDER DEFAULT PIC IF NONE SET */}
