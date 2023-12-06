@@ -32,7 +32,7 @@ export const Triplist = ({ userId }: Props) => {
   };
 
   return (
-    <>
+    <div>
       {userTrips.map((trip) => {
         return (
           <div
@@ -66,6 +66,6 @@ export const Triplist = ({ userId }: Props) => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };

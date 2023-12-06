@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router';
 import altPic from '../../assets/icons/button-active.svg';
 import { followUser, unFollowUser } from '../../services/followService';
-import { useRef, useState } from 'react';
+import { MutableRefObject, useRef, useState } from 'react';
 import { editDisplayName } from '../../services/editUser';
 
 type Props = {
@@ -27,7 +27,7 @@ export const Bio = ({
   setFollowerCount,
 }: Props) => {
   const domainUrl = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
-  const inputName = useRef(null);
+  const inputName = useRef<HTMLInputElement | null>(null);
   const [displayName, setDisplayName] = useState(name);
 
   const handleEditProfile = () => {
@@ -35,8 +35,7 @@ export const Bio = ({
   };
 
   const saveDisplayName = async () => {
-    const edited = await editDisplayName(userId, displayName);
-    console.log(edited);
+    await editDisplayName(userId, displayName);
   };
 
   const handleFollow = async () => {
@@ -66,11 +65,6 @@ export const Bio = ({
         </button>
       </div>
       <div className='font-noto text-2xl flex justify-center'>
-        {/* <p className='mx-auto mt-4'>
-          <span className='border-none' contentEditable={'true'}>
-            {name} 🤙
-          </span>
-        </p> */}
         <input
           onBlur={saveDisplayName}
           onChange={(e) => setDisplayName(e.target.value)}
