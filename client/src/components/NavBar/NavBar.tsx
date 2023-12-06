@@ -4,13 +4,14 @@ import travelIcon from '../../assets/icons/button-active.svg';
 import travelIconnoBackground from '../../assets/icons/traveller.svg';
 import { useMatch } from 'react-router-dom';
 import searchIcon from '../../assets/icons/search-black.svg';
-// import activeSearch from '../../assets/icons/search-orange.svg';
-import { Header } from './header';
+import { Header } from './Header';
 import homeIcon from '../../assets/icons/home-black.svg';
 import profileIcon from '../../assets/icons/profile-black.svg';
 import activeSearch from '../../assets/icons/search-orange.svg';
 import activeHome from '../../assets/icons/home-orange.svg';
 import activeProfile from '../../assets/icons/profile-orange.svg';
+import bellIcon from '../../assets/icons/bell-black.svg';
+import activeBell from '../../assets/icons/bell-orange.svg';
 
 type Props = {
   page: string;
@@ -21,6 +22,7 @@ const NavBar = ({ page }: Props) => {
   const feedMatch = useMatch('/feed');
   const searchMatch = useMatch('/search');
   const profileMatch = useMatch('/profile');
+  const notificationMatch = useMatch('/abc');
 
   return (
     <>
@@ -66,7 +68,11 @@ const NavBar = ({ page }: Props) => {
             isActive ? 'nav-link nav-link-active' : 'nav-link'
           }
         >
-          ...
+          {notificationMatch ? (
+            <img src={activeBell} />
+          ) : (
+            <img src={bellIcon} />
+          )}
         </NavLink>
         <NavLink
           to='/profile'
