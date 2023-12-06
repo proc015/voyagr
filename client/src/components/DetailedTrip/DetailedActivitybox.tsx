@@ -13,33 +13,33 @@ const DetailedActivitybox = ({ detailedActivity }: Props) => {
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
 
   return (
-    <div className='dev-styling mb-4 flex flex-col gap-2 align-middle justify-center'>
+    <div className='dev-styling flex flex-col gap-2 mb-20 align-middle justify-center'>
       {detailedActivity.activities.length > 0 ? (
         detailedActivity.activities.map((allActivities) => (
           <div
             key={allActivities.activity_id}
-            className='dev stlying flex flex-row items-center gap-1 border-2 border-voyagrBorders rounded-[10px]'
+            className='  h-full   flex items-center gap-1  rounded-[10px]'
           >
-            <div className='flex flex-row rounded-[10px] w-4/10 '> 
-            <div className='w-1/2 relative z-40'> 
-              <img
-                className='rounded-md w-full object-cover h-[100px]'
-                src={`${IMG_BASE_URL}/${allActivities.picture_src}`}
-                style={{maxHeight: '250px'}}
-              />
+            <div className='flex flex-row rounded-[10px] overflow-hidden self-start mt-3  h-[130px] max-w-[170px]  '>
+              <div className=' relative flex z-40 object-scale-down max-w-[100px]  '>
+                <img
+                  className='rounded-md object-cover min-w-[70px]'
+                  src={`${IMG_BASE_URL}/${allActivities.picture_src}`}
+                  style={{ maxHeight: '250px' }}
+                />
               </div>
-              <div className='w-1/2 relative z-10'>
+              <div className=' relative z-10  object-cover  min-h-[100%]'>
                 <StaticMap
                   location={allActivities.loc_lat_lon}
-                  className='h-[100px] -ml-5'
+                  className='h-full -ml-2'
                 ></StaticMap>{' '}
-            </div>
-            </div>
-            <div className='flex-1 flex flex-col ml-4'>
-              <div className='text-2xl font-semibold font-noto mb-1'>
-                <h3> {allActivities.activity_name} </h3>{' '}
               </div>
-              <div> {allActivities.location} </div>
+            </div>
+            <div className='flex-1 self-start flex flex-col rounded-[10px] ml-2 py-3'>
+              <div className='text-lg font-semibold font-didact mb-1'>
+                <h3> {allActivities.activity_name} </h3>
+              </div>
+              <p className='text-voyagrLightGrey'>{allActivities.location} </p>
             </div>
           </div>
         ))
