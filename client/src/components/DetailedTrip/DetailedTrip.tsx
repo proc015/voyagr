@@ -28,9 +28,9 @@ const DetailedTrip = () => {
   const tripDetails = filteredDetailedTrip[0];
 
   return (
-    <div className='dev-styling flex flex-col h-fit m-5 overflow-auto'>
+    <div className='dev-styling flex flex-col h-fit my-1 mx-2 overflow-auto'>
       <div className='flex-grow overflow-auto'>
-        <Profilebar feedTrip={tripDetails}/>
+        <Profilebar feedTrip={tripDetails} />
         <DetailedTripbox detailedTrip={tripDetails} />
         <Buttonbar />
         <DetailedActivitybox detailedActivity={tripDetails} />
