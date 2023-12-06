@@ -10,8 +10,6 @@ import TripPage from './pages/TripPage';
 import SearchBar from './components/SearchBar';
 import DetailedTripPage from './pages/DetailedTripPage';
 
-
-
 const AppRouter: FC = () => {
   return (
     <Router>
@@ -19,6 +17,15 @@ const AppRouter: FC = () => {
         <Route path='/' element={<LandingPage />} />
         <Route
           path='/profile'
+          element={
+            <>
+              <NavBar page={'profile'} />
+              <ProfilePage />
+            </>
+          }
+        />
+        <Route
+          path='/profile/:id'
           element={
             <>
               <NavBar page={'profile'} />

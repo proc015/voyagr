@@ -11,12 +11,13 @@ import { User } from '../../types/User';
 import { Triplist } from './Triplist';
 
 const ProfileMe = () => {
-  const status = useSelector((state: RootState) => state.getUserInfo.status); // TODO: create getProfile
+  const status = useSelector((state: RootState) => state.getUserInfo.status);
   const dispatch = useDispatch<AppDispatch>();
   const userInfo = useSelector(
     (state: RootState) => state.getUserInfo.userInfo
   );
   const [following, setFollowing] = useState(false);
+  const [followerCount, setFollowerCount] = useState(0);
 
   const [myProfile, setMyProfile] = useState<boolean>(false);
 
@@ -26,27 +27,29 @@ const ProfileMe = () => {
 
   const { state } = useLocation();
 
+  // Get user info
   useEffect(() => {
+    // if endpoint is /profile, go to logged in user's profile
     if (state == null) {
       dispatch(fetchUserInfo(loggedInUserId));
       setMyProfile(true);
     } else {
       dispatch(fetchUserInfo(state));
-      console.log(userInfo);
       setMyProfile(false);
+
       if (userInfo.followers.includes(loggedInUserId)) {
-        console.log('incldues', loggedInUserId);
         setFollowing(true);
       } else {
         setFollowing(false);
       }
     }
+
+    setFollowerCount(userInfo.followers.length);
   }, [dispatch, state]);
 
   if (status === 'loading') {
     return <div>Loading Profile...</div>;
   }
-  console.log('LOGGED IN', loggedInUserId);
 
   return (
     <>
@@ -58,10 +61,12 @@ const ProfileMe = () => {
         loggedInUserId={loggedInUserId}
         following={following}
         setFollowing={setFollowing}
+        followerCount={followerCount}
+        setFollowerCount={setFollowerCount}
       />
       <Stats
         tripCount={userInfo.trips.length}
-        followerCount={userInfo.followers.length}
+        followerCount={followerCount}
         followingCount={userInfo.following.length}
       />
       <Triplist userId={myProfile ? loggedInUserId : state} />
