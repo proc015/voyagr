@@ -48,7 +48,11 @@ const FeedList = () => {
 
   // Loading state
   if (status === 'loading') {
-    return <div>Loading activities...</div>;
+    return (
+      <div className='h-[100vh] flex justify-center items-center'>
+        <h1>Loading activities...</h1>
+      </div>
+    );
   }
 
   // Error state
@@ -57,7 +61,7 @@ const FeedList = () => {
   }
 
   return (
-    <div className='activity-list'>
+    <div className='activity-list flex flex-col mb-10'>
       {tripsDisplayFeed.length > 0 ? (
         tripsDisplayFeed.map((feedTrip) => {
           return (
@@ -72,7 +76,9 @@ const FeedList = () => {
           );
         })
       ) : (
-        <p>No activities to show</p>
+        <p className=' self-center justify-self-center '>
+          No activities to show
+        </p>
       )}
     </div>
   );

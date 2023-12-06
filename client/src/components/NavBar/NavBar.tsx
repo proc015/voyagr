@@ -3,15 +3,15 @@ import './NavBar.css';
 import travelIcon from '../../assets/icons/button-active.svg';
 import travelIconnoBackground from '../../assets/icons/traveller.svg';
 import { useMatch } from 'react-router-dom';
-import searchIcon from '../../assets/icons/search-black.svg';
+import { SearchIcon } from '../../assets/icons/search-black';
 import { Header } from './Header';
-import homeIcon from '../../assets/icons/home-black.svg';
-import profileIcon from '../../assets/icons/profile-black.svg';
-import activeSearch from '../../assets/icons/search-orange.svg';
-import activeHome from '../../assets/icons/home-orange.svg';
-import activeProfile from '../../assets/icons/profile-orange.svg';
-import bellIcon from '../../assets/icons/bell-black.svg';
-import activeBell from '../../assets/icons/bell-orange.svg';
+import { HomeIcon } from '../../assets/icons/home-black';
+import { ProfileIcon } from '../../assets/icons/profile-black';
+// import { SearchIcon } from '../../assets/icons/search-orange';
+// import activeHome from '../../assets/icons/home-orange';
+// import activeProfile from '../../assets/icons/profile-orange';
+import { BellIcon } from '../../assets/icons/bell-black';
+// import activeBell from '../../assets/icons/bell-orange';
 
 type Props = {
   page: string;
@@ -23,19 +23,30 @@ const NavBar = ({ page }: Props) => {
   const searchMatch = useMatch('/search');
   const profileMatch = useMatch('/profile');
   const notificationMatch = useMatch('/abc');
+  const activityMatch = useMatch('/trip/:trip_id/activity/:activity_id');
+
+  const color = activityMatch ? '#FFFFFF' : '#28292B';
 
   return (
     <>
       <Header page={page} />
 
-      <div className='navbar px-5'>
+      <div
+        className={`navbar px-5  translate-y-1 ${
+          activityMatch && 'navbar-activity'
+        }`}
+      >
         <NavLink
           to='/feed'
           className={({ isActive }) =>
             isActive ? 'nav-link nav-link-active' : 'nav-link'
           }
         >
-          {feedMatch ? <img src={activeHome} /> : <img src={homeIcon} />}
+          {feedMatch ? (
+            <HomeIcon className='#E84323' />
+          ) : (
+            <HomeIcon className={color} />
+          )}
         </NavLink>
         <NavLink
           to='/search'
@@ -43,7 +54,11 @@ const NavBar = ({ page }: Props) => {
             isActive ? 'nav-link nav-link-active' : 'nav-link'
           }
         >
-          {searchMatch ? <img src={activeSearch} /> : <img src={searchIcon} />}
+          {searchMatch ? (
+            <SearchIcon className='#E84323' />
+          ) : (
+            <SearchIcon className={color} />
+          )}
         </NavLink>
         <div className='nav-link-container'>
           {addTripMatch ? (
@@ -69,9 +84,9 @@ const NavBar = ({ page }: Props) => {
           }
         >
           {notificationMatch ? (
-            <img src={activeBell} />
+            <BellIcon className='#E84323' />
           ) : (
-            <img src={bellIcon} />
+            <BellIcon className={color} />
           )}
         </NavLink>
         <NavLink
@@ -81,10 +96,10 @@ const NavBar = ({ page }: Props) => {
           }
         >
           {profileMatch ? (
-            <img src={activeProfile} />
+            <ProfileIcon className='#E84323' />
           ) : (
-            <img src={profileIcon} />
-          )}{' '}
+            <ProfileIcon className={color} />
+          )}
         </NavLink>
       </div>
     </>

@@ -9,6 +9,7 @@ import ProfilePage from './pages/ProfilePage';
 import TripPage from './pages/TripPage';
 import SearchBar from './components/SearchBar';
 import DetailedTripPage from './pages/DetailedTripPage';
+import { DetailedActivityPage } from './pages/DetailedActivityPage';
 
 const AppRouter: FC = () => {
   return (
@@ -84,6 +85,15 @@ const AppRouter: FC = () => {
             <>
               <NavBar page={'detailedTrip'} />
               <DetailedTripPage />
+            </>
+          }
+        />
+        <Route
+          path='trip/:trip_id/activity/:activity_id'
+          element={
+            <>
+              <NavBar page={'detailedActivity'} />
+              <DetailedActivityPage />
             </>
           }
         />
