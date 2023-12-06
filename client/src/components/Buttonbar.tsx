@@ -3,11 +3,16 @@ import { HeartIcon } from './heartIcon';
 import { CommentIcon } from './commentIcon';
 import { ShareIcon } from './shareIcon';
 
+
 export const Buttonbar = () => {
   const [liked, setLiked] = useState(false);
 
+  const stopPropagation = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+  }
+
   return (
-    <div className='Buttonbar mb-8'>
+    <div className='Buttonbar mb-8' onClick={stopPropagation}>
       <div className='Buttonbar h-7 flex justify-around'>
         <button onClick={() => setLiked(!liked)}>
           <HeartIcon

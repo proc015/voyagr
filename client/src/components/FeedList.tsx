@@ -8,18 +8,18 @@ import { Trip } from '../types/Trip';
 import DetailedTrip from './DetailedTrip/DetailedTrip';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserInfo } from '../services/fetchUserInfo';
+import sortFeedPosts from '../utils/sortByDate';
 
 const FeedList = () => {
   const dispatch = useDispatch<AppDispatch>();
   let navigate = useNavigate();
 
-  
   const userInfo = useSelector(
     (state: RootState) => state.getUserInfo.userInfo
   );
 
-  const followingList = userInfo.following
-  console.log('following', userInfo)
+  const followingList = userInfo.following;
+  // console.log('following', userInfo)
 
   const userFeed = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
@@ -37,11 +37,15 @@ const FeedList = () => {
     dispatch(fetchUserFeed());
   }, [dispatch]);
 
-  const filteredTripsFeed = followingList.length > 0 
-  ? userFeed.filter(trip => followingList.includes(trip.userId)) : [];
-  
-  
-  const tripsDisplayFeed = filteredTripsFeed;
+  const filteredTripsFeed =
+    followingList.length > 0
+      ? userFeed.filter((trip) => followingList.includes(trip.userId))
+      : [];
+
+  const tripsDisplayFeed = sortFeedPosts(filteredTripsFeed);
+
+  // console.log('SORT', tripsDisplayFeed)
+
   // Loading state
   if (status === 'loading') {
     return <div>Loading activities...</div>;
@@ -61,7 +65,7 @@ const FeedList = () => {
               key={feedTrip.trip_id}
               feedTrip={feedTrip}
               onSelect={() => {
-                console.log('Selecting trip:', feedTrip);
+                // console.log('Selecting trip:', feedTrip);
                 navigate(`/trip/${feedTrip.trip_id}`);
               }}
             />

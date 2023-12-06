@@ -12,7 +12,7 @@ const DetailedTrip = () => {
 
   const tripNumberID = Number(trip_id);
 
-  console.log('tripID', trip_id);
+  // console.log('tripID', trip_id);
 
   const detailedTrip = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
@@ -30,7 +30,7 @@ const DetailedTrip = () => {
   return (
     <div className='dev-styling flex flex-col h-fit m-5 overflow-auto'>
       <div className='flex-grow overflow-auto'>
-        <Profilebar userIdentifier={tripDetails}/>
+        <Profilebar feedTrip={tripDetails}/>
         <DetailedTripbox detailedTrip={tripDetails} />
         <Buttonbar />
         <DetailedActivitybox detailedActivity={tripDetails} />
