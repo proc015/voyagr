@@ -17,13 +17,18 @@ export const Header = ({ page }: Props) => {
     profile: 'profile',
     search: 'search',
     feed: 'feed',
+    detailedActivity: 'Voyagr',
   };
 
   const navigate = useNavigate();
 
   return (
     <>
-      <div className='headerVoyagr pb-5 px-5 text-voyagrWhite font-noto text-3xl'>
+      <div
+        className={`headerVoyagr pb-5 px-5 text-voyagrWhite  font-noto text-3xl ${
+          page == 'detailedActivity' && 'bg-voyagrBlack font-light'
+        }`}
+      >
         {page != 'feed' && (
           <button className='pb-2' onClick={() => navigate(-1)}>
             <img className='' src={backButton} />

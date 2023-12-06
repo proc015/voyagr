@@ -71,7 +71,7 @@ export const Bio = ({
           ref={inputName}
           value={displayName}
           type='text'
-          className='text-center mt-3 outline-none'
+          className='text-center mt-3 outline-none bg-voyagrWhite'
         />
       </div>
     </>

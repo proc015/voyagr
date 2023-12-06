@@ -7,7 +7,6 @@ import travelIcon from '../assets/icons/button-active.svg';
 import * as dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 
-
 interface Prop {
   feedTrip: Trip;
 }
@@ -21,11 +20,12 @@ export const Profilebar = ({ feedTrip }: Prop) => {
     (state: RootState) => state.getAllUserInfo.userInformation
   );
 
-  const handleProfileClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleProfileClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     event.stopPropagation();
-    navigate(`/profile/${feedTrip.userId}`)
-  }
- 
+    navigate(`/profile/${feedTrip.userId}`);
+  };
 
   //pass specific userID from the trip that is being mapped -> userIdentifier
   // console.log('TI', userIdentifier);
@@ -50,7 +50,7 @@ export const Profilebar = ({ feedTrip }: Prop) => {
     <div className='flex gap-3 my-2 align-middle' onClick={handleProfileClick}>
       {filteredUserInfo.map((userProfileInfo) => (
         <div key={userProfileInfo.user_id} className='flex gap-3'>
-          <div className='picture h-12 w-12 rounded-full overflow-hidden bg-voyagrBlue'>
+          <div className='picture h-12 w-12 rounded-full overflow-hidden bg-voyagrLightGrey'>
             <img
               className='object-cover w-full h-full'
               src={
@@ -65,7 +65,9 @@ export const Profilebar = ({ feedTrip }: Prop) => {
             <h3 className='text-md font-semibold font-noto text-voyagrBlack'>
               {userProfileInfo.display_name}
             </h3>
-            <p className='text-sm text-voyagrLightGrey'>{dayjs(feedTrip.end_date).format('MMMM DD, YYYY')}</p>
+            <p className='text-sm text-voyagrLightGrey'>
+              {dayjs(feedTrip.end_date).format('MMMM DD, YYYY')}
+            </p>
           </div>
         </div>
       ))}
