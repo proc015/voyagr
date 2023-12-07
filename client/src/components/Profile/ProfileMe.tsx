@@ -43,8 +43,8 @@ const ProfileMe = () => {
         setFollowing(false);
       }
     }
-
-    setFollowerCount(userInfo.followers.length);
+    const followers = userInfo.followers.filter((id) => id != 0);
+    setFollowerCount(followers.length);
   }, [dispatch]);
 
   if (status === 'loading') {
