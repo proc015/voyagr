@@ -1,20 +1,10 @@
-
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { AppDispatch } from '../../app/store';
 import { fetchLastTrip } from '../../services/fetchLastTrip';
 import { useEffect } from 'react';
 
-<<<<<<< HEAD
 const ActivitySmallDetails = ({ activityAdded, setActivityAdded }) => {
-=======
-type Props = {
-  activityAdded: boolean;
-  setActivityAdded: (a: boolean) => void;
-};
-
-const ActivitySmallDetails = ({ activityAdded, setActivityAdded }: Props) => {
->>>>>>> a40a5b5 (feat: profilebar & buttonbar on activity view)
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
   const userId = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch<AppDispatch>();
@@ -30,7 +20,9 @@ const ActivitySmallDetails = ({ activityAdded, setActivityAdded }: Props) => {
 
   return (
     <div>
-      {lastTrip.lastTrip.activities.length > 0 && lastTrip.lastTrip.activities[0].activity_id && lastTrip.lastTrip.activities.length >= 1 ? (
+      {lastTrip.lastTrip.activities.length > 0 &&
+      lastTrip.lastTrip.activities[0].activity_id &&
+      lastTrip.lastTrip.activities.length >= 1 ? (
         lastTrip.lastTrip.activities.map((activity, index) => (
           <div
             key={index}
