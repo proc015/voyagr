@@ -43,9 +43,9 @@ const ProfileMe = () => {
         setFollowing(false);
       }
     }
-
-    setFollowerCount(userInfo.followers.length);
-  }, [dispatch, id]);
+    const followers = userInfo.followers.filter((id) => id != 0);
+    setFollowerCount(followers.length);
+  }, [dispatch]);
 
   if (status === 'loading') {
     <div className='h-[100vh] flex justify-center items-center'>
