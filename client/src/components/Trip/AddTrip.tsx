@@ -45,7 +45,7 @@ const AddTrip = () => {
       setStartDate(lastTrip.lastTrip.start_date);
       setEndDate(lastTrip.lastTrip.end_date);
       setPicture_src(lastTrip.lastTrip.picture_src);
-    };
+    }
   }, []);
 
   const tripExists = () => {
@@ -91,7 +91,6 @@ const AddTrip = () => {
     setEndDate(event.target.value);
   };
 
-  
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
     const filename = event.target.files![0].name;
@@ -100,9 +99,10 @@ const AddTrip = () => {
   };
 
   const hiddenFileInput = useRef<HTMLInputElement>(null);
-  
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
+    event.preventDefault();
     hiddenFileInput.current?.click();
   };
 
@@ -125,18 +125,20 @@ const AddTrip = () => {
     }
   };
 
-
   return (
     <>
       <form onSubmit={handleStartTrip} className=''>
         <div>
           {visibleDiv == 'trip' ? (
-            <div  onClick={() => changeVisibleDiv('')}>
+            <div onClick={() => changeVisibleDiv('')}>
               <div className='ToggleDiv w-[95%] h-[150px] mt-4 rounded-[20px] shadow-lg border-voyagrBorders border p-2 flex mx-auto mb-5'>
                 <div className='w-full text-zinc-800 text-3xl font-normal font-noto'>
                   <p className='p-3 pb-3 pt-3'>Trip name?</p>
 
-                  <div className='flex w-[95%] mx-auto' onClick={(e) => e.stopPropagation()}>
+                  <div
+                    className='flex w-[95%] mx-auto'
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <div>
                       <input
                         type='file'
@@ -217,14 +219,12 @@ const AddTrip = () => {
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     Where to?
                   </p>
-                  {(start_loc) &&
+                  {start_loc && (
                     <div className='p-1 w-[60%] font-didact text-xl text-right text-voyagrBlack mr-5'>
-                      {start_loc} 
-                      {(destination) &&
-                      <span> ↔ {destination} </span>
-                      } 
+                      {start_loc}
+                      {destination && <span> ↔ {destination} </span>}
                     </div>
-                  }
+                  )}
                 </label>
               </div>
             </div>
@@ -268,14 +268,14 @@ const AddTrip = () => {
                   <p className='p-3 pb-3  text-voyagrLightGrey text-2xl'>
                     When?
                   </p>
-                  {(start_date) && 
+                  {start_date && (
                     <div className='p-1 w-[60%] font-didact text-xl text-right text-voyagrBlack mr-5'>
-                      {dayjs(start_date).format('DD/MM/YY')} 
-                      {(end_date) &&
-                      <span> ↔ {dayjs(end_date).format('DD/MM/YY')}</span>
-                      }    
+                      {dayjs(start_date).format('DD/MM/YY')}
+                      {end_date && (
+                        <span> ↔ {dayjs(end_date).format('DD/MM/YY')}</span>
+                      )}
                     </div>
-                  }
+                  )}
                 </label>
               </div>
             </div>
@@ -333,7 +333,7 @@ const AddTrip = () => {
             <div className='flex text-voyagrBlack py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
               <input type='submit' value='Start Trip' className='mx-auto' />
             </div>
-           )}
+          )}
           {lastTrip.status === 'idle' && (
             <div className='flex text-voyagrBlack py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
               <input type='submit' value='Start Trip' className='mx-auto' />
