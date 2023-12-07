@@ -46,7 +46,7 @@ const DetailedActivitybox = ({ detailedActivity }: Props) => {
               <div className='text-lg font-semibold font-didact mb-1'>
                 <h3> {allActivities.activity_name} </h3>
               </div>
-              <p className='text-voyagrLightGrey'>{allActivities.location} </p>
+              <p className='text-voyagrLightGrey'>📍{allActivities.location}</p>
             </div>
           </div>
         ))

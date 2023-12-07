@@ -5,7 +5,16 @@ import { AppDispatch } from '../../app/store';
 import { fetchLastTrip } from '../../services/fetchLastTrip';
 import { useEffect } from 'react';
 
+<<<<<<< HEAD
 const ActivitySmallDetails = ({ activityAdded, setActivityAdded }) => {
+=======
+type Props = {
+  activityAdded: boolean;
+  setActivityAdded: (a: boolean) => void;
+};
+
+const ActivitySmallDetails = ({ activityAdded, setActivityAdded }: Props) => {
+>>>>>>> a40a5b5 (feat: profilebar & buttonbar on activity view)
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
   const userId = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch<AppDispatch>();
