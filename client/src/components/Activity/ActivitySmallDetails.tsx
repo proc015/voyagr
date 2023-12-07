@@ -7,7 +7,12 @@ import { AppDispatch } from '../../app/store';
 import { fetchLastTrip } from '../../services/fetchLastTrip';
 import { useEffect } from 'react';
 
-const ActivitySmallDetails = ({ activityAdded<boolean> }) => {
+type Props = {
+  activityAdded: boolean;
+  setActivityAdded: (a: boolean) => void;
+};
+
+const ActivitySmallDetails = ({ activityAdded, setActivityAdded }: Props) => {
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
   const userId = useSelector((state: RootState) => state.user.currentUser);
   const dispatch = useDispatch<AppDispatch>();
@@ -18,6 +23,7 @@ const ActivitySmallDetails = ({ activityAdded<boolean> }) => {
   useEffect(() => {
     if (activityAdded) {
       dispatch(fetchLastTrip(userId));
+      setActivityAdded(false);
     }
   }, [activityAdded]);
 

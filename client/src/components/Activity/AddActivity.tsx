@@ -100,7 +100,7 @@ const AddActivity = () => {
       setType('');
       setDate('');
       setLocation('');
-      setActivityAdded(prev => !prev);
+      setActivityAdded((prev) => !prev);
     });
   };
 
@@ -110,7 +110,10 @@ const AddActivity = () => {
         <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
           <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
             <p className='p-3 pb-3 pt-3'>Activities?</p>
-            <ActivitySmallDetails activityAdded={activityAdded} />
+            <ActivitySmallDetails
+              setActivityAdded={setActivityAdded}
+              activityAdded={activityAdded}
+            />
 
             <div className='flex w-[95%] mx-auto'>
               <div>
