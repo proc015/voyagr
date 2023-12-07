@@ -9,6 +9,7 @@ import AddActivity from '../Activity/AddActivity';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import Publish from '../Publish';
+import { useNavigate } from 'react-router-dom';
 
 export interface NewTripType {
   userId: number;
@@ -23,6 +24,7 @@ export interface NewTripType {
 }
 
 const AddTrip = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userId = useSelector((state: RootState) => state.user.currentUser);
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
@@ -36,7 +38,7 @@ const AddTrip = () => {
   const [picture_src, setPicture_src] = useState('');
 
   useEffect(() => {
-    if (lastTrip.lastTrip.trip_name) {
+    if (lastTrip.lastTrip.published === false) {
       setTripName(lastTrip.lastTrip.trip_name);
       setStartLoc(lastTrip.lastTrip.start_loc);
       setDestination(lastTrip.lastTrip.destination);
@@ -117,6 +119,7 @@ const AddTrip = () => {
       dispatch(addTrip(createdTrip));
       //sends the trip_id associated to this trip to the redux store
       dispatch(setTrip(createdTrip.trip_id));
+      navigate('/feed');
     } catch (error) {
       console.error('Error:', error);
     }
@@ -330,7 +333,7 @@ const AddTrip = () => {
             <div className='flex text-voyagrBlack py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
               <input type='submit' value='Start Trip' className='mx-auto' />
             </div>
-          )}
+           )}
           {lastTrip.status === 'idle' && (
             <div className='flex text-voyagrBlack py-[3px] px-[40px] rounded-full bg-voyagr border-[1px] mx-auto '>
               <input type='submit' value='Start Trip' className='mx-auto' />

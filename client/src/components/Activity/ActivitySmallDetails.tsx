@@ -21,7 +21,7 @@ const ActivitySmallDetails = ({ activityAdded, setActivityAdded }) => {
 
   return (
     <div>
-      {lastTrip.lastTrip.activities.length > 1 ? (
+      {lastTrip.lastTrip.activities.length > 0 && lastTrip.lastTrip.activities[0].activity_id && lastTrip.lastTrip.activities.length >= 1 ? (
         lastTrip.lastTrip.activities.map((activity, index) => (
           <div
             key={index}
@@ -29,7 +29,7 @@ const ActivitySmallDetails = ({ activityAdded, setActivityAdded }) => {
           >
             <img
               src={`${IMG_BASE_URL}${activity.picture_src}`}
-              alt={activity.date}
+              // alt={activity.date}
               className='w-16 h-auto object-cover rounded-2xl'
             />
             <p className='w-4/5 text-end m-auto mr-5 text-voyagrBlack font-didact text-xl'>

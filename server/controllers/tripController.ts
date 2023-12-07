@@ -36,6 +36,7 @@ export const getLastTrip = async (req: Request, res: Response) => {
     const trip = await prisma.trip.findFirst({
       where: {
         userId: userId,
+        published: false,
       },
       include: {
         activities: true,

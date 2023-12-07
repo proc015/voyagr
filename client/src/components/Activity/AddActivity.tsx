@@ -26,6 +26,10 @@ const AddActivity = () => {
     (state: RootState) => state.lastTrip.lastTrip.trip_id
   );
 
+  // const tripIdentifier = useSelector(
+  //   (state: RootState) => state.tripid.currentTrip
+  // );
+
   const [newActivity, setNewActivity] = useState<Activity>({
     activity_id,
     tripId: tripId,
@@ -86,7 +90,7 @@ const AddActivity = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    console.log(newActivityObj)
     postActivity(newActivityObj).then((createdActivity) => {
       dispatch(addActivity(createdActivity));
       // Update the grouped state
@@ -101,7 +105,7 @@ const AddActivity = () => {
       setType('');
       setDate('');
       setLocation('');
-      setActivityAdded(prev => !prev);
+      setActivityAdded(true);
     });
   };
 

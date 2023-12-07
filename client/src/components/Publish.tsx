@@ -10,7 +10,7 @@ const Publish = () => {
   );
   const navigate = useNavigate();
 
-  const handlePublish: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const handlePublish: MouseEventHandler<HTMLAnchorElement> = (event) => {
     event.preventDefault();
     console.log('the button was clicked');
     publishTrip(trip_id);
