@@ -7,7 +7,6 @@ import { DynamicMap } from '../maps/dynamicMap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import ActivitySmallDetails from './ActivitySmallDetails';
-import { lastTripSlice } from '../../redux/fetchTripSlice';
 
 const AddActivity = () => {
   const dispatch = useAppDispatch();
@@ -26,6 +25,10 @@ const AddActivity = () => {
   const tripId = useSelector(
     (state: RootState) => state.lastTrip.lastTrip.trip_id
   );
+
+  // const tripIdentifier = useSelector(
+  //   (state: RootState) => state.tripid.currentTrip
+  // );
 
   const [newActivity, setNewActivity] = useState<Activity>({
     activity_id,
@@ -87,7 +90,7 @@ const AddActivity = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+    console.log(newActivityObj)
     postActivity(newActivityObj).then((createdActivity) => {
       dispatch(addActivity(createdActivity));
       // Update the grouped state
@@ -97,10 +100,12 @@ const AddActivity = () => {
       setActivityName('');
       //TODO: check with sal - setLocation field does not seem to reset when you add activity
       setLocation('');
+      setLoc_lat_lon([]);
+      setPicture_src('');
       setType('');
       setDate('');
       setLocation('');
-      setActivityAdded(prev => !prev);
+      setActivityAdded(true);
     });
   };
 
@@ -108,9 +113,9 @@ const AddActivity = () => {
     <>
       <form onSubmit={handleSubmit} className='add-trip-form-container mt-5'>
         <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
-          <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+          <div className='w-full  text-3xl font-normal font-noto'>
             <p className='p-3 pb-3 pt-3'>Activities?</p>
-            <ActivitySmallDetails activityAdded={activityAdded} />
+            <ActivitySmallDetails activityAdded={activityAdded} setActivityAdded={setActivityAdded} />
 
             <div className='flex w-[95%] mx-auto'>
               <div>
@@ -131,7 +136,7 @@ const AddActivity = () => {
               </div>
               <input
                 id='activity_name'
-                className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+                className='mt-1 mb-3 ml-4 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm  font-didact mx-auto '
                 type='text'
                 required={true}
                 placeholder='add activity name'
@@ -139,7 +144,7 @@ const AddActivity = () => {
                 onChange={handleActivityNameChange}
               />
             </div>
-          </label>
+          </div>
 
           <label>
             <DynamicMap
@@ -159,20 +164,20 @@ const AddActivity = () => {
 
           <div className='flex w-[95%] mx-auto space-x-5'>
             <label>
-              <p className='ml-0 mr-0 pt-3 w-full h-[60px] text-zinc-800 text-3xl font-normal font-noto'>
+              <p className='ml-0 mr-0 pt-3 w-full h-[60px]  text-3xl font-normal font-noto'>
                 When?
               </p>{' '}
               <input
                 id='date'
                 type='date'
-                className='mt-1 w-full block px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto mr-6'
+                className='mt-1 w-full block px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm  font-didact mx-auto mr-6'
                 required={true}
                 value={date}
                 onChange={handleDateChange}
               />
             </label>
 
-            <label className='w-[100%] text-zinc-800 text-3xl font-normal font-noto'>
+            <label className='w-[100%]  text-3xl font-normal font-noto'>
               <p className='pb-3 pt-3'>Type</p>
               <select
                 id='type'
@@ -190,21 +195,21 @@ const AddActivity = () => {
             </label>
           </div>
 
-          <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+          <label className='w-full  text-3xl font-noto'>
             <p className='p-3 pb-3 pt-3 mt-3'>Who?</p>
             <input
               id='participants'
               type='text'
               placeholder='add buddies'
-              className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+              className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm  font-didact mx-auto '
             />
           </label>
 
-          <label className='w-full text-zinc-800 text-3xl font-normal font-noto'>
+          <label className='w-full  text-3xl font-noto'>
             <p className='p-3 pb-3 pt-3'>Tags!</p>
             <input
               id='tags'
-              className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 font-didact mx-auto '
+              className='mt-1 mb-3 block w-[95%] px-5 py-4 border border-voyagrBorders rounded-[15px] text-base shadow-sm  font-didact mx-auto '
               type='text'
               required={false}
               placeholder='add tags'
@@ -212,8 +217,8 @@ const AddActivity = () => {
             />
           </label>
 
-          <div className='w-full text-zinc-800 text-xl font-normal flex font-noto '>
-            <input type='submit' value='Save Activity' className='mx-auto' />
+          <div className='w-2/5 m-auto text-voyagrBlack text-center text-xl py-1 rounded-full border-voyagrBlack border font-noto'>
+            <input type='submit' value='Save activity' className='mx-auto' />
           </div>
         </div>
       </form>

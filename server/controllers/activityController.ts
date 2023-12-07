@@ -3,8 +3,10 @@ import { Request, Response } from 'express';
 const prisma = new PrismaClient();
 
 export const postActivity = async (req: Request, res: Response) => {
+  console.log('gets to postActivity');
   try {
     const newActivity = await req.body;
+    console.log(newActivity);
     const createdActivity = await prisma.activity.create({
       data: {
         trip: {
