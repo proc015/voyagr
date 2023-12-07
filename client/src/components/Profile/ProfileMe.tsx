@@ -45,10 +45,12 @@ const ProfileMe = () => {
     }
 
     setFollowerCount(userInfo.followers.length);
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   if (status === 'loading') {
-    return <div>Loading Profile...</div>;
+    <div className='h-[100vh] flex justify-center items-center'>
+      <h1>Loading profile...</h1>
+    </div>;
   }
 
   return (

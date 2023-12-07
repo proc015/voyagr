@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router';
 import altPic from '../../assets/icons/button-active.svg';
 import { followUser, unFollowUser } from '../../services/followService';
-import { MutableRefObject, useRef, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { editDisplayName } from '../../services/editUser';
 
 type Props = {
@@ -29,6 +29,10 @@ export const Bio = ({
   const domainUrl = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
   const inputName = useRef<HTMLInputElement | null>(null);
   const [displayName, setDisplayName] = useState(name);
+
+  useEffect(() => {
+    setDisplayName(name);
+  }, [name]);
 
   const handleEditProfile = () => {
     if (inputName.current) inputName.current.focus();
@@ -71,7 +75,7 @@ export const Bio = ({
           ref={inputName}
           value={displayName}
           type='text'
-          className='text-center mt-3 outline-none'
+          className='text-center mt-3 outline-none bg-voyagrWhite'
         />
       </div>
     </>

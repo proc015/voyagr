@@ -90,7 +90,7 @@ const AddActivity = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(newActivityObj)
+    console.log(newActivityObj);
     postActivity(newActivityObj).then((createdActivity) => {
       dispatch(addActivity(createdActivity));
       // Update the grouped state
@@ -115,7 +115,10 @@ const AddActivity = () => {
         <div className='w-[95%] h-auto bg-stone-50 rounded-[20px] shadow-lg border-voyagrBorders border p-2 mx-auto mb-5'>
           <div className='w-full  text-3xl font-normal font-noto'>
             <p className='p-3 pb-3 pt-3'>Activities?</p>
-            <ActivitySmallDetails activityAdded={activityAdded} setActivityAdded={setActivityAdded} />
+            <ActivitySmallDetails
+              activityAdded={activityAdded}
+              setActivityAdded={setActivityAdded}
+            />
 
             <div className='flex w-[95%] mx-auto'>
               <div>

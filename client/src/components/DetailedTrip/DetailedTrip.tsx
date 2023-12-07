@@ -6,12 +6,15 @@ import DetailedActivitybox from './DetailedActivitybox';
 import { RootState } from '../../app/store';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 const DetailedTrip = () => {
   const { trip_id } = useParams();
+  const [openActivity, setOpenActivity] = useState(null);
 
   const tripNumberID = Number(trip_id);
 
+  console.log(' open', openActivity);
   // console.log('tripID', trip_id);
 
   const detailedTrip = useSelector(

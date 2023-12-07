@@ -8,6 +8,7 @@ export const fetchUserActivity = createAsyncThunk<
   number,
   { rejectValue: string }
 >('getActivity/fetchUserActivity', async (trip_id, { rejectWithValue }) => {
+  console.log('hello');
   try {
     const response = await fetch(`${url}/activity/${trip_id}/all`);
     const data = await response.json();

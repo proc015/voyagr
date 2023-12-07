@@ -1,4 +1,3 @@
-
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { AppDispatch } from '../../app/store';
@@ -21,7 +20,9 @@ const ActivitySmallDetails = ({ activityAdded, setActivityAdded }) => {
 
   return (
     <div>
-      {lastTrip.lastTrip.activities.length > 0 && lastTrip.lastTrip.activities[0].activity_id && lastTrip.lastTrip.activities.length >= 1 ? (
+      {lastTrip.lastTrip.activities.length > 0 &&
+      lastTrip.lastTrip.activities[0].activity_id &&
+      lastTrip.lastTrip.activities.length >= 1 ? (
         lastTrip.lastTrip.activities.map((activity, index) => (
           <div
             key={index}
