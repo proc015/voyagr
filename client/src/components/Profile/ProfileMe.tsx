@@ -45,7 +45,7 @@ const ProfileMe = () => {
     }
 
     setFollowerCount(userInfo.followers.length);
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   if (status === 'loading') {
     <div className='h-[100vh] flex justify-center items-center'>

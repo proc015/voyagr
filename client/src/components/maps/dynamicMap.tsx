@@ -73,7 +73,6 @@ const DynamicMapComponent = ({
         }
       }
     }, 500); //uglyfix to have fitbounds not run until map is loaded
-    console.log(activities);
   }, [activities]);
 
   useEffect(() => {
