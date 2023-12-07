@@ -14,6 +14,7 @@ const DetailedTripbox = ({ detailedTrip }: Props) => {
       <h3> {detailedTrip.trip_name}</h3>
       <div className='items-center flex justify-center rounded-[6px] overflow-hidden w-full'>
         <DynamicMap
+          trip_id={detailedTrip.trip_id}
           activities={detailedTrip.activities}
           type={'activity'}
           action={'view'}

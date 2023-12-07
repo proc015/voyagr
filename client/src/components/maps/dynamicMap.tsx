@@ -14,6 +14,7 @@ import {
 
 import { useState, useRef, useEffect } from 'react';
 import { LatLngLiteral, DynamicMapProps } from './types';
+import { useNavigate } from 'react-router';
 
 const DynamicMapComponent = ({
   locationCoordinates,
@@ -26,7 +27,9 @@ const DynamicMapComponent = ({
   action,
   activities,
   style,
+  trip_id,
 }: DynamicMapProps) => {
+  const navigate = useNavigate();
   const [locLatLng, setLocLatLng] = useState<LatLngLiteral>();
 
   const [destLatLng, setDestLatLng] = useState<LatLngLiteral>();
@@ -70,6 +73,7 @@ const DynamicMapComponent = ({
         }
       }
     }, 500); //uglyfix to have fitbounds not run until map is loaded
+    console.log(activities);
   }, [activities]);
 
   useEffect(() => {
@@ -128,6 +132,11 @@ const DynamicMapComponent = ({
               locations.map((activity: any) => {
                 return (
                   <MarkerF
+                    onClick={() =>
+                      navigate(
+                        `/trip/${trip_id}/activity/${activity.activity_id}`
+                      )
+                    }
                     position={activity.loc}
                     key={activity.activity_id}
                     icon={pin}

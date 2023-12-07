@@ -18,6 +18,7 @@ type DynamicMapProps = {
   action: 'create' | 'view';
   activities?: Activity[];
   style: any; //FIXME: update to proper ts later
+  trip_id?: number;
 };
 
 type StaticMapProps = {
