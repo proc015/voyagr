@@ -10,7 +10,7 @@ import { Dispatch, AnyAction } from 'redux';
 import { User } from '../../types/User';
 import { Triplist } from './Triplist';
 
-const ProfileMe = () => {
+const Profile = () => {
   const status = useSelector((state: RootState) => state.getUserInfo.status);
   const dispatch = useDispatch<AppDispatch>();
   const userInfo = useSelector(
@@ -76,4 +76,4 @@ const ProfileMe = () => {
   );
 };
 
-export default ProfileMe;
+export default Profile;

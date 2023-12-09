@@ -8,8 +8,8 @@ import parse from 'html-react-parser';
 import travelIcon from '../../../assets/icons/traveller.svg';
 import { Activity } from '../../../types/Activity';
 import * as dayjs from 'dayjs';
-import { HeartIcon } from '../../heartIcon';
-import { CommentIcon } from '../../commentIcon';
+import { HeartIcon } from '../../../assets/icons/heartIcon';
+import { CommentIcon } from '../../../assets/icons/commentIcon';
 
 export const DetailedActivity = () => {
   const [liked, setLiked] = useState(false);

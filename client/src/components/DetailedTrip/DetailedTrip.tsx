@@ -1,7 +1,7 @@
 import { Trip } from '../../types/Trip';
-import { Buttonbar } from '../Buttonbar';
+import { Buttonbar } from '../Feed/Buttonbar';
 import DetailedTripbox from './DetailedTripbox';
-import { Profilebar } from '../Profilebar';
+import { Profilebar } from '../Feed/Profilebar';
 import DetailedActivitybox from './DetailedActivitybox';
 import { RootState } from '../../app/store';
 import { useSelector } from 'react-redux';
