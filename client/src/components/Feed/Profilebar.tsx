@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { AppDispatch, RootState } from '../app/store';
-import { fetchAllUserInfo } from '../services/fetchAllUserInfo';
-import { Trip } from '../types/Trip';
-import travelIcon from '../assets/icons/button-active.svg';
+import { AppDispatch, RootState } from '../../app/store';
+import { fetchAllUserInfo } from '../../services/fetchAllUserInfo';
+import { Trip } from '../../types/Trip';
+import travelIcon from '../../assets/icons/button-active.svg';
 import * as dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 

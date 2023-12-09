@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { searchUsers } from '../services/searchService';
-import noprofilepic from '../assets/images/noprofilepic.jpg';
-import searchIcon from '../assets/icons/search-icon.svg';
+import { searchUsers } from '../../services/searchService';
+import noprofilepic from '../../assets/images/noprofilepic.jpg';
+import searchIcon from '../../assets/icons/search-icon.svg';
 import { Link } from 'react-router-dom';
 
 function SearchBar() {

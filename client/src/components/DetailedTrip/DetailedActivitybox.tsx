@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { Activity } from '../../types/Activity';
 import { Trip } from '../../types/Trip';
-import { StaticMap } from '../maps/staticMap';
+import { StaticMap } from '../Maps/staticMap';
 
 interface Props {
   detailedActivity: Trip;

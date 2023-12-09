@@ -1,7 +1,7 @@
-import { Activity } from '../types/Activity';
+import { Activity } from '../../types/Activity';
 import Carousel from 'react-material-ui-carousel';
-import { DynamicMap } from './maps/dynamicMap';
-import { StaticMap } from './maps/staticMap';
+import { DynamicMap } from '../Maps/dynamicMap';
+import { StaticMap } from '../Maps/staticMap';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 

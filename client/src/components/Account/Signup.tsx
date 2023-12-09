@@ -1,12 +1,12 @@
 import { useState, FormEvent, ChangeEvent, MouseEvent } from 'react';
-import { createUser } from '../services/signupService';
+import { createUser } from '../../services/signupService';
 import { useNavigate } from 'react-router-dom';
-import traveller from '../assets/icons/traveller.svg';
-import backButton from '../assets/icons/chevron-left.svg';
+import traveller from '../../assets/icons/traveller.svg';
+import backButton from '../../assets/icons/chevron-left.svg';
 import { useDispatch } from 'react-redux';
 import { Tab } from '@headlessui/react';
-import { setUser } from '../redux/userSlice';
-import { uploadPhoto } from '../services/apiService';
+import { setUser } from '../../redux/userSlice';
+import { uploadPhoto } from '../../services/apiService';
 
 export const initialSignupState = {
   email: '',
@@ -96,14 +96,16 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
         <Tab.Panels>
           <Tab.Panel>
             {/* SHOW SELECTED PHOTO AFTTER UPLOAD */}
-            {(signupState.displayPicSrc) ? 
-            <img src={`${cloudinaryUrl}${signupState.displayPicSrc}`} className='h-24 w-24 m-auto my-8 rounded-full' />
-            :
-            <img src={`${traveller}`} className='h-24 w-auto m-auto my-8' />
-            }
+            {signupState.displayPicSrc ? (
+              <img
+                src={`${cloudinaryUrl}${signupState.displayPicSrc}`}
+                className='h-24 w-24 m-auto my-8 rounded-full'
+              />
+            ) : (
+              <img src={`${traveller}`} className='h-24 w-auto m-auto my-8' />
+            )}
             {/*  */}
-            <form className='flex justify-center' 
-            >
+            <form className='flex justify-center'>
               <div
                 id='parent-container'
                 className='flex flex-col w-[90%] items-center'
@@ -161,18 +163,29 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
           <Tab.Panel>
             <main className='bg-voyagrWhite h-[600px] relative z-10 rounded-2xl'>
               {/* SHOW SELECTED PHOTO AFTTER UPLOAD */}
-              {(signupState.displayPicSrc) ? 
-              <img src={`${cloudinaryUrl}${signupState.displayPicSrc}`} className='h-24 w-24 m-auto mt-8 mb-6 rounded-full' />
-              :
-              <img src={`${traveller}`} className='h-24 w-auto m-auto mt-8 mb-6' />
-              }
+              {signupState.displayPicSrc ? (
+                <img
+                  src={`${cloudinaryUrl}${signupState.displayPicSrc}`}
+                  className='h-24 w-24 m-auto mt-8 mb-6 rounded-full'
+                />
+              ) : (
+                <img
+                  src={`${traveller}`}
+                  className='h-24 w-auto m-auto mt-8 mb-6'
+                />
+              )}
               {/*  */}
               <form className='flex justify-center'>
                 <div
                   id='parent-container'
                   className='flex flex-col w-[90%] items-center'
                 >
-                  <p id='upload-help' className='text-base text-voyagrBlack font-didact mr-auto'>Upload a profile photo!</p>
+                  <p
+                    id='upload-help'
+                    className='text-base text-voyagrBlack font-didact mr-auto'
+                  >
+                    Upload a profile photo!
+                  </p>
                   <input
                     type='file'
                     accept='image/png, image/jpeg'
@@ -192,7 +205,12 @@ function Signup({ setOpenSignup }: { setOpenSignup: Function }) {
                     onChange={handleChange}
                     className='w-full h-12 my-4 rounded-xl border border-voyagrLightGrey pl-4 font-didact text-voyagrBlack text-lg focus:outline-none focus:border-voyagrRed'
                   />
-                  <button className='landing-btn' onClick={(e) => handleCreateUser(e)}>Finish</button>
+                  <button
+                    className='landing-btn'
+                    onClick={(e) => handleCreateUser(e)}
+                  >
+                    Finish
+                  </button>
                 </div>
               </form>
             </main>

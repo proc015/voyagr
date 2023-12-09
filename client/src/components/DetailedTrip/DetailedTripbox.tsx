@@ -1,5 +1,5 @@
 import { Trip } from '../../types/Trip';
-import { DynamicMap } from '../maps/dynamicMap';
+import { DynamicMap } from '../Maps/dynamicMap';
 
 interface Props {
   detailedTrip: Trip;

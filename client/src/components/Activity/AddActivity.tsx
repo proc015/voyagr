@@ -3,7 +3,7 @@ import { Activity } from '../../types/Activity';
 import { ChangeEvent, FormEvent, useState, useRef } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { addActivity } from '../../redux/addActivitySlice';
-import { DynamicMap } from '../maps/dynamicMap';
+import { DynamicMap } from '../Maps/dynamicMap';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import ActivitySmallDetails from './ActivitySmallDetails';
