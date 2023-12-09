@@ -38,7 +38,7 @@ npm start
 
 ## Author
 
-Nils Wagner - [Github](https://github.com/wagner-nils) - [LinkedIn](https://www.linkedin.com/in/nils--wagner/)
-Marc Rogers - [Github](https://github.com/rogermarco) - [LinkedIn](https://www.linkedin.com/in/rogersmarco/)
-Ryan Procaccini - [Github](https://github.com/proc015) - [LinkedIn](https://www.linkedin.com/in/proc015/)
-Sally Carlund - [Github](https://github.com/sal-car/) - [LinkedIn](https://www.linkedin.com/in/sally-carlund/)
+Nils Wagner - [Github](https://github.com/wagner-nils) - [LinkedIn](https://www.linkedin.com/in/nils--wagner/) <br> </br>
+Marc Rogers - [Github](https://github.com/rogermarco) - [LinkedIn](https://www.linkedin.com/in/rogersmarco/) <br> </br>
+Ryan Procaccini - [Github](https://github.com/proc015) - [LinkedIn](https://www.linkedin.com/in/proc015/) <br> </br>
+Sally Carlund - [Github](https://github.com/sal-car/) - [LinkedIn](https://www.linkedin.com/in/sally-carlund/) <br> </br>
