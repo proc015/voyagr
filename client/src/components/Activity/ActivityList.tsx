@@ -4,7 +4,7 @@ import ActivityComponent from './ActivityComponent';
 import { AppDispatch } from '../../app/store';
 import { fetchUserActivity } from '../../services/fetchActivity';
 import { useEffect } from 'react';
-import { DynamicMap } from '../maps/dynamicMap';
+import { DynamicMap } from '../Maps/dynamicMap';
 
 const ActivityList = () => {
   const dispatch = useDispatch<AppDispatch>();

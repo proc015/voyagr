@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { AppDispatch, RootState } from '../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserFeed } from '../../services/fetchUserFeed';
-import { StaticMap } from '../maps/staticMap';
+import { StaticMap } from '../Maps/staticMap';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {

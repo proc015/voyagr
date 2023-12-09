@@ -4,11 +4,11 @@ import { addTrip } from '../../redux/addTripSlice';
 import { setTrip } from '../../redux/saveTripIdSlice';
 import dayjs from 'dayjs';
 import { ChangeEvent, FormEvent, useState, useRef, useEffect } from 'react';
-import { DynamicMap } from '../maps/dynamicMap';
+import { DynamicMap } from '../Maps/dynamicMap';
 import AddActivity from '../Activity/AddActivity';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
-import Publish from '../Publish';
+import Publish from './Publish';
 import { useNavigate } from 'react-router-dom';
 
 export interface NewTripType {

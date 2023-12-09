@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import landing1 from '../assets/images/landing1.jpg';
 import logo from '../assets/logo/Voyagr-white-big.png';
-import Login from '../components/Login/Login';
+import Login from '../components/Account/Login';
 import { useState, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import Signup from '../components/Signup';
+import Signup from '../components/Account/Signup';
 
 function LandingPage() {
   const [openLogin, setOpenLogin] = useState(false);
@@ -37,39 +37,42 @@ function LandingPage() {
         <div className='landing-btn' onClick={() => setOpenLogin(true)}>
           Login
         </div>
-          <Transition show={openLogin}>
-            <Dialog className='relative z-10' onClose={() => setOpenLogin(false)}>
-              <Transition.Child
-                enter='transition ease-in-out duration-300 transform'
-                enterFrom='translate-y-full'
-                enterTo='translate-y-80'
-                leave='transition ease-in-out duration-300 transform'
-                leaveFrom='translate-y-80'
-                leaveTo='translate-y-full'
-              >
-                <Login setOpenLogin={setOpenLogin}/>
-              </Transition.Child>
-            </Dialog>
-          </Transition>
+        <Transition show={openLogin}>
+          <Dialog className='relative z-10' onClose={() => setOpenLogin(false)}>
+            <Transition.Child
+              enter='transition ease-in-out duration-300 transform'
+              enterFrom='translate-y-full'
+              enterTo='translate-y-80'
+              leave='transition ease-in-out duration-300 transform'
+              leaveFrom='translate-y-80'
+              leaveTo='translate-y-full'
+            >
+              <Login setOpenLogin={setOpenLogin} />
+            </Transition.Child>
+          </Dialog>
+        </Transition>
 
         {/* ON CLICK REVEAL SIGN UP COMPONENT ELEMENT */}
         <div className='landing-btn' onClick={() => setOpenSignup(true)}>
           Sign up
         </div>
-          <Transition show={openSignup}>
-            <Dialog className='relative z-10' onClose={() => setOpenSignup(false)}>
-              <Transition.Child
-                enter='transition ease-in-out duration-300 transform'
-                enterFrom='translate-y-full'
-                enterTo='translate-y-80'
-                leave='transition ease-in-out duration-300 transform'
-                leaveFrom='translate-y-80'
-                leaveTo='translate-y-full'
-              >
-                <Signup setOpenSignup={setOpenSignup}/>
-              </Transition.Child>
-            </Dialog>
-          </Transition>
+        <Transition show={openSignup}>
+          <Dialog
+            className='relative z-10'
+            onClose={() => setOpenSignup(false)}
+          >
+            <Transition.Child
+              enter='transition ease-in-out duration-300 transform'
+              enterFrom='translate-y-full'
+              enterTo='translate-y-80'
+              leave='transition ease-in-out duration-300 transform'
+              leaveFrom='translate-y-80'
+              leaveTo='translate-y-full'
+            >
+              <Signup setOpenSignup={setOpenSignup} />
+            </Transition.Child>
+          </Dialog>
+        </Transition>
 
         <div
           id='bottom-gradient'

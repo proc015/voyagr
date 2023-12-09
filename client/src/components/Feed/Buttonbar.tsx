@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { HeartIcon } from './heartIcon';
-import { CommentIcon } from './commentIcon';
-import { ShareIcon } from './shareIcon';
-
+import { HeartIcon } from '../../assets/icons/heartIcon';
+import { CommentIcon } from '../../assets/icons/commentIcon';
+import { ShareIcon } from '../../assets/icons/shareIcon';
 
 export const Buttonbar = () => {
   const [liked, setLiked] = useState(false);
 
-  const stopPropagation = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const stopPropagation = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
     event.stopPropagation();
-  }
+  };
 
   return (
     <div className='Buttonbar mb-8' onClick={stopPropagation}>

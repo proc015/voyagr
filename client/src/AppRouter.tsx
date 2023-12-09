@@ -7,7 +7,7 @@ import FeedPage from './pages/FeedPage';
 import LandingPage from './pages/LandingPage';
 import ProfilePage from './pages/ProfilePage';
 import TripPage from './pages/TripPage';
-import SearchBar from './components/SearchBar';
+import SearchBar from './components/Search/SearchBar';
 import DetailedTripPage from './pages/DetailedTripPage';
 import { DetailedActivityPage } from './pages/DetailedActivityPage';
 
