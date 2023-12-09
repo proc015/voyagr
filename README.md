@@ -6,6 +6,10 @@
 
 Voyagr is a social media app where travelers can share engaging recaps of their journeys. It offers a platform for users to create and publish detailed summaries of their destinations and activities, providing friends and the wider community with a vivid glimpse into their travel experiences.
 
+<p align="center">
+    <img src="https://i.imgur.com/qwO9FXo.jpeg">
+</p>
+
 ## Getting started
 
 1. Install dependencies from the /server and /client folders 
