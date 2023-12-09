@@ -1,8 +1,7 @@
-import { Autocompletion } from './autocompletion';
 import { StaticMapProps } from './types';
 
 export const StaticMap = ({ location, className }: StaticMapProps) => {
-  // Markers will take either an address with correct format (e.g. '+' instead of whitespace) OR lat-lang nums
+  // Markers will take lat-lang nums
   return (
     <>
       <div className={`overflow-hidden ${className} `}>

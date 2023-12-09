@@ -4,8 +4,6 @@ import { AppDispatch } from '../../app/store';
 import { useEffect, useState } from 'react';
 import { fetchUserFeed } from '../../services/fetchUserFeed';
 import FeedComponent from './FeedComponent';
-import { Trip } from '../../types/Trip';
-import DetailedTrip from '../DetailedTrip/DetailedTrip';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserInfo } from '../../services/fetchUserInfo';
 import sortFeedPosts from '../../utils/sortByDate';
@@ -19,7 +17,6 @@ const FeedList = () => {
   );
 
   const followingList = userInfo.following;
-  // console.log('following', userInfo)
 
   const userFeed = useSelector(
     (state: RootState) => state.getAllTrips.tripFeed
@@ -44,8 +41,6 @@ const FeedList = () => {
 
   const tripsDisplayFeed = sortFeedPosts(filteredTripsFeed);
 
-  // console.log('SORT', tripsDisplayFeed)
-
   // Loading state
   if (status === 'loading') {
     return (
@@ -69,7 +64,6 @@ const FeedList = () => {
               key={feedTrip.trip_id}
               feedTrip={feedTrip}
               onSelect={() => {
-                // console.log('Selecting trip:', feedTrip);
                 navigate(`/trip/${feedTrip.trip_id}`);
               }}
             />

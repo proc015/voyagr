@@ -1,16 +1,11 @@
-import { useParams } from "react-router-dom"
-import DetailedTrip from "../components/DetailedTrip/DetailedTrip";
-
+import DetailedTrip from '../components/DetailedTrip/DetailedTrip';
 
 const DetailedTripPage = () => {
-  
-    
-  
-    return (
+  return (
     <div>
-        <DetailedTrip />    
+      <DetailedTrip />
     </div>
-  )
-}
+  );
+};
 
-export default DetailedTripPage
+export default DetailedTripPage;

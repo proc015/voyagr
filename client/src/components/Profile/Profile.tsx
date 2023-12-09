@@ -2,12 +2,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Bio } from './Bio';
 import { Stats } from './Stats';
-import { useLocation, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { AppDispatch, RootState } from '../../app/store';
 import { fetchUserInfo } from '../../services/fetchUserInfo';
-import { AsyncThunkAction } from '@reduxjs/toolkit';
-import { Dispatch, AnyAction } from 'redux';
-import { User } from '../../types/User';
+
 import { Triplist } from './Triplist';
 
 const Profile = () => {
@@ -27,7 +25,6 @@ const Profile = () => {
 
   const { id } = useParams();
 
-  // Get user info
   useEffect(() => {
     // if endpoint is /profile, go to logged in user's profile
     if (id == null) {

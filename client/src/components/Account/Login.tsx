@@ -12,10 +12,10 @@ const initalState = {
 };
 
 interface LoginProps {
-  setOpenLogin: Function
+  setOpenLogin: Function;
 }
 
-const Login = ({setOpenLogin}: LoginProps) => {
+const Login = ({ setOpenLogin }: LoginProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginState, setLoginState] = useState(initalState);
@@ -32,7 +32,6 @@ const Login = ({setOpenLogin}: LoginProps) => {
     event.preventDefault();
     const { email, password } = loginState;
     const user = { email, password };
-    // console.log('user', user);
 
     const response = await postLogin(user);
 
@@ -40,8 +39,8 @@ const Login = ({setOpenLogin}: LoginProps) => {
       alert(`${response.message}`);
       setLoginState(initalState);
     } else {
-      console.log("login response", response.user_id)
-      dispatch(setUser(response.user_id))
+      console.log('login response', response.user_id);
+      dispatch(setUser(response.user_id));
       navigate('/feed');
     }
   };
@@ -53,17 +52,19 @@ const Login = ({setOpenLogin}: LoginProps) => {
   return (
     <main className='bg-voyagrWhite h-[650px] relative z-10 rounded-2xl'>
       <div id='top-bar' className='flex h-14 border-b border-voyagrBlack'>
-        <img src={`${backButton}`} className='h-4 my-auto pl-4' onClick={() => setOpenLogin(false)}/>
+        <img
+          src={`${backButton}`}
+          className='h-4 my-auto pl-4'
+          onClick={() => setOpenLogin(false)}
+        />
         <p className='font-noto my-auto w-full text-center mr-8'>login</p>
       </div>
-      <img src={`${traveller}`} 
-      className='h-24 w-auto m-auto my-8' 
-      />
-      <form
-        onSubmit={handleLogin}
-        className='flex justify-center'
-      >
-        <div id='parent-container' className='flex flex-col w-[90%] items-center'>
+      <img src={`${traveller}`} className='h-24 w-auto m-auto my-8' />
+      <form onSubmit={handleLogin} className='flex justify-center'>
+        <div
+          id='parent-container'
+          className='flex flex-col w-[90%] items-center'
+        >
           <input
             type='text'
             placeholder='Email'

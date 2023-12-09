@@ -51,7 +51,6 @@ export const lastTripSlice = createSlice({
         if (action.payload.published === false) {
           state.status = 'succeeded';
           state.lastTrip = action.payload;
-          // console.log('lastTrip in fetchLastTripSlice', state.lastTrip);
         } else {
           state.status = 'idle';
         }

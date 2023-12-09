@@ -3,13 +3,13 @@ import { Trip } from '../types/Trip';
 import { fetchUserTrips } from '../services/fetchTrip';
 
 export interface LastTripState {
-  lastTrip: Trip | null;  // Changed to null for initial state
+  lastTrip: Trip | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;   // Error can be null initially
+  error: string | null;
 }
 
 const initialState: LastTripState = {
-  lastTrip: null,  // Initially, there's no last trip
+  lastTrip: null,
   status: 'idle',
   error: null,
 };
@@ -19,7 +19,7 @@ export const fetchLastTrip = createAsyncThunk(
   'lastTrip/fetchLastTrip',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetchUserTrips(); // Assume fetchUserTrips returns the last trip
+      const response = await fetchUserTrips();
       return response;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -30,9 +30,7 @@ export const fetchLastTrip = createAsyncThunk(
 export const lastTripSlice = createSlice({
   name: 'lastTrip',
   initialState,
-  reducers: {
-    // Reducers can be added here if needed
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchLastTrip.pending, (state) => {
@@ -44,7 +42,7 @@ export const lastTripSlice = createSlice({
         if (!action.payload.published) {
           state.lastTrip = action.payload;
         } else {
-          state.lastTrip = null; // Reset the state if the last trip is published
+          state.lastTrip = null;
         }
       })
       .addCase(fetchLastTrip.rejected, (state, action) => {

@@ -8,10 +8,8 @@ interface Props {
 }
 
 const DetailedActivitybox = ({ detailedActivity }: Props) => {
-  // console.log('DetailedActivity:', detailedActivity.activities);
   const navigate = useNavigate();
 
-  //TODO: add picture + map to the div below
   const IMG_BASE_URL = 'https://res.cloudinary.com/dwskyhib9/image/upload/';
 
   return (

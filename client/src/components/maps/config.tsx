@@ -19,27 +19,6 @@ const zoom = {
   },
 };
 
-//DEV styling to have during dev phase
-const devStyling = {
-  mapDiv: {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // gap: '20px',
-  },
-  mapContainerStyle: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '170px',
-    borderRadius: '6px',
-    // margin: '10px',
-    // marginTop: '20px',
-  },
-};
-
 // default center = Europe
 const center: LatLngLiteral = { lat: 57, lng: 18 };
 
@@ -97,7 +76,6 @@ export {
   mapOptions,
   lineOptions,
   center,
-  devStyling,
   zoom,
   autocompletionRequestOptions,
 };
