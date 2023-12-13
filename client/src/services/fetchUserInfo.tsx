@@ -1,5 +1,3 @@
-// router.get('/user/:id', c.getUserDetails);
-
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { User } from '../types/User';
 

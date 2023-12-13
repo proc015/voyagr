@@ -22,7 +22,6 @@ const fitBounds = (locations: any, map: any) => {
   const bounds = new window.google.maps.LatLngBounds();
 
   if (locations[0]['lat'] && locations[1]) {
-    //FIXME: this is not very readable
     locations.forEach((location: any) => {
       if (location != undefined) bounds.extend(location);
     });
@@ -66,9 +65,8 @@ const convert = {
   },
 };
 
-// FIXME: change name of this to smth more explanatory
 const getActivityLocations = (activities: Activity[]) => {
-  let res: any = []; //FIXME: add type def
+  let res: any = [];
 
   activities.forEach((activity) => {
     res.push({

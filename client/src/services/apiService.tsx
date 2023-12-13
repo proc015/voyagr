@@ -1,5 +1,4 @@
 import { Activity } from '../types/Activity';
-import { Trip } from '../types/Trip';
 import { NewTripType } from '../components/Trip/AddTrip';
 
 const url = 'http://localhost:3000';
@@ -61,22 +60,11 @@ export async function publishTrip(trip_id: number) {
     const data = await fetch(`${url}/trip/${trip_id}/publish`, {
       method: 'PUT',
     });
-    console.log('data service', data)
+    console.log('data service', data);
     const response = await data.json();
-    console.log(response)
+    console.log(response);
     return response;
   } catch (err) {
     console.log(err);
   }
 }
-
-// export async function searchUserByDisplayName(display_name: string) {
-//   try {
-//     const data = await fetch(`${url}/user/${display_name}`);
-//     const response = await data.json();
-//     console.log(response);
-//     return response;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }

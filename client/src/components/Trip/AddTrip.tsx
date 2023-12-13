@@ -28,7 +28,6 @@ const AddTrip = () => {
   const dispatch = useAppDispatch();
   const userId = useSelector((state: RootState) => state.user.currentUser);
   const lastTrip = useSelector((state: RootState) => state.lastTrip);
-  // console.log('lastTrip in Add Trip', lastTrip);
 
   const [trip_name, setTripName] = useState('');
   const [start_loc, setStartLoc] = useState('');
@@ -70,8 +69,6 @@ const AddTrip = () => {
     start_lat_lon,
     dest_lat_lon,
     picture_src,
-    // published,
-    // activities,
   };
 
   const changeVisibleDiv = (div: any) => {
@@ -107,8 +104,7 @@ const AddTrip = () => {
   };
 
   const handleParticipantsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const convertStringtoNum = Number(event.target.value); // nw: this is not right, but I keep it for now to change it tomorrow
-    // setUserId(convertStringtoNum);
+    const convertStringtoNum = Number(event.target.value);
   };
 
   const handleStartTrip = async (event: FormEvent<HTMLFormElement>) => {

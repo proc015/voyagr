@@ -11,13 +11,12 @@ import ActivitySmallDetails from './ActivitySmallDetails';
 const AddActivity = () => {
   const dispatch = useAppDispatch();
 
-  // const [tripId, setTripId] = useState<number>(0);
   const [activity_name, setActivityName] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [type, setType] = useState<string>('');
   const [date, setDate] = useState<string>('');
-  const [description, setDescription] = useState<string>(''); // this  is unwanted
-  const [picture_src, setPicture_src] = useState<string>(''); // Updated to store the image URL
+  const [description, setDescription] = useState<string>('');
+  const [picture_src, setPicture_src] = useState<string>('');
   const [loc_lat_lon, setLoc_lat_lon] = useState<number[]>([]);
   const [activity_id] = useState(0);
   const [activityAdded, setActivityAdded] = useState(false);
@@ -25,10 +24,6 @@ const AddActivity = () => {
   const tripId = useSelector(
     (state: RootState) => state.lastTrip.lastTrip.trip_id
   );
-
-  // const tripIdentifier = useSelector(
-  //   (state: RootState) => state.tripid.currentTrip
-  // );
 
   const [newActivity, setNewActivity] = useState<Activity>({
     activity_id,
@@ -93,12 +88,9 @@ const AddActivity = () => {
     console.log(newActivityObj);
     postActivity(newActivityObj).then((createdActivity) => {
       dispatch(addActivity(createdActivity));
-      // Update the grouped state
       setNewActivity(newActivityObj);
-      // Reset individual state variables
 
       setActivityName('');
-      //TODO: check with sal - setLocation field does not seem to reset when you add activity
       setLocation('');
       setLoc_lat_lon([]);
       setPicture_src('');

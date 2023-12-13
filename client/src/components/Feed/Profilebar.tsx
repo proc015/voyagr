@@ -27,18 +27,10 @@ export const Profilebar = ({ feedTrip }: Prop) => {
     navigate(`/profile/${feedTrip.userId}`);
   };
 
-  //pass specific userID from the trip that is being mapped -> userIdentifier
-  // console.log('TI', userIdentifier);
-  // console.log('UI', userInfo);
-
   const filteredUserInfo =
     userInfo.length > 0
       ? userInfo.filter((user) => user.user_id === feedTrip.userId)
       : [];
-
-  // console.log('filt', filteredUserInfo);
-
-  //based on a userId (userIdentifier) I need to pull (1) profile pic (2) display name
 
   useEffect(() => {
     dispatch(fetchAllUserInfo());

@@ -7,11 +7,7 @@ import { SearchIcon } from '../../assets/icons/search-black';
 import { Header } from './Header';
 import { HomeIcon } from '../../assets/icons/home-black';
 import { ProfileIcon } from '../../assets/icons/profile-black';
-// import { SearchIcon } from '../../assets/icons/search-orange';
-// import activeHome from '../../assets/icons/home-orange';
-// import activeProfile from '../../assets/icons/profile-orange';
 import { BellIcon } from '../../assets/icons/bell-black';
-// import activeBell from '../../assets/icons/bell-orange';
 
 type Props = {
   page: string;

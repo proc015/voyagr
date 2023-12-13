@@ -1,7 +1,6 @@
 import { UserNoTrips } from '../types/User';
 import { fetchAllUserInfo } from '../services/fetchAllUserInfo';
 import { createSlice } from '@reduxjs/toolkit';
-import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export interface UserInfoProp {
   userInformation: UserNoTrips[];
@@ -29,7 +28,7 @@ export const fetchAllUserInfoSlice = createSlice({
   name: 'getAllUserInfo',
   initialState,
   reducers: {},
-  
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllUserInfo.pending, (state) => {
@@ -45,7 +44,5 @@ export const fetchAllUserInfoSlice = createSlice({
       });
   },
 });
-
-
 
 export default fetchAllUserInfoSlice.reducer;

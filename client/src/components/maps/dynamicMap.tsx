@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import { useLoadScript, GoogleMap, MarkerF } from '@react-google-maps/api';
 import * as config from './config';
 import { Autocompletion } from './autocompletion';
@@ -46,14 +46,13 @@ const DynamicMapComponent = ({
   useEffect(() => {
     // FEED VIEW
     // center map on trip
-    // console.log('LOCATION', locationCoordinates);
     if (locationCoordinates && action == 'view') {
       const latlng = convert.toLatLngObj(locationCoordinates);
 
       if (!isNaN(latlng?.lat as unknown as number)) {
         setTimeout(() => {
           centerMap(mapRef, latlng);
-        }, 500); //uglyfix to have centerMap not run until map is loaded
+        }, 500);
       }
     }
   }, [locationCoordinates, isLoaded]);
@@ -72,7 +71,7 @@ const DynamicMapComponent = ({
           centerMap(mapRef, locations[0].loc);
         }
       }
-    }, 500); //uglyfix to have fitbounds not run until map is loaded
+    }, 500);
   }, [activities]);
 
   useEffect(() => {

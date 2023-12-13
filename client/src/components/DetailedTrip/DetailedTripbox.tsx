@@ -7,7 +7,6 @@ interface Props {
 
 const DetailedTripbox = ({ detailedTrip }: Props) => {
   console.log('TripDetailBox:', detailedTrip);
-  // console.log('TripDetailBox:', detailedTrip.activities);
 
   return (
     <div className='dev-styling mb-4 flex flex-col gap-2 align-middle justify-center'>

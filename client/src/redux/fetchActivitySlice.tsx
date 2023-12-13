@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { Activity } from '../types/Activity';
 import { fetchUserActivity } from '../services/fetchActivity';
 
@@ -19,7 +19,7 @@ const initialState = {
       type: '',
       date: '',
       loc_lat_lon: [0, 0],
-      picture_src: ''
+      picture_src: '',
     },
   ],
   status: 'idle',

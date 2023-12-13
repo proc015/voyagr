@@ -7,7 +7,6 @@ export const fetchUserFeed = createAsyncThunk<Trip[]>(
   'getTrip/fetchUserTrips',
   async () => {
     try {
-      // confirm with MR on the endpoint
       const response = await fetch(`${url}/trip/all`);
       const data = await response.json();
       return data;

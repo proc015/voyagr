@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom';
 import landing1 from '../assets/images/landing1.jpg';
 import logo from '../assets/logo/Voyagr-white-big.png';
 import Login from '../components/Account/Login';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import Signup from '../components/Account/Signup';
 
@@ -11,7 +10,6 @@ function LandingPage() {
   const [openSignup, setOpenSignup] = useState(false);
 
   return (
-    // tailwind arbitary bg-[] wasn't working so cop this basic bitch css
     <main
       style={{
         backgroundImage: `url(${landing1})`,

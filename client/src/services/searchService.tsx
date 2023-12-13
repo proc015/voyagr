@@ -7,7 +7,6 @@ export const searchUsers = async (searchTerm: string) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      // body: JSON.stringify(searchTerm),
     });
     const response = await data.json();
     return response;

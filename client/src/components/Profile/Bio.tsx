@@ -1,7 +1,6 @@
-import { useLocation } from 'react-router';
 import altPic from '../../assets/icons/button-active.svg';
 import { followUser, unFollowUser } from '../../services/followService';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { editDisplayName } from '../../services/editUser';
 
 type Props = {

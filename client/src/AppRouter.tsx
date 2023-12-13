@@ -1,12 +1,10 @@
 import { FC } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
-import ActivityPage from './pages/ActivityPage';
 import AddTripPage from './pages/AddTripPage';
 import FeedPage from './pages/FeedPage';
 import LandingPage from './pages/LandingPage';
 import ProfilePage from './pages/ProfilePage';
-import TripPage from './pages/TripPage';
 import SearchBar from './components/Search/SearchBar';
 import DetailedTripPage from './pages/DetailedTripPage';
 import { DetailedActivityPage } from './pages/DetailedActivityPage';
@@ -49,24 +47,6 @@ const AppRouter: FC = () => {
             <>
               <NavBar page={'addTrip'} />
               <AddTripPage />
-            </>
-          }
-        />
-        <Route
-          path='/trip'
-          element={
-            <>
-              <NavBar page={'trip'} />
-              <TripPage />
-            </>
-          }
-        />
-        <Route
-          path='/activity'
-          element={
-            <>
-              <NavBar page={'activity'} />
-              <ActivityPage />
             </>
           }
         />
